@@ -42,7 +42,9 @@ export default function ScreenViewport({
 
   // Keep the freshest values available to the native (non-passive) wheel handler.
   const latest = useRef({ camera, offsetX, canNavigate, onCameraChange });
-  latest.current = { camera, offsetX, canNavigate, onCameraChange };
+  useEffect(() => {
+    latest.current = { camera, offsetX, canNavigate, onCameraChange };
+  });
 
   useEffect(() => {
     const node = ref.current;
