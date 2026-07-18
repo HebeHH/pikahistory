@@ -25,15 +25,22 @@ function replaceRecord(data: HistoryWallData, updated: HistoryWallRecord): Histo
   };
 }
 
-// TODO(ai-strip): replace with a real call once the suggestion endpoint lands.
+// TODO(ai-strip): replace with a real (Pikachu-flavored!) call once the endpoint lands.
 function suggestFromNotes(record: HistoryWallRecord | null): string | null {
   if (!record) return null;
   const source = record.details?.markdown?.trim() ? record.details.markdown : record.notes;
   const firstLine = source.split("\n").find((l) => l.trim()) ?? "";
-  const hook = firstLine.replace(/[#*>_`]/g, "").trim().slice(0, 80);
-  return hook
-    ? `Based on your notes — want to dig into "${hook}${hook.length >= 80 ? "…" : ""}"?`
-    : `Add a note on ${record.title} and I'll suggest a rabbit hole to explore.`;
+  const hook = firstLine.replace(/[#*>_`]/g, "").trim().slice(0, 70);
+  if (!hook) {
+    return `Pika? ⚡ Jot a note on ${record.title} and I'll spark a rabbit-hole for you — pika-pika!`;
+  }
+  const lines = [
+    `Pika-pika! ⚡ Your notes on ${record.title} zapped an idea — wanna chase "${hook}"?`,
+    `Pikaaa! ⚡ Based on this, have you heard about "${hook}"? Let's bolt over there!`,
+    `Pika! Something's sparking here — dig into "${hook}" and I'll follow, pika-pika!`,
+    `⚡ Pi-ka-chu picks: "${hook}" looks electric. Shall we explore?`,
+  ];
+  return lines[hook.length % lines.length]; // deterministic so it doesn't flicker
 }
 
 export default function HistoryWallApp({ initialData }: { initialData: HistoryWallData }) {

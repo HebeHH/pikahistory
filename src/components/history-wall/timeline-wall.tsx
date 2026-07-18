@@ -8,6 +8,7 @@ import {
   xForYear,
 } from "@/lib/history-wall/time-scale";
 import ContinentBand from "./continent-band";
+import PikaSprite from "./pika-sprite";
 
 interface TimelineWallProps {
   bands: BandLayout[];
@@ -113,6 +114,25 @@ export default function TimelineWall({
                   boxShadow: "0 0 0 4px rgba(232,169,12,.2)",
                 }}
               />
+            </div>
+          )}
+
+          {/* Pikachu hops to the selected item on the wall */}
+          {activeYear !== null && (
+            <div
+              key={activeId ?? "pika"}
+              className="pika-hop"
+              style={{
+                position: "absolute",
+                left: xForYear(activeYear, zoom),
+                top: 16,
+                zIndex: 20,
+                transform: "translateX(-50%)",
+                pointerEvents: "none",
+                filter: "drop-shadow(0 4px 5px rgba(43,38,32,.25))",
+              }}
+            >
+              <PikaSprite size={40} mood="spark" />
             </div>
           )}
 
