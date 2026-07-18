@@ -90,15 +90,16 @@ export default function NoteDock({ record, saving, suggestion, onClose, onSave, 
   );
 }
 
-function DockContent({
+export function DockContent({
   record,
   saving,
   suggestion,
   onClose,
   onSave,
   onExplore,
-}: NoteDockProps & { record: HistoryWallRecord }) {
-  const [editing, setEditing] = useState(false);
+  startEditing = false,
+}: NoteDockProps & { record: HistoryWallRecord; startEditing?: boolean }) {
+  const [editing, setEditing] = useState(startEditing);
   const [title, setTitle] = useState(record.title);
   const [label, setLabel] = useState(record.span.displayLabel);
   const [notes, setNotes] = useState(readMarkdown(record));

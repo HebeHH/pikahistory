@@ -168,3 +168,8 @@ body {
 .fun-bolt { filter: drop-shadow(0 0 5px rgba(232,169,12,.9)); animation: fun-bolt-flicker 4.6s ease-out forwards; }
 .fun-node { transform-box: fill-box; transform-origin: center; animation: fun-node-pop 4.6s ease-out forwards; }
 .fun-card { animation: fun-card-in 4.6s ease-out forwards; }
+@keyframes note-pop-in {
+  0% { opacity: 0; transform: translateY(8px) scale(0.98); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+.note-pop { animation: note-pop-in 0.18s ease-out; }

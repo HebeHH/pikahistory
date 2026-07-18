@@ -6,11 +6,11 @@ import type { HistoryWallData, HistoryWallRecord } from "@/contracts/history-wal
 import { updateRecord } from "@/lib/history-wall/data-client";
 import { buildWallLayout } from "@/lib/history-wall/layout";
 import { funFactBetween } from "@/lib/history-wall/fun-facts";
-import { clampZoom } from "@/lib/history-wall/time-scale";
+import { clampZoom, formatYear } from "@/lib/history-wall/time-scale";
 import TimelineHeader from "./timeline-header";
 import TimelineWall from "./timeline-wall";
 import HistoryMap from "./history-map";
-import NoteDock from "./note-dock";
+import FloatingNote from "./floating-note";
 import FunFactBurst from "./fun-fact-burst";
 
 export type WallView = "timeline" | "map";
@@ -52,18 +52,18 @@ export default function HistoryWallApp({ initialData }: { initialData: HistoryWa
   const [data, setData] = useState(initialData);
   const [zoom, setZoom] = useState(1);
   const [activeId, setActiveId] = useState<string | null>(null);
+  const [openIds, setOpenIds] = useState<string[]>([]);
   const [saving, setSaving] = useState(false);
   const [view, setView] = useState<WallView>("timeline");
   const [funFact, setFunFact] = useState<{ aId: string; bId: string; fact: string } | null>(null);
   const lastCivRef = useRef<string | null>(null);
+  const [draftIds, setDraftIds] = useState<string[]>([]);
 
   const bands = useMemo(() => buildWallLayout(data), [data]);
   const activeRecord = useMemo(
     () => allRecords(data).find((r) => r.id === activeId) ?? null,
     [data, activeId],
   );
-  const suggestion = useMemo(() => suggestFromNotes(activeRecord), [activeRecord]);
-
   const handleSave = async (updated: HistoryWallRecord) => {
     setData((prev) => replaceRecord(prev, updated)); // optimistic
     setSaving(true);
@@ -76,8 +76,20 @@ export default function HistoryWallApp({ initialData }: { initialData: HistoryWa
     }
   };
 
-  const handleSelect = (id: string) => {
+  const openNote = (id: string) => {
+    setOpenIds((prev) => (prev.includes(id) ? [...prev.filter((x) => x !== id), id] : [...prev, id]));
     setActiveId(id);
+  };
+
+  const closeNote = (id: string) => {
+    const next = openIds.filter((x) => x !== id);
+    setOpenIds(next);
+    setDraftIds((prev) => prev.filter((x) => x !== id));
+    if (activeId === id) setActiveId(next.length ? next[next.length - 1] : null);
+  };
+
+  const handleSelect = (id: string) => {
+    openNote(id);
     const record = allRecords(data).find((r) => r.id === id);
     if (record?.type === "civilization") {
       const previous = lastCivRef.current;
@@ -87,6 +99,24 @@ export default function HistoryWallApp({ initialData }: { initialData: HistoryWa
       }
       lastCivRef.current = id;
     }
+  };
+
+  // Midway insert: clicking empty lane space drafts a new event, prefilled with
+  // the civilization + the rough year from the click position, opened for editing.
+  const handleInsert = (civilizationId: string, year: number) => {
+    const id = `event_new_${Date.now()}`;
+    const draft = {
+      type: "event",
+      id,
+      title: "",
+      span: { startYear: year, displayLabel: `~${formatYear(year)}`, certainty: "approximate" },
+      civilizationId,
+      notes: "",
+      metadata: {},
+    } as HistoryWallData["events"][number];
+    setData((prev) => ({ ...prev, events: [...prev.events, draft] }));
+    setDraftIds((prev) => [...prev, id]);
+    openNote(id);
   };
 
   return (
@@ -99,6 +129,7 @@ export default function HistoryWallApp({ initialData }: { initialData: HistoryWa
           activeId={activeId}
           activeYear={activeRecord ? activeRecord.span.startYear : null}
           onSelect={handleSelect}
+          onInsert={handleInsert}
           onZoomIn={() => setZoom((z) => clampZoom(z * 1.25))}
           onZoomOut={() => setZoom((z) => clampZoom(z / 1.25))}
           onZoomFit={() => setZoom(1)}
@@ -106,17 +137,23 @@ export default function HistoryWallApp({ initialData }: { initialData: HistoryWa
       ) : (
         <HistoryMap data={data} activeId={activeId} onSelect={handleSelect} />
       )}
-      <NoteDock
-        record={activeRecord}
-        saving={saving}
-        suggestion={suggestion}
-        onClose={() => setActiveId(null)}
-        onSave={handleSave}
-        onExplore={() => {
-          // TODO(ai-strip): navigate to / create the suggested topic.
-          console.log("Explore suggestion for", activeRecord?.id);
-        }}
-      />
+
+      {openIds
+        .map((id) => allRecords(data).find((r) => r.id === id))
+        .filter((r): r is HistoryWallRecord => Boolean(r))
+        .map((record, index) => (
+          <FloatingNote
+            key={record.id}
+            index={index}
+            record={record}
+            saving={saving}
+            suggestion={suggestFromNotes(record)}
+            startEditing={draftIds.includes(record.id)}
+            onClose={() => closeNote(record.id)}
+            onSave={handleSave}
+            onExplore={() => console.log("Explore suggestion for", record.id)}
+          />
+        ))}
       {funFact && (
         <FunFactBurst
           aId={funFact.aId}

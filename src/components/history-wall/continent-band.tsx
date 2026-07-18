@@ -5,13 +5,14 @@ import type { CSSProperties } from "react";
 import type { VisualReference } from "@/contracts/history-wall.types";
 import type { BandLayout } from "@/lib/history-wall/layout";
 import { eraSentimentColor } from "@/lib/history-wall/layout";
-import { bandHeight, laneY, xForYear } from "@/lib/history-wall/time-scale";
+import { bandHeight, laneY, xForYear, yearFromX } from "@/lib/history-wall/time-scale";
 
 interface ContinentBandProps {
   band: BandLayout;
   zoom: number;
   activeId: string | null;
   onSelect: (id: string) => void;
+  onInsert: (civilizationId: string, year: number) => void;
 }
 
 /** Emoji glyph, image asset, or a Material Symbol fallback inside a circle. */
@@ -24,14 +25,36 @@ function IconGlyph({ visual, fallback }: { visual?: VisualReference; fallback: s
   return <span className="material-symbols-outlined" style={{ fontSize: 19 }}>{fallback}</span>;
 }
 
-export default function ContinentBand({ band, zoom, activeId, onSelect }: ContinentBandProps) {
+export default function ContinentBand({ band, zoom, activeId, onSelect, onInsert }: ContinentBandProps) {
   const { style, laneCount, civs } = band;
   const height = bandHeight(laneCount);
+
+  // Click empty lane space → prefill a new event on the nearest civ + that year.
+  const handleBackgroundClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if ((e.target as HTMLElement).closest("button")) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const year = yearFromX(e.clientX - rect.left, zoom);
+    const localY = e.clientY - rect.top;
+    const lane = Math.max(0, Math.min(laneCount - 1, Math.round((localY - laneY(0)) / 56)));
+    const onLane = civs.filter((c) => c.lane === lane);
+    const pool = onLane.length ? onLane : civs;
+    if (!pool.length) return;
+    const covering = pool.find(
+      (c) => year >= c.civ.span.startYear && year <= (c.civ.span.endYear ?? c.civ.span.startYear),
+    );
+    const midpoint = (c: (typeof pool)[number]) =>
+      (c.civ.span.startYear + (c.civ.span.endYear ?? c.civ.span.startYear)) / 2;
+    const chosen =
+      covering ??
+      [...pool].sort((a, b) => Math.abs(midpoint(a) - year) - Math.abs(midpoint(b) - year))[0];
+    onInsert(chosen.civ.id, year);
+  };
 
   return (
     <div
       className="relative"
-      style={{ height, background: style.tint, borderBottom: "1px solid #eae3d2" }}
+      onClick={handleBackgroundClick}
+      style={{ height, background: style.tint, borderBottom: "1px solid #eae3d2", cursor: "copy" }}
     >
       {/* Lane baselines */}
       {Array.from({ length: laneCount }).map((_, lane) => (

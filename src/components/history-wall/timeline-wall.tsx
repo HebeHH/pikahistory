@@ -16,6 +16,7 @@ interface TimelineWallProps {
   activeId: string | null;
   activeYear: number | null;
   onSelect: (id: string) => void;
+  onInsert: (civilizationId: string, year: number) => void;
   onZoomIn: () => void;
   onZoomOut: () => void;
   onZoomFit: () => void;
@@ -27,6 +28,7 @@ export default function TimelineWall({
   activeId,
   activeYear,
   onSelect,
+  onInsert,
   onZoomIn,
   onZoomOut,
   onZoomFit,
@@ -144,6 +146,7 @@ export default function TimelineWall({
               zoom={zoom}
               activeId={activeId}
               onSelect={onSelect}
+              onInsert={onInsert}
             />
           ))}
 
