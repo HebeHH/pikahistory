@@ -6,26 +6,32 @@ in [`docs/tech-stack/README.md`](docs/tech-stack/README.md).
 
 ## Local development
 
-Requirements: Node.js 20.9 or newer and pnpm 10.
+Requirements: Node.js 20.9 or newer, pnpm 10, and Docker Desktop.
 
 ```bash
 pnpm install
-cp .env.example .env.local
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000). The starter page validates
-and displays summary counts from the canonical History Wall sample data.
+`pnpm dev` starts a dedicated PostgreSQL 17 container, waits until it is ready,
+applies the Drizzle schema, inserts any missing base records, and starts Next.js.
+Data persists between runs in a Docker volume. Open
+[http://localhost:3000](http://localhost:3000).
 
-Set `DATABASE_URL` in `.env.local` before using the database commands:
+On macOS, the command also opens Docker Desktop when it is installed but
+stopped. The first run may take a moment while Docker downloads PostgreSQL.
+
+Useful local database commands:
 
 ```bash
-pnpm db:push
-pnpm db:studio
+pnpm db:local:up    # Start, apply schema, and seed without starting Next.js
+pnpm db:local:url   # Print the local connection string
+pnpm db:local:down  # Stop PostgreSQL; its data remains
 ```
 
-The Drizzle table definition is in `src/lib/db/schema.ts`. Configure
-`DATABASE_URL`, then push it to the shared Neon database.
+If Docker Desktop is stopped, `pnpm dev` explains what to start and exits rather
+than falling back to a remote database. `pnpm dev:app` starts only Next.js and
+uses `DATABASE_URL` from the environment or `.env.local`.
 
 ## REST API
 
@@ -38,6 +44,12 @@ The append-only v1 API is documented in
 - `POST /api/v1/records` — append one civilization, event, or era
 
 There are intentionally no update or delete endpoints.
+
+## Vercel deployment
+
+See [`docs/deployment/vercel.md`](docs/deployment/vercel.md) for linking the
+project, provisioning Neon, applying the schema, deploying, and verifying the
+API with Vercel CLI.
 
 ## Checks
 

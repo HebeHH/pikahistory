@@ -3,17 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "node scripts/local-dev.mjs dev",
+    "dev:app": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
+    "db:local:up": "node scripts/local-dev.mjs up",
+    "db:local:down": "node scripts/local-dev.mjs down",
+    "db:local:url": "node scripts/local-dev.mjs url",
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio"
   },
   "dependencies": {
-    "@neondatabase/serverless": "1.1.0",
     "drizzle-orm": "0.45.2",
     "next": "16.2.10",
+    "postgres": "3.4.9",
     "react": "19.2.7",
     "react-dom": "19.2.7",
     "server-only": "0.0.1",

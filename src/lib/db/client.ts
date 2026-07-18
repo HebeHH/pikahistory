@@ -1,17 +1,24 @@
 import "server-only";
 
-import { drizzle } from "drizzle-orm/neon-http";
+import { drizzle } from "drizzle-orm/postgres-js";
+import postgres from "postgres";
 
 /**
- * Lazily create the Neon HTTP client on the first API request. Keeping this
- * lazy allows TypeScript checks and Next.js builds to run before a developer
- * has configured DATABASE_URL locally.
+ * Postgres.js connects to both the automatic local PostgreSQL container and
+ * Neon on Vercel, so application code never branches by environment.
+ * Connections are lazy and the small pool is reused by a warm Next.js process.
  */
-let database: ReturnType<typeof drizzle> | undefined;
+type Database = ReturnType<typeof drizzle>;
+type SqlClient = ReturnType<typeof postgres>;
+
+const globalDatabase = globalThis as typeof globalThis & {
+  historyWallDatabase?: Database;
+  historyWallSqlClient?: SqlClient;
+};
 
 export function getDb() {
-  if (database) {
-    return database;
+  if (globalDatabase.historyWallDatabase) {
+    return globalDatabase.historyWallDatabase;
   }
 
   const databaseUrl = process.env.DATABASE_URL;
@@ -20,6 +27,17 @@ export function getDb() {
     throw new Error("DATABASE_URL is not configured.");
   }
 
-  database = drizzle(databaseUrl);
+  const client = postgres(databaseUrl, {
+    // Keep each local/Vercel process economical and PgBouncer-compatible.
+    max: 1,
+    prepare: false,
+    idle_timeout: 20,
+    connect_timeout: 10,
+  });
+  const database = drizzle({ client });
+
+  globalDatabase.historyWallSqlClient = client;
+  globalDatabase.historyWallDatabase = database;
+
   return database;
 }
