@@ -41,6 +41,10 @@ function getCivilizationId(record: HistoryWallRecord) {
 }
 
 function getReferencedCivilizationIds(record: HistoryWallRecord) {
+  if (record.type === "person") {
+    return record.civilizationIds;
+  }
+
   if (record.type === "era") {
     return [record.civilizationId];
   }

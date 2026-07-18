@@ -14,6 +14,8 @@ import {
   InteractionRoleSchema,
   InteractionSchema,
   InteractionTypeSchema,
+  PersonRoleSchema,
+  PersonSchema,
   RecordDetailsSchema,
   SourceReferenceSchema,
   VisualReferenceSchema,
@@ -38,8 +40,10 @@ export type RecordDetails = z.infer<typeof RecordDetailsSchema>;
 export type InteractionType = z.infer<typeof InteractionTypeSchema>;
 export type InteractionRole = z.infer<typeof InteractionRoleSchema>;
 export type Interaction = z.infer<typeof InteractionSchema>;
+export type PersonRole = z.infer<typeof PersonRoleSchema>;
 
 export type Civilization = z.infer<typeof CivilizationSchema>;
+export type HistoricalPerson = z.infer<typeof PersonSchema>;
 export type HistoryEvent = z.infer<typeof EventSchema>;
 export type Era = z.infer<typeof EraSchema>;
 export type HistoryWallRecord = z.infer<typeof HistoryWallRecordSchema>;

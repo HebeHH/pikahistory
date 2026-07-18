@@ -1,6 +1,6 @@
 # History Wall
 
-A Next.js application for exploring civilizations, eras, and world events on a
+A Next.js application for exploring civilizations, people, eras, and world events on a
 shared timeline. The project stack and contribution constraints are documented
 in [`docs/tech-stack/README.md`](docs/tech-stack/README.md).
 

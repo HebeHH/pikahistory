@@ -22,6 +22,7 @@ import type { HistoryWallRecord } from "@/contracts/history-wall.types";
  */
 export const historyRecordType = pgEnum("history_record_type", [
   "civilization",
+  "person",
   "event",
   "era",
 ]);
@@ -31,7 +32,7 @@ export const historyRecords = pgTable(
   {
     id: varchar("id", { length: 100 }).primaryKey(),
     type: historyRecordType("type").notNull(),
-    schemaVersion: integer("schema_version").notNull().default(1),
+    schemaVersion: integer("schema_version").notNull().default(2),
     title: varchar("title", { length: 200 }).notNull(),
     startYear: integer("start_year").notNull(),
     endYear: integer("end_year"),
@@ -51,7 +52,10 @@ export const historyRecords = pgTable(
     index("history_records_type_idx").on(table.type),
     index("history_records_start_year_idx").on(table.startYear),
     index("history_records_civilization_id_idx").on(table.civilizationId),
-    check("history_records_schema_version_check", sql`${table.schemaVersion} = 1`),
+    check(
+      "history_records_schema_version_check",
+      sql`${table.schemaVersion} in (1, 2)`,
+    ),
     check(
       "history_records_start_year_check",
       sql`${table.startYear} <> 0`,
@@ -63,6 +67,7 @@ export const historyRecords = pgTable(
     check(
       "history_records_reference_shape_check",
       sql`(${table.type} = 'civilization' and ${table.civilizationId} is null)
+        or (${table.type} = 'person' and ${table.civilizationId} is null)
         or ${table.type} = 'event'
         or (${table.type} = 'era' and ${table.civilizationId} is not null)`,
     ),

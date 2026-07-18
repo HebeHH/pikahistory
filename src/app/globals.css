@@ -50,6 +50,7 @@ button { font: inherit; }
 .legend i { display: inline-block; }
 .legend-span { background: #78864b; border-radius: 4px; height: 8px; width: 32px; }
 .legend-event { background: var(--surface); border: 3px solid var(--gold); border-radius: 50%; height: 14px; width: 14px; }
+.legend-person { background: #76649a; border-radius: 50% 50% 45% 45%; height: 14px; width: 14px; }
 .legend-link { border-left: 2px dashed #9b6048; height: 20px; width: 8px; }
 
 .input-panel {
@@ -170,6 +171,24 @@ button { font: inherit; }
   z-index: 6;
 }
 .event-marker span { align-items: center; background: var(--surface); border: 2px solid var(--gold); border-radius: 50%; display: flex; font-size: 15px; height: 30px; justify-content: center; width: 30px; }
+.person-marker {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  color: #5a5143;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  font-size: 9px;
+  gap: 2px;
+  max-width: 100px;
+  padding: 0;
+  position: absolute;
+  top: 2px;
+  transform: translateX(-50%);
+  z-index: 7;
+}
+.person-marker span { align-items: center; background: #eee9f5; border: 2px solid #76649a; border-radius: 50%; display: flex; font-size: 13px; height: 25px; justify-content: center; width: 25px; }
 .row-input-layer {
   background: rgb(232 169 12 / 7%);
   border: 1px dashed rgb(138 106 12 / 45%);

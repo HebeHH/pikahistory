@@ -91,13 +91,14 @@ async function seedBaseData() {
   );
   const records = [
     ...source.civilizations,
+    ...source.people,
     ...source.events,
     ...source.eras,
   ];
   const sql = postgres(databaseUrl, { max: 1, prepare: false });
 
   try {
-    // Civilizations are first so event/era foreign keys are always valid.
+    // Civilizations are first so person/event/era references are always valid.
     for (const record of records) {
       const civilizationId =
         record.type === "event" || record.type === "era"

@@ -4,7 +4,7 @@
 
 Multiple laptops placed left-to-right should behave like windows onto one large,
 two-dimensional history wall. Time runs along the world x-axis. Civilizations,
-eras, events, and relationships occupy explicit world positions on both axes.
+people, eras, events, and relationships occupy explicit world positions on both axes.
 
 The person who creates a wall session is its controller. The controller's pan
 and zoom gestures move the shared camera on every connected laptop. Anyone may
@@ -33,7 +33,7 @@ both pieces can be developed in parallel.
 
 The main UI owner should own:
 
-- The appearance of civilizations, eras, events, and relationships.
+- The appearance of civilizations, people, eras, events, and relationships.
 - Detail drawers/panels and their content.
 - Selection hit targets and visual selected states.
 - The layout rules that assign each rendered item a world-space box or point.

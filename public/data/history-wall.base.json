@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "civilizations": [
     {
       "type": "civilization",
@@ -51,6 +51,39 @@
         "alt": "Ancient pottery"
       },
       "color": "#6D7F56",
+      "metadata": {}
+    }
+  ],
+  "people": [
+    {
+      "type": "person",
+      "id": "person_hatshepsut",
+      "title": "Hatshepsut",
+      "span": {
+        "startYear": -1507,
+        "endYear": -1458,
+        "displayLabel": "c. 1507–1458 BCE",
+        "certainty": "approximate"
+      },
+      "civilizationIds": ["civilization_egypt"],
+      "roles": ["monarch", "political_leader"],
+      "roleTitle": "Pharaoh",
+      "notes": "A pharaoh of Egypt's Eighteenth Dynasty known for extensive building and trade projects.",
+      "location": {
+        "continent": "africa",
+        "label": "Ancient Egypt"
+      },
+      "visual": {
+        "kind": "emoji",
+        "value": "👤",
+        "alt": "Person marker"
+      },
+      "details": {
+        "markdown": "## Hatshepsut\n\nA full person detail can hold biography, historical significance, disputed interpretations, media, and sources.",
+        "tags": ["pharaoh", "eighteenth-dynasty"],
+        "sources": [],
+        "media": []
+      },
       "metadata": {}
     }
   ],

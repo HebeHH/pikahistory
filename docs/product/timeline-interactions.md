@@ -3,17 +3,20 @@
 This is the shared product handoff for the wall UI and input UI. The executable
 contract remains `src/contracts/history-wall.schema.ts`.
 
-## Four things displayed on the wall
+## Five things displayed on the wall
 
 1. **Civilization** — a long bar. Its start/end dates determine its width. Its
    base hue comes from its continent family, with an optional civilization hue.
-2. **Era** — a range inside one civilization. Users add it by dragging from a
+2. **Person** — a historical person with a lifespan/active span and zero-or-more
+   civilization affiliations. A person marker opens their full biography,
+   roles, sources, and media. Users place an affiliated person with a tap.
+3. **Era** — a range inside one civilization. Users add it by dragging from a
    start year to an end year. Its width comes from that span. Its `value` (1–5)
    changes intensity, but never changes the continent/civilization color family.
-3. **Event** — normally a point on one civilization. Users add it with a tap or
+4. **Event** — normally a point on one civilization. Users add it with a tap or
    click, then complete the full event form. Tapping the marker opens its full
    note, media, tags, and sources.
-4. **Interaction event** — one event connecting two or more civilizations. It
+5. **Interaction event** — one event connecting two or more civilizations. It
    has an explicit relationship type and a role for each participant. This is
    how World War II, Anglo-French wars, trade routes, alliances, or hegemonic
    relationships are represented without copying the same event into each row.
@@ -38,6 +41,8 @@ to 40. A single event can therefore represent a world war cleanly.
 
 - Selecting **Event · tap** and tapping a civilization row chooses the date and
   civilization, then opens the event form.
+- Selecting **Person · tap** chooses the person's associated civilization and
+  initial timeline position, then opens the full person form.
 - Selecting **Era · drag** and dragging along an existing civilization chooses
   both dates. The form then collects title, value, tag, summary, full Markdown
   note, tags, media, and sources.

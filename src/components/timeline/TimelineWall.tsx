@@ -5,6 +5,7 @@ import { useMemo, useState } from "react";
 import type {
   Civilization,
   Era,
+  HistoricalPerson,
   HistoryEvent,
   HistoryWallData,
   HistoryWallRecord,
@@ -66,6 +67,7 @@ export function TimelineWall({ data }: { data: HistoryWallData }) {
         <div className="legend" aria-label="Timeline legend">
           <span><i className="legend-span" /> civilization / era span</span>
           <span><i className="legend-event" /> event · tap for detail</span>
+          <span><i className="legend-person" /> person · tap for biography</span>
           <span><i className="legend-link" /> interaction · links 2+ civilizations</span>
         </div>
       </header>
@@ -106,6 +108,9 @@ export function TimelineWall({ data }: { data: HistoryWallData }) {
                 eras={data.eras.filter(
                   (era) => era.civilizationId === civilization.id,
                 )}
+                people={data.people.filter((person) =>
+                  person.civilizationIds.includes(civilization.id),
+                )}
                 events={singleEvents.filter(
                   (event) => event.civilizationId === civilization.id,
                 )}
@@ -138,6 +143,19 @@ export function TimelineWall({ data }: { data: HistoryWallData }) {
               ))}
             </div>
           ) : null}
+          {selected.type === "person" ? (
+            <div className="participant-list">
+              {selected.roleTitle ? <strong>{selected.roleTitle}</strong> : null}
+              {selected.roles.map((role) => (
+                <span key={role}>{role.replaceAll("_", " ")}</span>
+              ))}
+              {selected.civilizationIds.map((civilizationId) => (
+                <span key={civilizationId}>
+                  {civilizationsById.get(civilizationId)?.title ?? civilizationId}
+                </span>
+              ))}
+            </div>
+          ) : null}
           <div className="full-note">{fullNotes(selected)}</div>
           {selected.details?.tags.length ? (
             <div className="tag-list">
@@ -153,6 +171,7 @@ export function TimelineWall({ data }: { data: HistoryWallData }) {
 function CivilizationRow({
   civilization,
   eras,
+  people,
   events,
   onSelect,
   inputMode,
@@ -160,6 +179,7 @@ function CivilizationRow({
 }: {
   civilization: Civilization;
   eras: Era[];
+  people: HistoricalPerson[];
   events: HistoryEvent[];
   onSelect: (record: HistoryWallRecord) => void;
   inputMode: TimelineInputMode;
@@ -215,6 +235,19 @@ function CivilizationRow({
           {event.title}
         </button>
       ))}
+      {people.map((person) => (
+        <button
+          className="person-marker"
+          key={person.id}
+          onClick={() => onSelect(person)}
+          style={{ left: position(person.span.startYear) }}
+          title={`Open biography: ${person.title}`}
+          type="button"
+        >
+          <span>{person.visual?.kind === "emoji" ? person.visual.value : "👤"}</span>
+          {person.title}
+        </button>
+      ))}
       {inputMode !== "inspect" ? (
         <div
           aria-label={`Add ${inputMode} to ${civilization.title}`}
@@ -229,8 +262,8 @@ function CivilizationRow({
             event.currentTarget.setPointerCapture(event.pointerId);
             setDragStart(year);
             onDraft(
-              inputMode === "event"
-                ? `${civilization.title}: event selected at ${formatYear(year)}.`
+              inputMode === "event" || inputMode === "person"
+                ? `${civilization.title}: ${inputMode} selected at ${formatYear(year)}.`
                 : `${civilization.title}: ${inputMode} starts at ${formatYear(year)}; drag to set the end.`,
             );
           }}
@@ -245,8 +278,8 @@ function CivilizationRow({
             const start = Math.min(dragStart, pointerYear);
             const end = Math.max(dragStart, pointerYear);
             onDraft(
-              inputMode === "event"
-                ? `${civilization.title}: event at ${formatYear(dragStart)}. Open the full event form next.`
+              inputMode === "event" || inputMode === "person"
+                ? `${civilization.title}: ${inputMode} at ${formatYear(dragStart)}. Open the full ${inputMode} form next.`
                 : `${civilization.title}: ${inputMode} span ${formatYear(start)} → ${formatYear(end)}. Open its full form next.`,
             );
             setDragStart(undefined);
