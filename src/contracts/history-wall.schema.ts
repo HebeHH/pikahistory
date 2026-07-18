@@ -102,6 +102,31 @@ export const VisualReferenceSchema = z
   })
   .strict();
 
+/** A source attached to a note. URLs stay explicit so the detail panel can link them. */
+export const SourceReferenceSchema = z
+  .object({
+    title: z.string().trim().min(1).max(240),
+    url: z.url().max(2_000),
+    publisher: z.string().trim().min(1).max(160).optional(),
+  })
+  .strict();
+
+/**
+ * Optional long-form detail shared by civilizations, events, and eras.
+ *
+ * Keep `notes` as the short, backwards-compatible summary. The detail drawer
+ * should prefer this object when it exists: `markdown` is the full study note,
+ * while tags, sources, and media remain structured and reusable by the UI.
+ */
+export const RecordDetailsSchema = z
+  .object({
+    markdown: z.string().trim().max(30_000).default(""),
+    tags: z.array(z.string().trim().min(1).max(60)).max(30).default([]),
+    sources: z.array(SourceReferenceSchema).max(30).default([]),
+    media: z.array(VisualReferenceSchema).max(12).default([]),
+  })
+  .strict();
+
 /** CSS-compatible six-digit hex color. Example: `#D4A72C`. */
 export const HexColorSchema = z
   .string()
@@ -124,9 +149,90 @@ export const CivilizationSchema = z
     location: GeographySchema,
     icon: VisualReferenceSchema.optional(),
     color: HexColorSchema,
+    details: RecordDetailsSchema.optional(),
     metadata: MetadataSchema,
   })
   .strict();
+
+/**
+ * Stable visual/filter vocabulary for relationships between civilizations.
+ * `other` is intentionally available, but UIs should offer these named types
+ * first so wars do not get stored as trade or vague free text.
+ */
+export const InteractionTypeSchema = z.enum([
+  "war",
+  "conquest",
+  "occupation",
+  "alliance",
+  "treaty",
+  "diplomacy",
+  "trade",
+  "migration",
+  "exploration_contact",
+  "colonialism",
+  "hegemony_tributary",
+  "cultural_exchange",
+  "religious_exchange",
+  "technology_transfer",
+  "rivalry",
+  "aid",
+  "epidemic_transmission",
+  "other",
+]);
+
+/** A participant role is optional context; it never replaces the relationship type. */
+export const InteractionRoleSchema = z.enum([
+  "participant",
+  "initiator",
+  "aggressor",
+  "defender",
+  "ally",
+  "victor",
+  "defeated",
+  "occupier",
+  "occupied",
+  "colonizer",
+  "colonized",
+  "hegemon",
+  "tributary",
+  "explorer",
+  "encountered",
+  "trader",
+  "migrant_origin",
+  "migrant_destination",
+]);
+
+export const InteractionSchema = z
+  .object({
+    type: InteractionTypeSchema,
+    /** Two or more civilizations; supports large events such as World War II. */
+    participants: z
+      .array(
+        z
+          .object({
+            civilizationId: HistoryWallIdSchema,
+            role: InteractionRoleSchema.default("participant"),
+          })
+          .strict(),
+      )
+      .min(2)
+      .max(40),
+  })
+  .strict()
+  .superRefine(({ participants }, context) => {
+    const seen = new Set<string>();
+
+    participants.forEach((participant, index) => {
+      if (seen.has(participant.civilizationId)) {
+        context.addIssue({
+          code: z.ZodIssueCode.custom,
+          path: ["participants", index, "civilizationId"],
+          message: "Each civilization may appear only once in an interaction.",
+        });
+      }
+      seen.add(participant.civilizationId);
+    });
+  });
 
 export const EventSchema = z
   .object({
@@ -137,19 +243,45 @@ export const EventSchema = z
     span: HistoricalSpanSchema,
     /** Optional because an event may be global or involve several civilizations. */
     civilizationId: HistoryWallIdSchema.optional(),
+    /**
+     * Present only when this event explicitly links multiple civilizations.
+     * Example: World War II is one event with many participants and type `war`.
+     */
+    interaction: InteractionSchema.optional(),
     notes: z.string().trim().max(5_000).default(""),
     visual: VisualReferenceSchema.optional(),
+    details: RecordDetailsSchema.optional(),
     metadata: MetadataSchema,
   })
-  .strict();
+  .strict()
+  .superRefine(({ civilizationId, interaction }, context) => {
+    if (civilizationId !== undefined && interaction !== undefined) {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["interaction"],
+        message:
+          "Use civilizationId for a single-civilization event or interaction for a multi-civilization event, not both.",
+      });
+    }
+  });
 
 /** Fixed UI vocabulary for the optional "vibe" of an era. */
 export const EraTagSchema = z.enum([
   "golden_age",
   "peace",
+  "prosperity",
   "expansion",
+  "empire",
+  "occupation",
+  "colonization",
   "reform",
   "renaissance",
+  "revolution",
+  "industrialization",
+  "restoration",
+  "transition",
+  "stagnation",
+  "fragmentation",
   "decline",
   "crisis",
   "civil_war",
@@ -169,6 +301,7 @@ export const EraSchema = z
     /** UI sentiment: 1 is very bad, 3 neutral, and 5 very good. */
     value: z.number().int().min(1).max(5).default(3),
     tag: EraTagSchema.optional(),
+    details: RecordDetailsSchema.optional(),
     metadata: MetadataSchema,
   })
   .strict();
@@ -240,6 +373,23 @@ export const HistoryWallDataSchema = z
           message: `Unknown civilization ID: ${event.civilizationId}`,
         });
       }
+
+      event.interaction?.participants.forEach((participant, participantIndex) => {
+        if (!civilizationIds.has(participant.civilizationId)) {
+          context.addIssue({
+            code: z.ZodIssueCode.custom,
+            path: [
+              "events",
+              index,
+              "interaction",
+              "participants",
+              participantIndex,
+              "civilizationId",
+            ],
+            message: `Unknown civilization ID: ${participant.civilizationId}`,
+          });
+        }
+      });
     });
 
     data.eras.forEach((era, index) => {

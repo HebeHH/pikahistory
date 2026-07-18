@@ -11,6 +11,11 @@ import {
   HistoricalSpanSchema,
   HistoryWallDataSchema,
   HistoryWallRecordSchema,
+  InteractionRoleSchema,
+  InteractionSchema,
+  InteractionTypeSchema,
+  RecordDetailsSchema,
+  SourceReferenceSchema,
   VisualReferenceSchema,
 } from "./history-wall.schema";
 
@@ -28,6 +33,11 @@ export type Continent = z.infer<typeof ContinentSchema>;
 export type Geography = z.infer<typeof GeographySchema>;
 export type VisualReference = z.infer<typeof VisualReferenceSchema>;
 export type EraTag = z.infer<typeof EraTagSchema>;
+export type SourceReference = z.infer<typeof SourceReferenceSchema>;
+export type RecordDetails = z.infer<typeof RecordDetailsSchema>;
+export type InteractionType = z.infer<typeof InteractionTypeSchema>;
+export type InteractionRole = z.infer<typeof InteractionRoleSchema>;
+export type Interaction = z.infer<typeof InteractionSchema>;
 
 export type Civilization = z.infer<typeof CivilizationSchema>;
 export type HistoryEvent = z.infer<typeof EventSchema>;

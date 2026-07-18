@@ -22,6 +22,35 @@
         "alt": "Ancient Egyptian Eye of Horus symbol"
       },
       "color": "#D4A72C",
+      "details": {
+        "markdown": "## Ancient Egypt\n\nUse this full note for study context, interpretations, and links that do not fit in the timeline label.",
+        "tags": ["nile", "north-africa"],
+        "sources": [],
+        "media": []
+      },
+      "metadata": {}
+    },
+    {
+      "type": "civilization",
+      "id": "civilization_mycenaean_greece",
+      "title": "Mycenaean Greece",
+      "span": {
+        "startYear": -1750,
+        "endYear": -1050,
+        "displayLabel": "c. 1750–1050 BCE",
+        "certainty": "approximate"
+      },
+      "notes": "A Late Bronze Age civilization centred on mainland Greece and the Aegean.",
+      "location": {
+        "continent": "europe",
+        "label": "Aegean"
+      },
+      "icon": {
+        "kind": "emoji",
+        "value": "🏺",
+        "alt": "Ancient pottery"
+      },
+      "color": "#6D7F56",
       "metadata": {}
     }
   ],
@@ -42,6 +71,38 @@
         "kind": "emoji",
         "value": "🔺",
         "alt": "Pyramid symbol"
+      },
+      "metadata": {}
+    },
+    {
+      "type": "event",
+      "id": "event_egypt_aegean_trade",
+      "title": "Egyptian–Aegean trade networks",
+      "span": {
+        "startYear": -1600,
+        "endYear": -1200,
+        "displayLabel": "c. 1600–1200 BCE",
+        "certainty": "approximate"
+      },
+      "interaction": {
+        "type": "trade",
+        "participants": [
+          {
+            "civilizationId": "civilization_egypt",
+            "role": "trader"
+          },
+          {
+            "civilizationId": "civilization_mycenaean_greece",
+            "role": "trader"
+          }
+        ]
+      },
+      "notes": "Goods and ideas moved through connected eastern Mediterranean exchange networks.",
+      "details": {
+        "markdown": "Trade interactions can connect two or many civilizations. The wall renders one relationship line with every participant attached.",
+        "tags": ["trade", "bronze-age", "mediterranean"],
+        "sources": [],
+        "media": []
       },
       "metadata": {}
     }

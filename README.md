@@ -65,8 +65,18 @@ The append-only v1 API is documented in
 - `GET /api/v1/records?detail=full` — all complete records
 - `GET /api/v1/records/:id` — one complete record
 - `POST /api/v1/records` — append one civilization, event, or era
+- `POST /api/v1/images/generate` — protected OpenAI/Gemini event-image preview
 
 There are intentionally no update or delete endpoints.
+
+Timeline interaction types, drag/tap input behavior, era colors, structured
+notes, and image-generation behavior are documented in
+[`docs/product/timeline-interactions.md`](docs/product/timeline-interactions.md).
+
+To enable event images locally or on Vercel, set `IMAGE_GENERATION_SECRET` and
+at least one of `GEMINI_API_KEY` or `OPENAI_API_KEY`. Keep these server-only;
+never use a `NEXT_PUBLIC_` prefix. The cost-oriented defaults and optional model
+overrides are listed in [`.env.example`](.env.example).
 
 ## Vercel deployment
 

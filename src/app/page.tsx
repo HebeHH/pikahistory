@@ -1,9 +1,7 @@
-import baseHistoryWallData from "../../public/data/history-wall.base.json";
-
-import { parseHistoryWallData } from "@/contracts/history-wall.schema";
 import HistoryWallApp from "@/components/history-wall/history-wall-app";
+import { loadInitialData } from "@/lib/history-wall/load-seed";
 
-const historyWall = parseHistoryWallData(baseHistoryWallData);
+const historyWall = loadInitialData();
 
 export default function Home() {
   return <HistoryWallApp initialData={historyWall} />;

@@ -72,8 +72,20 @@ function groupByCivId<T extends { civilizationId?: string }>(items: T[]): Map<st
   return map;
 }
 
+/** An event anchors to its civilization, or to the first participant of an interaction. */
+function eventAnchorCivId(event: HistoryEvent): string | undefined {
+  return event.civilizationId ?? event.interaction?.participants[0]?.civilizationId;
+}
+
 export function buildWallLayout(data: HistoryWallData): BandLayout[] {
-  const eventsByCiv = groupByCivId(data.events);
+  const eventsByCiv = new Map<string, HistoryEvent[]>();
+  for (const event of data.events) {
+    const anchor = eventAnchorCivId(event);
+    if (!anchor) continue;
+    const list = eventsByCiv.get(anchor);
+    if (list) list.push(event);
+    else eventsByCiv.set(anchor, [event]);
+  }
   const erasByCiv = groupByCivId(data.eras);
 
   const civsByBand = new Map<string, Civilization[]>();

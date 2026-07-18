@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import type { CSSProperties, ClipboardEvent } from "react";
 
-import type { HistoryWallRecord } from "@/contracts/history-wall.types";
+import type { HistoryWallRecord, SourceReference, VisualReference } from "@/contracts/history-wall.types";
 import { renderMarkdown } from "@/lib/history-wall/markdown";
 import { formatYear } from "@/lib/history-wall/time-scale";
 
@@ -41,18 +41,18 @@ function getSpeechCtor(): (new () => SpeechRecognitionLike) | undefined {
   return w.SpeechRecognition ?? w.webkitSpeechRecognition;
 }
 
-interface SourceLink {
-  label: string;
-  url: string;
+/** Full study note lives in `details.markdown`; `notes` is the short summary fallback. */
+function readMarkdown(record: HistoryWallRecord): string {
+  return record.details?.markdown?.trim() ? record.details.markdown : record.notes;
 }
 function readTags(record: HistoryWallRecord): string[] {
-  const raw = (record.metadata as Record<string, unknown>).tags;
-  return Array.isArray(raw) ? raw.filter((t): t is string => typeof t === "string") : [];
+  return record.details?.tags ?? [];
 }
-function readSources(record: HistoryWallRecord): SourceLink[] {
-  const raw = (record.metadata as Record<string, unknown>).sources;
-  if (!Array.isArray(raw)) return [];
-  return raw.filter((s): s is SourceLink => !!s && typeof s === "object" && "label" in s && "url" in s);
+function readSources(record: HistoryWallRecord): SourceReference[] {
+  return record.details?.sources ?? [];
+}
+function readMedia(record: HistoryWallRecord): VisualReference[] {
+  return record.details?.media ?? [];
 }
 
 export default function NoteDock({ record, saving, suggestion, onClose, onSave, onExplore }: NoteDockProps) {
@@ -99,8 +99,16 @@ function DockContent({
   const [editing, setEditing] = useState(false);
   const [title, setTitle] = useState(record.title);
   const [label, setLabel] = useState(record.span.displayLabel);
-  const [notes, setNotes] = useState(record.notes);
+  const [notes, setNotes] = useState(readMarkdown(record));
   const [tagsText, setTagsText] = useState(readTags(record).join(", "));
+
+  const discard = () => {
+    setTitle(record.title);
+    setLabel(record.span.displayLabel);
+    setNotes(readMarkdown(record));
+    setTagsText(readTags(record).join(", "));
+    setEditing(false);
+  };
 
   const [listening, setListening] = useState(false);
   const [speechOk] = useState(() => Boolean(getSpeechCtor()));
@@ -158,12 +166,17 @@ function DockContent({
       .split(",")
       .map((t) => t.trim())
       .filter(Boolean);
+    const details = {
+      markdown: notes,
+      tags,
+      sources: record.details?.sources ?? [],
+      media: record.details?.media ?? [],
+    };
     const updated = {
       ...record,
       title: title.trim() || record.title,
-      notes,
       span: { ...record.span, displayLabel: label.trim() || record.span.displayLabel },
-      metadata: { ...record.metadata, tags },
+      details,
     } as HistoryWallRecord;
     onSave(updated);
     setEditing(false);
@@ -171,6 +184,7 @@ function DockContent({
 
   const tags = readTags(record);
   const sources = readSources(record);
+  const media = readMedia(record);
   const inputCls = "w-full rounded-md border px-2 py-1 text-sm outline-none focus:ring-2 focus:ring-[var(--accent)]";
 
   return (
@@ -210,19 +224,25 @@ function DockContent({
           </span>
           {editing ? (
             <div className="flex gap-2">
-              <button type="button" onClick={() => setEditing(false)} style={btnGhost}>
-                Cancel
+              <button type="button" onClick={discard} style={btnGhost}>
+                <span className="material-symbols-outlined" style={{ fontSize: 16 }}>
+                  close
+                </span>
+                Discard
               </button>
               <button type="button" onClick={handleSave} disabled={saving} style={btnPrimary}>
-                {saving ? "Saving…" : "Save"}
+                <span className="material-symbols-outlined" style={{ fontSize: 16 }}>
+                  save
+                </span>
+                {saving ? "Saving…" : "Save note"}
               </button>
             </div>
           ) : (
-            <button type="button" onClick={() => setEditing(true)} style={btnGhost}>
+            <button type="button" onClick={() => setEditing(true)} style={btnPrimary}>
               <span className="material-symbols-outlined" style={{ fontSize: 16 }}>
                 edit
               </span>
-              Edit
+              Edit note
             </button>
           )}
           <button type="button" onClick={onClose} style={{ ...btnGhost, border: "none" }} title="Close">
@@ -253,7 +273,7 @@ function DockContent({
               </div>
             </>
           ) : (
-            <div className="note-markdown" dangerouslySetInnerHTML={{ __html: renderMarkdown(record.notes || "*No notes yet — click Edit to add some.*") }} />
+            <div className="note-markdown" dangerouslySetInnerHTML={{ __html: renderMarkdown(readMarkdown(record) || "*No notes yet — click Edit to add some.*") }} />
           )}
         </div>
 
@@ -262,15 +282,26 @@ function DockContent({
           <div className="font-mono" style={{ fontSize: 10, letterSpacing: "0.15em", color: "var(--faint)", marginBottom: 8 }}>
             MEDIA
           </div>
-          <div className="flex gap-2" style={{ marginBottom: 18 }}>
-            {["image", "play_circle"].map((glyph, i) => (
-              <div key={glyph} className="flex flex-col items-center justify-center" style={{ flex: 1, height: 74, borderRadius: 8, border: "1px solid var(--line-4)", background: "repeating-linear-gradient(45deg,#efe8d8,#efe8d8 7px,#e8e0cd 7px,#e8e0cd 14px)", color: "var(--muted)", gap: 4 }}>
-                <span className="material-symbols-outlined" style={{ fontSize: 20 }}>
-                  {glyph}
-                </span>
-                <span style={{ fontSize: 10 }}>{i === 0 ? "image slot" : "clip slot"}</span>
-              </div>
-            ))}
+          <div className="flex gap-2" style={{ marginBottom: 18, flexWrap: "wrap" }}>
+            {media.length > 0
+              ? media.map((m, i) =>
+                  m.kind === "emoji" ? (
+                    <div key={i} className="flex items-center justify-center" style={{ width: 74, height: 74, borderRadius: 8, border: "1px solid var(--line-4)", background: "var(--app-bg)", fontSize: 32 }} title={m.alt}>
+                      {m.value}
+                    </div>
+                  ) : (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img key={i} src={m.value} alt={m.alt ?? ""} style={{ width: 74, height: 74, objectFit: "cover", borderRadius: 8, border: "1px solid var(--line-4)" }} />
+                  ),
+                )
+              : ["image", "play_circle"].map((glyph, i) => (
+                  <div key={glyph} className="flex flex-col items-center justify-center" style={{ flex: 1, height: 74, borderRadius: 8, border: "1px solid var(--line-4)", background: "repeating-linear-gradient(45deg,#efe8d8,#efe8d8 7px,#e8e0cd 7px,#e8e0cd 14px)", color: "var(--muted)", gap: 4 }}>
+                    <span className="material-symbols-outlined" style={{ fontSize: 20 }}>
+                      {glyph}
+                    </span>
+                    <span style={{ fontSize: 10 }}>{i === 0 ? "image slot" : "clip slot"}</span>
+                  </div>
+                ))}
           </div>
           <div className="font-mono" style={{ fontSize: 10, letterSpacing: "0.15em", color: "var(--faint)", marginBottom: 8 }}>
             SOURCES
@@ -283,7 +314,7 @@ function DockContent({
                     <span className="material-symbols-outlined" style={{ fontSize: 15 }}>
                       link
                     </span>
-                    {s.label}
+                    {s.title}
                   </a>
                 </li>
               ))}
@@ -316,5 +347,5 @@ function DockContent({
 }
 
 const btnGhost: CSSProperties = { display: "flex", alignItems: "center", gap: 4, fontSize: 13, color: "var(--muted)", border: "1px solid var(--line)", borderRadius: 7, padding: "5px 10px", background: "transparent", cursor: "pointer" };
-const btnPrimary: CSSProperties = { fontSize: 13, color: "var(--app-bg)", background: "var(--text)", borderRadius: 7, padding: "5px 12px", cursor: "pointer", border: "none" };
+const btnPrimary: CSSProperties = { display: "flex", alignItems: "center", gap: 4, fontSize: 13, color: "var(--app-bg)", background: "var(--text)", borderRadius: 7, padding: "5px 12px", cursor: "pointer", border: "none" };
 const chip: CSSProperties = { fontSize: 12, border: "1px solid var(--line)", borderRadius: 6, padding: "4px 9px", background: "#fafaf7", cursor: "pointer" };

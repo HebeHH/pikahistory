@@ -28,7 +28,8 @@ function replaceRecord(data: HistoryWallData, updated: HistoryWallRecord): Histo
 // TODO(ai-strip): replace with a real call once the suggestion endpoint lands.
 function suggestFromNotes(record: HistoryWallRecord | null): string | null {
   if (!record) return null;
-  const firstLine = record.notes.split("\n").find((l) => l.trim()) ?? "";
+  const source = record.details?.markdown?.trim() ? record.details.markdown : record.notes;
+  const firstLine = source.split("\n").find((l) => l.trim()) ?? "";
   const hook = firstLine.replace(/[#*>_`]/g, "").trim().slice(0, 80);
   return hook
     ? `Based on your notes — want to dig into "${hook}${hook.length >= 80 ? "…" : ""}"?`

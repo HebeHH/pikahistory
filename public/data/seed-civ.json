@@ -1,0 +1,276 @@
+[
+  {
+    "type": "civilization",
+    "id": "civilization_rome",
+    "title": "Ancient Rome",
+    "span": {
+      "startYear": -753,
+      "endYear": 476,
+      "displayLabel": "753 BCE–476 CE",
+      "certainty": "approximate"
+    },
+    "notes": "A civilization centred on Rome that expanded from an Italian city-state to control the Mediterranean, spanning the Kingdom, Republic, and Empire.",
+    "location": {
+      "continent": "europe"
+    },
+    "icon": {
+      "kind": "emoji",
+      "value": "🏛️"
+    },
+    "color": "#8C1C13",
+    "metadata": {
+      "wikidataQid": "Q1747689",
+      "wikidataLabel": "Ancient Rome",
+      "capitals": [
+        "Roma"
+      ]
+    }
+  },
+  {
+    "type": "civilization",
+    "id": "civilization_ptolemaic_egypt",
+    "title": "Ptolemaic Egypt",
+    "span": {
+      "startYear": -305,
+      "endYear": -30,
+      "displayLabel": "305 BCE–30 BCE",
+      "certainty": "exact"
+    },
+    "notes": "The Greek Macedonian dynasty that ruled Egypt after Alexander's conquest, ending with Cleopatra's death and Roman annexation.",
+    "location": {
+      "continent": "africa"
+    },
+    "icon": {
+      "kind": "emoji",
+      "value": "𓋹"
+    },
+    "color": "#C9A227",
+    "metadata": {
+      "wikidataQid": "Q2320005",
+      "wikidataLabel": "Ptolemaic Kingdom",
+      "capitals": [
+        "Alexandria"
+      ]
+    }
+  },
+  {
+    "type": "civilization",
+    "id": "civilization_macedon",
+    "title": "Macedon",
+    "span": {
+      "startYear": -808,
+      "endYear": -167,
+      "displayLabel": "808 BCE–167 BCE",
+      "certainty": "approximate"
+    },
+    "notes": "A Hellenic kingdom in the northern Greek peninsula, home to Philip II and Alexander the Great before falling to Rome.",
+    "location": {
+      "continent": "europe"
+    },
+    "icon": {
+      "kind": "emoji",
+      "value": "⭐"
+    },
+    "color": "#3C6E71",
+    "metadata": {
+      "wikidataQid": "Q83958",
+      "wikidataLabel": "Macedonia",
+      "capitals": [
+        "Pella",
+        "Aigai"
+      ]
+    }
+  },
+  {
+    "type": "civilization",
+    "id": "civilization_aksum",
+    "title": "Kingdom of Aksum",
+    "span": {
+      "startYear": -401,
+      "endYear": 960,
+      "displayLabel": "401 BCE–960 CE",
+      "certainty": "approximate"
+    },
+    "notes": "A trading kingdom in the Horn of Africa that controlled Red Sea trade routes and minted its own coinage.",
+    "location": {
+      "continent": "africa"
+    },
+    "icon": {
+      "kind": "emoji",
+      "value": "🗿"
+    },
+    "color": "#6A4C93",
+    "metadata": {
+      "wikidataQid": "Q139377",
+      "wikidataLabel": "Kingdom of Aksum",
+      "capitals": [
+        "Axum"
+      ]
+    }
+  },
+  {
+    "type": "civilization",
+    "id": "civilization_mali",
+    "title": "Mali Empire",
+    "span": {
+      "startYear": 1235,
+      "endYear": 1670,
+      "displayLabel": "1235 CE–1670 CE",
+      "certainty": "exact"
+    },
+    "notes": "A West African empire built on the trans-Saharan gold and salt trade, reaching its height under Mansa Musa.",
+    "location": {
+      "continent": "africa"
+    },
+    "icon": {
+      "kind": "emoji",
+      "value": "👑"
+    },
+    "color": "#D68C45",
+    "metadata": {
+      "wikidataQid": "Q184536",
+      "wikidataLabel": "Mali Empire",
+      "capitals": [
+        "Kangaba"
+      ]
+    }
+  },
+  {
+    "type": "civilization",
+    "id": "civilization_umayyad_caliphate",
+    "title": "Umayyad Caliphate",
+    "span": {
+      "startYear": 661,
+      "endYear": 750,
+      "displayLabel": "661 CE–750 CE",
+      "certainty": "exact"
+    },
+    "notes": "The second Islamic caliphate, ruling from Damascus over territory stretching from Iberia to Central Asia.",
+    "location": {
+      "continent": "transcontinental"
+    },
+    "icon": {
+      "kind": "emoji",
+      "value": "☪️"
+    },
+    "color": "#2E7D32",
+    "metadata": {
+      "wikidataQid": "Q8575586",
+      "wikidataLabel": "Umayyad Caliphate",
+      "capitals": [
+        "Damascus",
+        "Harran"
+      ]
+    }
+  },
+  {
+    "type": "civilization",
+    "id": "civilization_han_china",
+    "title": "Han China",
+    "span": {
+      "startYear": -206,
+      "endYear": 220,
+      "displayLabel": "206 BCE–220 CE",
+      "certainty": "exact"
+    },
+    "notes": "An imperial Chinese dynasty that consolidated centralized bureaucratic rule and expanded trade along the Silk Road.",
+    "location": {
+      "continent": "asia"
+    },
+    "icon": {
+      "kind": "emoji",
+      "value": "🐉"
+    },
+    "color": "#B23A48",
+    "metadata": {
+      "wikidataQid": "Q7209",
+      "wikidataLabel": "Han dynasty",
+      "capitals": [
+        "Luoyang",
+        "Xuchang",
+        "Chang'an"
+      ]
+    }
+  },
+  {
+    "type": "civilization",
+    "id": "civilization_maurya_india",
+    "title": "Maurya India",
+    "span": {
+      "startYear": -322,
+      "endYear": -185,
+      "displayLabel": "322 BCE–185 BCE",
+      "certainty": "exact"
+    },
+    "notes": "The first empire to unify most of the Indian subcontinent, reaching its peak under Ashoka.",
+    "location": {
+      "continent": "asia"
+    },
+    "icon": {
+      "kind": "emoji",
+      "value": "🦁"
+    },
+    "color": "#E07A5F",
+    "metadata": {
+      "wikidataQid": "Q62943",
+      "wikidataLabel": "Maurya empire",
+      "capitals": [
+        "Patna",
+        "Pataliputra"
+      ]
+    }
+  },
+  {
+    "type": "civilization",
+    "id": "civilization_inca",
+    "title": "Inca Empire",
+    "span": {
+      "startYear": 1438,
+      "endYear": 1533,
+      "displayLabel": "1438 CE–1533 CE",
+      "certainty": "exact"
+    },
+    "notes": "The largest pre-Columbian empire in the Americas, administered from Cusco across the Andes.",
+    "location": {
+      "continent": "south_america"
+    },
+    "icon": {
+      "kind": "emoji",
+      "value": "☀️"
+    },
+    "color": "#FFB703",
+    "metadata": {
+      "wikidataQid": "Q28573",
+      "wikidataLabel": "Inca Empire",
+      "capitals": [
+        "Cusco"
+      ]
+    }
+  },
+  {
+    "type": "civilization",
+    "id": "civilization_maori_aotearoa",
+    "title": "Pre-colonial Maori Aotearoa",
+    "span": {
+      "startYear": 1200,
+      "endYear": 1840,
+      "displayLabel": "c. 1200 CE–1840 CE",
+      "certainty": "estimated"
+    },
+    "notes": "Polynesian settlement and society in Aotearoa New Zealand from first voyaging arrival to the Treaty of Waitangi. Hand-curated rather than Wikidata-extracted: oral-tradition history has no inception/dissolution/capital triple and no dated point-events to query for Round 2.",
+    "location": {
+      "continent": "oceania",
+      "label": "Aotearoa / New Zealand"
+    },
+    "icon": {
+      "kind": "emoji",
+      "value": "🛶"
+    },
+    "color": "#1B998B",
+    "metadata": {
+      "curated": true,
+      "replacesSlot": "3rd Asian civilization (Khmer Empire, dropped for thin Wikidata coverage per context-transfer doc)",
+      "sourceMaterial": "parsingEvents/events.json New Zealand entries"
+    }
+  }
+]

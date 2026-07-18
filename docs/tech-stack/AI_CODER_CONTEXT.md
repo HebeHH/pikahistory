@@ -35,6 +35,8 @@ Optimize for a working demo, fast integration, and minimal code. Follow
    inferred types in `src/contracts/history-wall.types.ts` and an example at
    `public/data/history-wall.base.json`. Read it before producing or consuming
    History Wall data; do not invent alternate fields or date formats.
+   Cross-civilization relationships are event `interaction` objects with 2+
+   participants; never duplicate one war/trade relationship as unrelated events.
 0. The public REST contract is documented in `docs/api/v1.md`. It is
    append-only: POST adds a new stable ID, GET reads, and duplicate IDs return
    a conflict. Do not add PUT, PATCH, DELETE, or upsert behaviour. The records
@@ -43,8 +45,9 @@ Optimize for a working demo, fast integration, and minimal code. Follow
    another route.
 2. Default to Server Components. Add `"use client"` only to the smallest
    interactive subtree.
-3. Put product components in `src/components/history-wall/` and small generic
-   primitives in `src/components/ui/`.
+3. Put wall components in `src/components/timeline/`, other product components
+   in `src/components/history-wall/`, and small generic primitives in
+   `src/components/ui/`.
 4. Keep database access in `src/lib/db/`; never expose `DATABASE_URL` or import
    database code into a Client Component.
 5. Use the existing versioned REST API in `src/app/api/v1/` for record reads and
@@ -60,6 +63,8 @@ Optimize for a working demo, fast integration, and minimal code. Follow
    it.
 10. Preserve unrelated repository work and do not reformat unrelated files.
 11. Use pnpm and preserve the lockfile. Never commit secrets or real user data.
+    AI provider keys and `IMAGE_GENERATION_SECRET` are server-only environment
+    variables; never expose them with a `NEXT_PUBLIC_` prefix.
 12. Run only the quick checks already available and report what you actually
     verified.
 
