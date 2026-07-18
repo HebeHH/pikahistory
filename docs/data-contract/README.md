@@ -63,6 +63,9 @@ import type { Civilization, HistoryEvent } from "@/contracts/history-wall.types"
 Zod defaults are applied only when data is parsed. The public base JSON includes
 the defaulted fields explicitly so it is readable without running code.
 
+The append-only database and REST mapping for this contract is documented in
+`docs/api/v1.md`.
+
 ## Extending it
 
 For a small experiment, put non-contract data in a record's `metadata` object.
