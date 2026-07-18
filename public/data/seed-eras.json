@@ -1,0 +1,109 @@
+[
+  {
+    "type": "era",
+    "id": "era_pax_romana",
+    "title": "Pax Romana",
+    "span": {
+      "startYear": 27,
+      "endYear": 180,
+      "displayLabel": "27 BCE - 180 CE",
+      "certainty": "approximate"
+    },
+    "civilizationId": "civilization_rome",
+    "notes": "Two centuries of relative internal peace and stability across the Roman world, from Augustus to the death of Marcus Aurelius.",
+    "value": 5,
+    "tag": "golden_age",
+    "metadata": {},
+    "details": {
+      "markdown": "Trade, travel, and construction flourished under the protection of a single power controlling the Mediterranean rim. Historians conventionally close the period with Marcus Aurelius's death and the accession of Commodus.",
+      "tags": [
+        "rome",
+        "golden-age",
+        "stability"
+      ],
+      "sources": [
+        {
+          "title": "Pax Romana",
+          "url": "https://en.wikipedia.org/wiki/Pax_Romana",
+          "publisher": "Wikipedia"
+        }
+      ],
+      "media": []
+    }
+  },
+  {
+    "type": "era",
+    "id": "era_han_wudi_expansion",
+    "title": "Reign of Emperor Wu",
+    "span": {
+      "startYear": -141,
+      "endYear": -87,
+      "displayLabel": "141-87 BCE",
+      "certainty": "approximate"
+    },
+    "civilizationId": "civilization_han_china",
+    "notes": "Emperor Wu vastly expands Han territory, defeats the Xiongnu in sustained campaigns, and opens westward contact along what becomes the Silk Road.",
+    "value": 4,
+    "tag": "expansion",
+    "metadata": {}
+  },
+  {
+    "type": "era",
+    "id": "era_ptolemaic_golden_age",
+    "title": "Ptolemaic Golden Age",
+    "span": {
+      "startYear": -285,
+      "endYear": -246,
+      "displayLabel": "285-246 BCE",
+      "certainty": "approximate"
+    },
+    "civilizationId": "civilization_ptolemaic_egypt",
+    "notes": "Under Ptolemy II Philadelphus, Alexandria becomes the intellectual capital of the Hellenistic world, home to the Library and the Lighthouse.",
+    "value": 5,
+    "tag": "golden_age",
+    "metadata": {},
+    "details": {
+      "markdown": "Ptolemy II's reign is the peak of Ptolemaic wealth and cultural patronage, before the dynasty's slow decline through internal succession conflicts in later centuries.",
+      "tags": [
+        "egypt",
+        "alexandria",
+        "golden-age",
+        "scholarship"
+      ],
+      "sources": [],
+      "media": []
+    }
+  },
+  {
+    "type": "era",
+    "id": "era_mansa_musa_reign",
+    "title": "Reign of Mansa Musa",
+    "span": {
+      "startYear": 1312,
+      "endYear": 1337,
+      "displayLabel": "1312-1337 CE",
+      "certainty": "approximate"
+    },
+    "civilizationId": "civilization_mali",
+    "notes": "Mali reaches its height of wealth, territory, and international renown under Mansa Musa, capped by his famous hajj to Mecca.",
+    "value": 5,
+    "tag": "golden_age",
+    "metadata": {}
+  },
+  {
+    "type": "era",
+    "id": "era_umayyad_second_fitna",
+    "title": "Second Fitna",
+    "span": {
+      "startYear": 683,
+      "endYear": 692,
+      "displayLabel": "683-692 CE",
+      "certainty": "approximate"
+    },
+    "civilizationId": "civilization_umayyad_caliphate",
+    "notes": "A succession crisis fractures the caliphate into competing claimants for nearly a decade before Umayyad authority is forcibly reunified.",
+    "value": 1,
+    "tag": "civil_war",
+    "metadata": {}
+  }
+]

@@ -1,0 +1,205 @@
+[
+  {
+    "type": "person",
+    "id": "person_alexander_the_great",
+    "title": "Alexander the Great",
+    "span": {
+      "startYear": -356,
+      "endYear": -323,
+      "displayLabel": "356-323 BCE",
+      "certainty": "approximate"
+    },
+    "civilizationIds": [
+      "civilization_macedon",
+      "civilization_ptolemaic_egypt"
+    ],
+    "roles": [
+      "monarch",
+      "military_leader"
+    ],
+    "roleTitle": "King of Macedon",
+    "notes": "Conquered the Persian Empire and founded Alexandria in Egypt; after his death, his general Ptolemy took Egypt and founded the Ptolemaic dynasty.",
+    "visual": {
+      "kind": "emoji",
+      "value": "👑"
+    },
+    "metadata": {
+      "curated": true
+    },
+    "details": {
+      "markdown": "The direct link between two of our civilizations: Alexander is Macedon's own king, and the reason Ptolemaic Egypt exists at all -- his general Ptolemy I Soter took Egypt after Alexander's empire fractured.",
+      "tags": [
+        "macedon",
+        "egypt",
+        "conqueror"
+      ],
+      "sources": [],
+      "media": []
+    }
+  },
+  {
+    "type": "person",
+    "id": "person_julius_caesar",
+    "title": "Julius Caesar",
+    "span": {
+      "startYear": -100,
+      "endYear": -44,
+      "displayLabel": "100-44 BCE",
+      "certainty": "approximate"
+    },
+    "civilizationIds": [
+      "civilization_rome",
+      "civilization_ptolemaic_egypt"
+    ],
+    "roles": [
+      "political_leader",
+      "military_leader"
+    ],
+    "roleTitle": "Dictator of Rome",
+    "notes": "Intervened in a Ptolemaic succession dispute on Cleopatra's behalf at the Battle of the Nile, then ruled Rome as dictator until his assassination.",
+    "visual": {
+      "kind": "emoji",
+      "value": "🏛️"
+    },
+    "metadata": {
+      "curated": true
+    }
+  },
+  {
+    "type": "person",
+    "id": "person_cleopatra_vii",
+    "title": "Cleopatra VII",
+    "span": {
+      "startYear": -69,
+      "endYear": -30,
+      "displayLabel": "69-30 BCE",
+      "certainty": "approximate"
+    },
+    "civilizationIds": [
+      "civilization_ptolemaic_egypt",
+      "civilization_rome"
+    ],
+    "roles": [
+      "monarch",
+      "political_leader",
+      "diplomat"
+    ],
+    "roleTitle": "Pharaoh",
+    "notes": "The last active ruler of the Ptolemaic Kingdom, allied first with Caesar and then Mark Antony against Rome's shifting internal politics before her death and Egypt's annexation.",
+    "visual": {
+      "kind": "emoji",
+      "value": "👑"
+    },
+    "metadata": {
+      "curated": true
+    }
+  },
+  {
+    "type": "person",
+    "id": "person_ashoka",
+    "title": "Ashoka",
+    "span": {
+      "startYear": -304,
+      "endYear": -232,
+      "displayLabel": "c. 304-232 BCE",
+      "certainty": "approximate"
+    },
+    "civilizationIds": [
+      "civilization_maurya_india"
+    ],
+    "roles": [
+      "monarch",
+      "religious_leader"
+    ],
+    "roleTitle": "Emperor",
+    "notes": "Maurya emperor whose brutal conquest of Kalinga led him to renounce further warfare and promote Buddhism through edicts inscribed across the empire.",
+    "visual": {
+      "kind": "emoji",
+      "value": "☸️"
+    },
+    "metadata": {
+      "curated": true
+    }
+  },
+  {
+    "type": "person",
+    "id": "person_zhang_qian",
+    "title": "Zhang Qian",
+    "span": {
+      "startYear": -200,
+      "endYear": -114,
+      "displayLabel": "c. 200-114 BCE",
+      "certainty": "approximate"
+    },
+    "civilizationIds": [
+      "civilization_han_china"
+    ],
+    "roles": [
+      "explorer",
+      "diplomat"
+    ],
+    "roleTitle": "Imperial Envoy",
+    "notes": "Sent west by Emperor Wu to seek allies against the Xiongnu; his 13-year journey produced the first Chinese account of Central Asia and opened the route later travelers turned into the Silk Road.",
+    "visual": {
+      "kind": "emoji",
+      "value": "🧭"
+    },
+    "metadata": {
+      "curated": true
+    }
+  },
+  {
+    "type": "person",
+    "id": "person_mansa_musa",
+    "title": "Mansa Musa",
+    "span": {
+      "startYear": 1280,
+      "endYear": 1337,
+      "displayLabel": "c. 1280-1337 CE",
+      "certainty": "approximate"
+    },
+    "civilizationIds": [
+      "civilization_mali"
+    ],
+    "roles": [
+      "monarch",
+      "political_leader"
+    ],
+    "roleTitle": "Mansa",
+    "notes": "Ruler of the Mali Empire at its wealthiest, remembered for a hajj to Mecca so lavish it depressed Cairo's gold price for years.",
+    "visual": {
+      "kind": "emoji",
+      "value": "🕋"
+    },
+    "metadata": {
+      "curated": true
+    }
+  },
+  {
+    "type": "person",
+    "id": "person_aristotle",
+    "title": "Aristotle",
+    "span": {
+      "startYear": -384,
+      "endYear": -322,
+      "displayLabel": "384-322 BCE",
+      "certainty": "approximate"
+    },
+    "civilizationIds": [
+      "civilization_macedon"
+    ],
+    "roles": [
+      "philosopher",
+      "scholar"
+    ],
+    "roleTitle": "Tutor",
+    "notes": "Greek philosopher hired by Philip II to tutor the young Alexander at Mieza, shaping Alexander's lifelong interests in science and philosophy.",
+    "visual": {
+      "kind": "emoji",
+      "value": "📖"
+    },
+    "metadata": {
+      "curated": true
+    }
+  }
+]

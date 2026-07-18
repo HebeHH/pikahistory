@@ -24,6 +24,22 @@
       "capitals": [
         "Roma"
       ]
+    },
+    "details": {
+      "markdown": "From a single city-state to a Mediterranean-spanning empire across roughly twelve centuries, through Kingdom, Republic, and Empire.",
+      "tags": [
+        "mediterranean",
+        "empire",
+        "republic"
+      ],
+      "sources": [
+        {
+          "title": "Ancient Rome",
+          "url": "https://en.wikipedia.org/wiki/Ancient_Rome",
+          "publisher": "Wikipedia"
+        }
+      ],
+      "media": []
     }
   },
   {
@@ -51,6 +67,22 @@
       "capitals": [
         "Alexandria"
       ]
+    },
+    "details": {
+      "markdown": "A Greek Macedonian dynasty ruling pharaonic Egypt for nearly three centuries, blending Hellenistic and Egyptian traditions until Roman annexation.",
+      "tags": [
+        "egypt",
+        "hellenistic",
+        "alexandria"
+      ],
+      "sources": [
+        {
+          "title": "Ptolemaic Kingdom",
+          "url": "https://en.wikipedia.org/wiki/Ptolemaic_Kingdom",
+          "publisher": "Wikipedia"
+        }
+      ],
+      "media": []
     }
   },
   {
@@ -190,6 +222,22 @@
         "Xuchang",
         "Chang'an"
       ]
+    },
+    "details": {
+      "markdown": "A foundational Chinese imperial dynasty that consolidated bureaucratic rule, expanded far into Central Asia, and gave its name to the Han ethnic majority.",
+      "tags": [
+        "china",
+        "silk-road",
+        "bureaucracy"
+      ],
+      "sources": [
+        {
+          "title": "Han dynasty",
+          "url": "https://en.wikipedia.org/wiki/Han_dynasty",
+          "publisher": "Wikipedia"
+        }
+      ],
+      "media": []
     }
   },
   {
