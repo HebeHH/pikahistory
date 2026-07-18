@@ -28,6 +28,12 @@ export function trackWidth(zoom: number): number {
   return xForYear(YEAR_MAX, zoom) + 40;
 }
 
+/** Inverse of {@link xForYear}: track x-pixel → historical year. */
+export function yearFromX(x: number, zoom: number): number {
+  const year = Math.round(((x - LEFT_OFFSET) / (BASE_WIDTH * zoom)) * SPAN_YEARS + YEAR_MIN);
+  return Math.max(YEAR_MIN, Math.min(YEAR_MAX, year));
+}
+
 export function laneY(lane: number): number {
   return LANE_TOP + lane * LANE_GAP;
 }

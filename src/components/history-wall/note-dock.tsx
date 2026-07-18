@@ -6,6 +6,8 @@ import type { CSSProperties, ClipboardEvent } from "react";
 import type { HistoryWallRecord, SourceReference, VisualReference } from "@/contracts/history-wall.types";
 import { renderMarkdown } from "@/lib/history-wall/markdown";
 import { formatYear } from "@/lib/history-wall/time-scale";
+import { imageForRecord } from "@/lib/history-wall/civ-images";
+import PikaSprite from "./pika-sprite";
 
 interface NoteDockProps {
   record: HistoryWallRecord | null;
@@ -88,15 +90,16 @@ export default function NoteDock({ record, saving, suggestion, onClose, onSave, 
   );
 }
 
-function DockContent({
+export function DockContent({
   record,
   saving,
   suggestion,
   onClose,
   onSave,
   onExplore,
-}: NoteDockProps & { record: HistoryWallRecord }) {
-  const [editing, setEditing] = useState(false);
+  startEditing = false,
+}: NoteDockProps & { record: HistoryWallRecord; startEditing?: boolean }) {
+  const [editing, setEditing] = useState(startEditing);
   const [title, setTitle] = useState(record.title);
   const [label, setLabel] = useState(record.span.displayLabel);
   const [notes, setNotes] = useState(readMarkdown(record));
@@ -184,7 +187,11 @@ function DockContent({
 
   const tags = readTags(record);
   const sources = readSources(record);
-  const media = readMedia(record);
+  const landmark = imageForRecord(record);
+  const media: VisualReference[] = [
+    ...(landmark ? [{ kind: "url" as const, value: landmark.url, alt: landmark.credit }] : []),
+    ...readMedia(record),
+  ];
   const inputCls = "w-full rounded-md border px-2 py-1 text-sm outline-none focus:ring-2 focus:ring-[var(--accent)]";
 
   return (
@@ -327,13 +334,11 @@ function DockContent({
 
       {/* AI suggestion strip */}
       <div className="flex items-center gap-3" style={{ padding: "12px 22px", background: "linear-gradient(90deg, rgba(232,169,12,.14), rgba(232,169,12,.05))", borderTop: "1px solid rgba(232,169,12,.35)" }}>
-        <span className="flex items-center justify-center" style={{ width: 32, height: 32, borderRadius: "50%", background: "var(--accent)", boxShadow: "0 3px 10px rgba(232,169,12,.4)", flex: "0 0 auto" }}>
-          <span className="material-symbols-outlined filled" style={{ fontSize: 18, color: "var(--text)" }}>
-            bolt
-          </span>
+        <span className="flex items-center justify-center pika-bob" style={{ width: 38, height: 38, flex: "0 0 auto" }} title="Pika!">
+          <PikaSprite size={38} mood="spark" />
         </span>
         <span className="font-serif" style={{ flex: 1, fontStyle: "italic", fontSize: 14, color: "#4a4335" }}>
-          {suggestion ?? "Thinking of a rabbit hole based on your notes…"}
+          {suggestion ?? "Pika-pika… ⚡ sniffing out a rabbit-hole from your notes…"}
         </span>
         <button type="button" onClick={onExplore} className="flex items-center gap-1" style={{ background: "var(--text)", color: "var(--app-bg)", borderRadius: 8, padding: "7px 14px", fontSize: 13, flex: "0 0 auto" }}>
           Explore
