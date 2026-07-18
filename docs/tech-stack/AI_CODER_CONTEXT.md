@@ -18,6 +18,17 @@ Optimize for a working demo, fast integration, and minimal code. Follow
 - Tailwind CSS; shadcn/ui only when it saves time
 - pnpm
 
+## Required run modes
+
+- `pnpm dev` is the default: it opens/uses Docker, starts isolated local
+  PostgreSQL, applies the schema, seeds missing base records, and starts Next.
+- `pnpm dlx vercel@latest env run -- pnpm dev:app` runs locally against the
+  shared persistent **development** Neon database connected to Vercel.
+- Never assume `pnpm dev` uses Neon, and never point ordinary development work
+  at the production database.
+- Setup details are canonical in `README.md`; deployment and production schema
+  commands are canonical in `docs/deployment/vercel.md`.
+
 ## Rules
 
 0. The canonical data contract is `src/contracts/history-wall.schema.ts`, with
@@ -36,15 +47,16 @@ Optimize for a working demo, fast integration, and minimal code. Follow
    primitives in `src/components/ui/`.
 4. Keep database access in `src/lib/db/`; never expose `DATABASE_URL` or import
    database code into a Client Component.
-5. Prefer Server Actions for writes and direct server-side queries for reads.
-   Do not create an internal REST API.
+5. Use the existing versioned REST API in `src/app/api/v1/` for record reads and
+   writes. Do not create competing unversioned endpoints or alternate data
+   access contracts.
 6. Validate user-submitted values with Zod immediately before server-side use.
 7. Use props and local React state. Do not add a global state or client
    data-fetching library.
 8. Use the simplest working implementation. Do not introduce speculative
    abstractions, service layers, repositories, or a custom design system.
-9. Do not add tests, test infrastructure, backups, monitoring, analytics,
-   multiple environments, or CI/CD work unless the task explicitly asks for
+9. Do not add tests, test infrastructure, backups, monitoring, analytics, extra
+   deployment environments, or CI/CD work unless the task explicitly asks for
    it.
 10. Preserve unrelated repository work and do not reformat unrelated files.
 11. Use pnpm and preserve the lockfile. Never commit secrets or real user data.

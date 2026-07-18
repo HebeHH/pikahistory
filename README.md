@@ -33,6 +33,29 @@ If Docker Desktop is stopped, `pnpm dev` explains what to start and exits rather
 than falling back to a remote database. `pnpm dev:app` starts only Next.js and
 uses `DATABASE_URL` from the environment or `.env.local`.
 
+## Local app with the persistent Vercel database
+
+Use this when teammates need to see the same persistent Neon data instead of
+their isolated Docker data:
+
+```bash
+pnpm dlx vercel@latest login
+pnpm dlx vercel@latest link --project history-wall
+pnpm dlx vercel@latest env run -- pnpm dev:app
+```
+
+This injects Vercel's **development** `DATABASE_URL` into Next.js without
+writing the secret into the repository. Each teammate must log in and link their
+own checkout once. Do not use `pnpm dev` for this mode: that command always
+selects the local Docker database.
+
+The production database can be selected with `-e production`, but it should not
+be used for ordinary development:
+
+```bash
+pnpm dlx vercel@latest env run -e production -- pnpm dev:app
+```
+
 ## REST API
 
 The append-only v1 API is documented in

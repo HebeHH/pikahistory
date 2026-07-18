@@ -19,6 +19,15 @@ demo and do not add infrastructure for hypothetical future needs.
 Do not swap frameworks, databases, ORMs, styling systems, or package managers
 during the hackathon.
 
+## How to run it
+
+- `pnpm dev` uses the automatic local Docker PostgreSQL database.
+- `pnpm dlx vercel@latest env run -- pnpm dev:app` uses the persistent Vercel
+  development database while Next.js still runs locally.
+- Full setup and teammate instructions live in the root `README.md`.
+- Vercel, Neon, schema, and deployment commands live in
+  `docs/deployment/vercel.md`.
+
 ## Scope
 
 - Build one main page at `src/app/page.tsx`.
