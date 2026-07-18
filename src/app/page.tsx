@@ -1,10 +1,8 @@
-import { parseHistoryWallData } from "@/contracts/history-wall.schema";
-import { TimelineWall } from "@/components/timeline/TimelineWall";
+import HistoryWallApp from "@/components/history-wall/history-wall-app";
+import { loadInitialData } from "@/lib/history-wall/load-seed";
 
-import baseHistoryWallData from "../../public/data/history-wall.base.json";
-
-const historyWall = parseHistoryWallData(baseHistoryWallData);
+const historyWall = loadInitialData();
 
 export default function Home() {
-  return <TimelineWall data={historyWall} />;
+  return <HistoryWallApp initialData={historyWall} />;
 }
