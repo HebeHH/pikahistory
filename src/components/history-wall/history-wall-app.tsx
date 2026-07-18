@@ -11,7 +11,7 @@ import TimelineWall from "./timeline-wall";
 import NoteDock from "./note-dock";
 
 function allRecords(data: HistoryWallData): HistoryWallRecord[] {
-  return [...data.civilizations, ...data.events, ...data.eras];
+  return [...data.civilizations, ...data.people, ...data.events, ...data.eras];
 }
 
 function replaceRecord(data: HistoryWallData, updated: HistoryWallRecord): HistoryWallData {
@@ -20,6 +20,7 @@ function replaceRecord(data: HistoryWallData, updated: HistoryWallRecord): Histo
   return {
     ...data,
     civilizations: swap(data.civilizations),
+    people: swap(data.people),
     events: swap(data.events),
     eras: swap(data.eras),
   };

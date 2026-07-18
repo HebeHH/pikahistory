@@ -1,4 +1,7 @@
-import { parseHistoryWallData } from "@/contracts/history-wall.schema";
+import {
+  HISTORY_WALL_SCHEMA_VERSION,
+  parseHistoryWallData,
+} from "@/contracts/history-wall.schema";
 import type { HistoryWallData } from "@/contracts/history-wall.types";
 
 import baseData from "../../../public/data/history-wall.base.json";
@@ -14,8 +17,9 @@ import seedEvents from "../../../public/data/seed-events.json";
 export function loadInitialData(): HistoryWallData {
   try {
     return parseHistoryWallData({
-      schemaVersion: 1,
+      schemaVersion: HISTORY_WALL_SCHEMA_VERSION,
       civilizations: seedCiv,
+      people: [],
       events: seedEvents,
       eras: [],
     });

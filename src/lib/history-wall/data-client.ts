@@ -3,11 +3,8 @@ import type { HistoryWallRecord } from "@/contracts/history-wall.types";
 /**
  * Thin client over the History Wall REST API (`/api/v1`).
  *
- * The API is append-only today (POST + GET). The design needs edit-in-place,
- * which the team will support via an update endpoint soon. `updateRecord`
- * already targets that endpoint and degrades gracefully (optimistic local
- * result) until it exists, so the UI works now and gets real persistence for
- * free once the endpoint ships.
+ * Record identity/history fields are append-only. PATCH persists only the
+ * authorable notes/details fields and the UI keeps other edits local.
  */
 
 const BASE = "/api/v1/records";
@@ -28,7 +25,7 @@ async function readError(response: Response): Promise<string> {
   }
 }
 
-/** Create a brand-new civilization / event / era. */
+/** Create a brand-new civilization / person / event / era. */
 export async function addRecord(record: HistoryWallRecord): Promise<SaveResult> {
   const response = await fetch(BASE, {
     method: "POST",
@@ -39,13 +36,16 @@ export async function addRecord(record: HistoryWallRecord): Promise<SaveResult> 
   return { record, persisted: true };
 }
 
-/** Update an existing record (e.g. edited notes). Assumes a coming endpoint. */
+/** Update the authorable note fields of an existing record. */
 export async function updateRecord(record: HistoryWallRecord): Promise<SaveResult> {
   try {
     const response = await fetch(`${BASE}/${encodeURIComponent(record.id)}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(record),
+      body: JSON.stringify({
+        notes: record.notes,
+        ...(record.details === undefined ? {} : { details: record.details }),
+      }),
     });
     if (response.ok) return { record, persisted: true };
     // 404/405 = endpoint not live yet; anything else is a real error.
