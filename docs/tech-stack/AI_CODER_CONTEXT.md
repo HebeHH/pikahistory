@@ -20,6 +20,10 @@ Optimize for a working demo, fast integration, and minimal code. Follow
 
 ## Rules
 
+0. The canonical data contract is `src/contracts/history-wall.schema.ts`, with
+   inferred types in `src/contracts/history-wall.types.ts` and an example at
+   `public/data/history-wall.base.json`. Read it before producing or consuming
+   History Wall data; do not invent alternate fields or date formats.
 1. Keep the product on one main page unless the task cannot work without
    another route.
 2. Default to Server Components. Add `"use client"` only to the smallest

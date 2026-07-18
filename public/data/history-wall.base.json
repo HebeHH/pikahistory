@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "civilizations": [
+    {
+      "type": "civilization",
+      "id": "civilization_egypt",
+      "title": "Ancient Egypt",
+      "span": {
+        "startYear": -3100,
+        "endYear": -30,
+        "displayLabel": "c. 3100–30 BCE",
+        "certainty": "approximate"
+      },
+      "notes": "A civilization centred on the Nile Valley in northeast Africa.",
+      "location": {
+        "continent": "africa",
+        "label": "Nile Valley"
+      },
+      "icon": {
+        "kind": "emoji",
+        "value": "𓂀",
+        "alt": "Ancient Egyptian Eye of Horus symbol"
+      },
+      "color": "#D4A72C",
+      "metadata": {}
+    }
+  ],
+  "events": [
+    {
+      "type": "event",
+      "id": "event_pyramids_giza",
+      "title": "Pyramids of Giza",
+      "span": {
+        "startYear": -2550,
+        "endYear": -2490,
+        "displayLabel": "2550–2490 BCE",
+        "certainty": "estimated"
+      },
+      "civilizationId": "civilization_egypt",
+      "notes": "Monumental pyramid complexes were built at Giza during Egypt's Old Kingdom.",
+      "visual": {
+        "kind": "emoji",
+        "value": "🔺",
+        "alt": "Pyramid symbol"
+      },
+      "metadata": {}
+    }
+  ],
+  "eras": [
+    {
+      "type": "era",
+      "id": "era_egypt_old_kingdom",
+      "title": "Old Kingdom",
+      "span": {
+        "startYear": -2686,
+        "endYear": -2181,
+        "displayLabel": "c. 2686–2181 BCE",
+        "certainty": "approximate"
+      },
+      "civilizationId": "civilization_egypt",
+      "notes": "A period of centralized rule and major pyramid building.",
+      "value": 4,
+      "tag": "golden_age",
+      "metadata": {}
+    }
+  ]
+}
