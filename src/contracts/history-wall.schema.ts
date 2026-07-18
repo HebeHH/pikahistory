@@ -136,7 +136,27 @@ export const HexColorSchema = z
  * Explicit escape hatch for small future additions during the hackathon.
  * Stable fields should eventually graduate from `metadata` into the schema.
  */
-const MetadataSchema = z.record(z.string(), z.unknown()).default({});
+const MAX_METADATA_KEYS = 100;
+const MAX_METADATA_BYTES = 32 * 1024;
+
+const MetadataSchema = z
+  .record(z.string(), z.json())
+  .superRefine((metadata, context) => {
+    if (Object.keys(metadata).length > MAX_METADATA_KEYS) {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: `metadata may contain at most ${MAX_METADATA_KEYS} top-level keys.`,
+      });
+    }
+
+    if (new TextEncoder().encode(JSON.stringify(metadata)).byteLength > MAX_METADATA_BYTES) {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: `metadata must be at most ${MAX_METADATA_BYTES} bytes when encoded as JSON.`,
+      });
+    }
+  })
+  .default({});
 
 export const CivilizationSchema = z
   .object({
@@ -376,6 +396,19 @@ export const HistoryWallRecordSchema = z.discriminatedUnion("type", [
   EventSchema,
   EraSchema,
 ]);
+
+/** The only mutable part of an existing record in v1. */
+export const RecordNotesPatchSchema = z
+  .object({
+    notes: z.string().trim().max(5_000).optional(),
+    /** Use null to remove the structured details object. */
+    details: RecordDetailsSchema.nullable().optional(),
+  })
+  .strict()
+  .refine(
+    ({ notes, details }) => notes !== undefined || details !== undefined,
+    "At least one of notes or details must be provided.",
+  );
 
 /**
  * Top-level payload read and written by the app.

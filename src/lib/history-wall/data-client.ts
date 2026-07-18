@@ -1,3 +1,4 @@
+import { persistRecordNotes } from "@/app/actions/history-records";
 import type { HistoryWallRecord } from "@/contracts/history-wall.types";
 
 /**
@@ -39,22 +40,20 @@ export async function addRecord(record: HistoryWallRecord): Promise<SaveResult> 
 /** Update the authorable note fields of an existing record. */
 export async function updateRecord(record: HistoryWallRecord): Promise<SaveResult> {
   try {
-    const response = await fetch(`${BASE}/${encodeURIComponent(record.id)}`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        notes: record.notes,
-        ...(record.details === undefined ? {} : { details: record.details }),
-      }),
+    await persistRecordNotes({
+      id: record.id,
+      notes: record.notes,
+      ...(record.details === undefined ? {} : { details: record.details }),
     });
-    if (response.ok) return { record, persisted: true };
-    // 404/405 = endpoint not live yet; anything else is a real error.
-    if (response.status !== 404 && response.status !== 405) {
-      throw new Error(await readError(response));
-    }
+    return { record, persisted: true };
   } catch (error) {
-    if (error instanceof Error && !/Failed to fetch/i.test(error.message)) throw error;
+    if (
+      error instanceof Error &&
+      !/Failed to fetch|Record writes are disabled/i.test(error.message)
+    ) {
+      throw error;
+    }
   }
-  // Fallback: keep the edit locally so the demo flows until PATCH ships.
+  // Keep the edit locally if the server is offline or authoring is disabled.
   return { record, persisted: false };
 }

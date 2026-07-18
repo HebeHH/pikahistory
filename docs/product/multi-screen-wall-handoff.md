@@ -329,10 +329,15 @@ A future explicit **Focus wall here** command may allow the controller to move
 the shared camera to a selected item, but ordinary selection must never move
 the wall.
 
-## 8. Add room synchronization behind a transport interface
+## 8. Connect the implemented room backend
 
-Prove the renderer and coordinate math before choosing or integrating the final
-realtime provider. Keep provider-specific code behind a small interface:
+The room persistence, screen credentials, controller authorization, Ably token
+scoping, camera snapshot endpoint, and browser client adapter now live in this
+repository. Follow
+[`multi-screen-backend-integration.md`](./multi-screen-backend-integration.md)
+for the exact UI lifecycle and deployment setup.
+
+Keep provider-specific behavior behind the supplied client adapter:
 
 ```ts
 type WallRoomTransport = {
@@ -345,11 +350,9 @@ type WallRoomTransport = {
 };
 ```
 
-Cross-laptop camera motion needs a realtime network transport. `BroadcastChannel`
-is useful for a same-machine multi-tab prototype but does not work across the
-team's laptops. The deployed version should use a Vercel-compatible managed
-realtime/WebSocket service rather than holding long-lived WebSockets inside a
-normal Next.js serverless route.
+Cross-laptop camera motion uses Ably channels with backend-issued, short-lived
+credentials. The API key remains server-side. Followers receive subscribe-only
+camera capability; only the controller receives camera publish capability.
 
 Minimum room state:
 
@@ -465,9 +468,10 @@ controller.
 
 ### Phase C: actual laptop room
 
-1. Implement create/join room flows through the chosen realtime provider.
-2. Secure camera publishing with the owner token.
-3. Send presence, dimensions, order, snapshots, and camera revisions.
+1. Wire the supplied create/join/recover client functions into the UI.
+2. Connect the supplied Ably adapter and enter screen presence.
+3. Send dimensions, order, snapshots, and camera revisions as described in the
+   backend integration guide.
 4. Test three laptops on different networks or the same Wi-Fi.
 5. Add reconnect handling and owner-disconnected state.
 
@@ -509,4 +513,3 @@ fullscreen, and pan/zoom as one wall.
 - Persisting room state after the session ends.
 - Independent x-axis and y-axis zoom.
 - Canvas/WebGL optimization unless DOM rendering proves too slow.
-

@@ -1,5 +1,13 @@
 import { HistoryWallRecordSchema } from "@/contracts/history-wall.schema";
-import { RecordListQuerySchema, apiError, apiList, apiData } from "@/lib/api/v1";
+import {
+  RecordListQuerySchema,
+  RequestBodyError,
+  apiData,
+  apiError,
+  apiList,
+  authorizeRecordWrite,
+  readBoundedJson,
+} from "@/lib/api/v1";
 import {
   CivilizationReferenceError,
   addHistoryRecord,
@@ -13,7 +21,7 @@ export const dynamic = "force-dynamic";
  * GET /api/v1/records
  * GET /api/v1/records?detail=full
  *
- * Returns every civilization, event, and era. Summaries are the default so a
+ * Returns every civilization, person, event, and era. Summaries are the default so a
  * list view never downloads every note/media field by accident.
  */
 export async function GET(request: Request) {
@@ -46,16 +54,22 @@ export async function GET(request: Request) {
 /**
  * POST /api/v1/records
  *
- * Appends one civilization, event, or era. There is deliberately no upsert:
+ * Appends one civilization, person, event, or era. There is deliberately no upsert:
  * resubmitting an existing stable ID returns 409 instead of changing history.
  */
 export async function POST(request: Request) {
+  const authorizationError = authorizeRecordWrite(request);
+  if (authorizationError) return authorizationError;
+
   let input: unknown;
 
   try {
-    input = await request.json();
-  } catch {
-    return apiError(400, "invalid_json", "Request body must be valid JSON.");
+    input = await readBoundedJson(request);
+  } catch (error) {
+    if (error instanceof RequestBodyError) {
+      return apiError(error.status, error.code, error.message);
+    }
+    throw error;
   }
 
   const parsed = HistoryWallRecordSchema.safeParse(input);

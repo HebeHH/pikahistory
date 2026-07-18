@@ -86,6 +86,10 @@ async function waitForPostgres() {
 }
 
 async function seedBaseData() {
+  // Keep the raw SQL seed path, but validate it against the same contract used
+  // by API writes before anything reaches PostgreSQL.
+  run("pnpm", ["validate:data"]);
+
   const source = JSON.parse(
     await readFile("public/data/history-wall.base.json", "utf8"),
   );
