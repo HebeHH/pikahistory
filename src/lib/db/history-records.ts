@@ -1,6 +1,6 @@
 import "server-only";
 
-import { asc, eq } from "drizzle-orm";
+import { asc, eq, inArray } from "drizzle-orm";
 
 import type { HistoryWallRecord } from "@/contracts/history-wall.types";
 import { HISTORY_WALL_SCHEMA_VERSION } from "@/contracts/history-wall.schema";
@@ -17,6 +17,8 @@ export type HistoryRecordSummary = {
   startYear: number;
   endYear?: number;
   civilizationId?: string;
+  civilizationIds?: string[];
+  interactionType?: string;
   createdAt: string;
 };
 
@@ -36,6 +38,24 @@ function getCivilizationId(record: HistoryWallRecord) {
   return record.type === "event" || record.type === "era"
     ? record.civilizationId
     : undefined;
+}
+
+function getReferencedCivilizationIds(record: HistoryWallRecord) {
+  if (record.type === "era") {
+    return [record.civilizationId];
+  }
+
+  if (record.type !== "event") {
+    return [];
+  }
+
+  if (record.interaction) {
+    return record.interaction.participants.map(
+      (participant) => participant.civilizationId,
+    );
+  }
+
+  return record.civilizationId ? [record.civilizationId] : [];
 }
 
 /** Return every record, ordered from earliest start year to latest. */
@@ -77,6 +97,7 @@ export async function listHistoryRecords(
       startYear: historyRecords.startYear,
       endYear: historyRecords.endYear,
       civilizationId: historyRecords.civilizationId,
+      payload: historyRecords.payload,
       createdAt: historyRecords.createdAt,
     })
     .from(historyRecords)
@@ -95,6 +116,14 @@ export async function listHistoryRecords(
     ...(row.civilizationId === null
       ? {}
       : { civilizationId: row.civilizationId }),
+    ...(row.payload.type === "event" && row.payload.interaction
+      ? {
+          civilizationIds: row.payload.interaction.participants.map(
+            (participant) => participant.civilizationId,
+          ),
+          interactionType: row.payload.interaction.type,
+        }
+      : {}),
     createdAt: row.createdAt.toISOString(),
   }));
 }
@@ -121,16 +150,25 @@ export async function getHistoryRecord(
 export async function addHistoryRecord(record: HistoryWallRecord) {
   const db = getDb();
   const civilizationId = getCivilizationId(record);
+  const referencedCivilizationIds = getReferencedCivilizationIds(record);
 
-  if (civilizationId) {
-    const [civilization] = await db
-      .select({ type: historyRecords.type })
+  if (referencedCivilizationIds.length > 0) {
+    const civilizations = await db
+      .select({ id: historyRecords.id, type: historyRecords.type })
       .from(historyRecords)
-      .where(eq(historyRecords.id, civilizationId))
-      .limit(1);
+      .where(inArray(historyRecords.id, referencedCivilizationIds));
 
-    if (!civilization || civilization.type !== "civilization") {
-      throw new CivilizationReferenceError(civilizationId);
+    const foundCivilizationIds = new Set(
+      civilizations
+        .filter((candidate) => candidate.type === "civilization")
+        .map((candidate) => candidate.id),
+    );
+    const missingCivilizationId = referencedCivilizationIds.find(
+      (candidate) => !foundCivilizationIds.has(candidate),
+    );
+
+    if (missingCivilizationId) {
+      throw new CivilizationReferenceError(missingCivilizationId);
     }
   }
 
