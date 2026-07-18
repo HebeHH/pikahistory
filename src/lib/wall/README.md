@@ -15,8 +15,8 @@ transport.
 | `screen-layout.ts` | `WallScreen`, left-to-right offsets, viewport measurement |
 | `ruler-scale.ts` | adaptive tick step + visible-year range (visual is UI-owned) |
 | `room-types.ts` | `WallRoomState`, message types, `WallRoomTransport` interface |
-| `transport-broadcast.ts` | same-machine multi-tab mock (Phase B) |
-| `create-transport.ts` | **single swap point** for the real backend transport |
+| `transport-broadcast.ts` | legacy same-machine multi-tab mock retained for isolated mechanics work |
+| `session-client.ts` | production create/join/recover API and Ably realtime adapter |
 | `presence.ts` | stable per-user sprite hue assignment |
 | `use-wall-room.ts` | headless React hook: `state`, `camera`, `canNavigate`, create/join/publish |
 
@@ -30,14 +30,24 @@ const { camera, canNavigate, publishCamera, state, myScreenId } = useWallRoom();
 // only publish camera changes when canNavigate is true
 ```
 
-## Swapping in the real backend
+## Real backend integration
 
-Implement `WallRoomTransport` against the managed realtime provider and return it
-from `createWallTransport()`. Nothing else changes. The transport MUST reject
-camera writes whose owner token is invalid and ignore stale camera revisions.
+The real multi-screen page is `src/app/wall/page.tsx`, backed by
+`src/components/wall/wall-session-app.tsx`. It uses `session-client.ts` directly:
 
-## Local multi-tab test (no backend needed)
+- Next.js + Neon create rooms, register screens, authenticate the controller,
+  and persist final camera snapshots.
+- Ably carries throttled camera frames and presence.
+- The server gives followers subscribe-only camera capability.
+- Each laptop renders one clipped `ScreenViewport`; it never renders three fake
+  laptop frames on one page.
 
-Two tabs on the same machine share a `BroadcastChannel`: create a room in tab 1,
-join with its code in tab 2 (different screen order). The math is unit-checked
-for roundtrip, pointer-anchored zoom, and screen-boundary continuity.
+Set `ABLY_API_KEY`, apply the Drizzle schema with `pnpm db:push`, and open
+`/wall`. The first laptop chooses **Create room code**; the others enter that
+code and choose their left-to-right screen position.
+
+## Legacy local mock
+
+`use-wall-room.ts`, `create-transport.ts`, and `transport-broadcast.ts` remain as
+a no-backend mechanics harness. They are not imported by the production
+`/wall` route.

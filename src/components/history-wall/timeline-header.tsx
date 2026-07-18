@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 import type { WallView } from "./history-wall-app";
 
 export default function TimelineHeader({
@@ -53,6 +55,23 @@ export default function TimelineHeader({
 
       {/* Controls */}
       <div className="flex items-center gap-3">
+        <Link
+          className="flex items-center gap-1"
+          href="/wall"
+          style={{
+            background: "var(--accent)",
+            borderRadius: 999,
+            color: "var(--text)",
+            fontSize: 12,
+            fontWeight: 700,
+            padding: "7px 12px",
+          }}
+        >
+          <span className="material-symbols-outlined" style={{ fontSize: 17 }}>
+            devices
+          </span>
+          Multi-screen
+        </Link>
         {/* Timeline ⇄ Map toggle */}
         <div
           className="flex items-center"
