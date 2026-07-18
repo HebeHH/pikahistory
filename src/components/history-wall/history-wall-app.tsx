@@ -49,6 +49,10 @@ export default function HistoryWallApp({ initialData }: { initialData: HistoryWa
     [data, activeId],
   );
   const suggestion = useMemo(() => suggestFromNotes(activeRecord), [activeRecord]);
+  const civilizationTitles = useMemo(
+    () => new Map(data.civilizations.map((c) => [c.id, c.title])),
+    [data.civilizations],
+  );
 
   const handleSave = async (updated: HistoryWallRecord) => {
     setData((prev) => replaceRecord(prev, updated)); // optimistic
@@ -79,8 +83,10 @@ export default function HistoryWallApp({ initialData }: { initialData: HistoryWa
         record={activeRecord}
         saving={saving}
         suggestion={suggestion}
+        civilizationTitles={civilizationTitles}
         onClose={() => setActiveId(null)}
         onSave={handleSave}
+        onSelect={setActiveId}
         onExplore={() => {
           // TODO(ai-strip): navigate to / create the suggested topic.
           console.log("Explore suggestion for", activeRecord?.id);
