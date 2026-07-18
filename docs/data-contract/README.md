@@ -84,3 +84,7 @@ invalid or changes a field's meaning.
 
 Schema v2 adds the required `people` collection. Existing database rows remain
 valid v1 records; new writes use v2.
+
+`location` (on civilizations and people) now carries optional `lat`/`lng`
+(WGS84 decimal degrees) alongside `continent`/`label`, for map pins. Additive
+and optional -- no version bump. Not every record needs a pin.

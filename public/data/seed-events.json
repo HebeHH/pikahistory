@@ -1152,5 +1152,112 @@
       "curated": true,
       "curationReason": "demonstrates a multi-civilization interaction event"
     }
+  },
+  {
+    "type": "event",
+    "id": "event_ptolemaic_embassy_to_maurya",
+    "title": "Ptolemy II's embassy to the Mauryan court",
+    "span": {
+      "startYear": -275,
+      "displayLabel": "c. 275 BCE",
+      "certainty": "approximate"
+    },
+    "interaction": {
+      "type": "diplomacy",
+      "participants": [
+        {
+          "civilizationId": "civilization_ptolemaic_egypt",
+          "role": "initiator"
+        },
+        {
+          "civilizationId": "civilization_maurya_india",
+          "role": "encountered"
+        }
+      ]
+    },
+    "notes": "Ptolemy II Philadelphus sends an ambassador, Dionysius, to the Mauryan court -- recorded by Pliny the Elder. Ashoka's own 13th Rock Edict lists Ptolemy among the Hellenistic kings he sent Buddhist emissaries to in return, making this one of the rare documented two-way diplomatic contacts in our data.",
+    "visual": {
+      "kind": "emoji",
+      "value": "🤝"
+    },
+    "details": {
+      "markdown": "Confirmed independently from both sides: a Greco-Roman source (Pliny) names the Ptolemaic ambassador, and Ashoka's own inscribed edict names Ptolemy as a recipient of his missionaries. Not many ancient diplomatic contacts have this kind of two-source corroboration.",
+      "tags": [
+        "egypt",
+        "maurya",
+        "diplomacy",
+        "ashoka"
+      ],
+      "sources": [],
+      "media": []
+    },
+    "metadata": {
+      "curated": true,
+      "curationReason": "non-war interaction event, from civilization_links.json research"
+    }
+  },
+  {
+    "type": "event",
+    "id": "event_roman_aksumite_red_sea_trade",
+    "title": "Roman-Aksumite Red Sea trade flourishes",
+    "span": {
+      "startYear": 50,
+      "displayLabel": "c. 50 CE",
+      "certainty": "approximate"
+    },
+    "interaction": {
+      "type": "trade",
+      "participants": [
+        {
+          "civilizationId": "civilization_rome",
+          "role": "trader"
+        },
+        {
+          "civilizationId": "civilization_aksum",
+          "role": "trader"
+        }
+      ]
+    },
+    "notes": "The Periplus of the Erythraean Sea, a Greco-Roman merchant's guide from Roman Egypt, names Aksum's port of Adulis as a major Red Sea trade hub -- direct written evidence of regular Roman-Aksumite commercial contact.",
+    "visual": {
+      "kind": "emoji",
+      "value": "⛵"
+    },
+    "metadata": {
+      "curated": true,
+      "curationReason": "non-war interaction event, from civilization_links.json research"
+    }
+  },
+  {
+    "type": "event",
+    "id": "event_gan_ying_mission",
+    "title": "Gan Ying's mission toward Rome",
+    "span": {
+      "startYear": 97,
+      "displayLabel": "97 CE",
+      "certainty": "exact"
+    },
+    "interaction": {
+      "type": "exploration_contact",
+      "participants": [
+        {
+          "civilizationId": "civilization_han_china",
+          "role": "explorer"
+        },
+        {
+          "civilizationId": "civilization_rome",
+          "role": "encountered"
+        }
+      ]
+    },
+    "notes": "The Han general Ban Chao sends envoy Gan Ying west to reach Rome (\"Daqin\"). He turns back at the Persian Gulf, deterred by Parthian sailors' accounts of a long and dangerous sea voyage -- Parthia had every reason to keep China and Rome from trading directly and cutting out the middleman.",
+    "visual": {
+      "kind": "emoji",
+      "value": "🧭"
+    },
+    "metadata": {
+      "curated": true,
+      "curationReason": "non-war interaction event, from civilization_links.json research"
+    }
   }
 ]

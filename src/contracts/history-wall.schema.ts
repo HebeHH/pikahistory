@@ -87,6 +87,9 @@ export const GeographySchema = z
     continent: ContinentSchema,
     /** Human-readable detail such as `Nile Valley` or `Eastern Mediterranean`. */
     label: z.string().trim().min(1).max(160).optional(),
+    /** Map pin coordinates, WGS84 decimal degrees. Optional: not every record needs a pin. */
+    lat: z.number().min(-90).max(90).optional(),
+    lng: z.number().min(-180).max(180).optional(),
   })
   .strict();
 

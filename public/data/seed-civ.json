@@ -11,7 +11,9 @@
     },
     "notes": "A civilization centred on Rome that expanded from an Italian city-state to control the Mediterranean, spanning the Kingdom, Republic, and Empire.",
     "location": {
-      "continent": "europe"
+      "continent": "europe",
+      "lat": 41.9028,
+      "lng": 12.4964
     },
     "icon": {
       "kind": "emoji",
@@ -23,6 +25,24 @@
       "wikidataLabel": "Ancient Rome",
       "capitals": [
         "Roma"
+      ],
+      "funFacts": [
+        {
+          "withCivilizationId": "civilization_aksum",
+          "fact": "Roman Egypt traded directly with Aksum via the Red Sea port of Adulis. The Periplus of the Erythraean Sea, a 1st-century Greco-Roman merchant's guide, describes Aksum by name as a regional trade power."
+        },
+        {
+          "withCivilizationId": "civilization_umayyad_caliphate",
+          "fact": "No overlap for Rome itself (ends 476 CE, Umayyad starts 661 CE), but Rome's direct successor state, the Byzantine Empire, was the Umayyad Caliphate's primary rival for a century, including two sieges of Constantinople. Flagged as indirect since our civilization_rome record doesn't extend into the Byzantine period."
+        },
+        {
+          "withCivilizationId": "civilization_han_china",
+          "fact": "In 97 CE the Han general Ban Chao sent an envoy, Gan Ying, toward Rome (\"Daqin\"); he turned back at the Persian Gulf, deterred by Parthian sailors' accounts of a long and dangerous sea voyage. Indirect Silk Road trade is also attested archaeologically (Roman glassware in Han-era tombs, Chinese silk reaching Rome)."
+        },
+        {
+          "withCivilizationId": "civilization_inca",
+          "fact": "[Independent parallel, no contact possible] Both ran empire-spanning road networks built around professional relay runners: Rome's cursus publicus and the Inca chasqui system on the Qhapaq Nan. Independently invented, ~1500 years and an ocean apart, to solve the same problem -- binding a huge empire together with fast, reliable communication."
+        }
       ]
     },
     "details": {
@@ -54,7 +74,9 @@
     },
     "notes": "The Greek Macedonian dynasty that ruled Egypt after Alexander's conquest, ending with Cleopatra's death and Roman annexation.",
     "location": {
-      "continent": "africa"
+      "continent": "africa",
+      "lat": 31.2001,
+      "lng": 29.9187
     },
     "icon": {
       "kind": "emoji",
@@ -66,6 +88,28 @@
       "wikidataLabel": "Ptolemaic Kingdom",
       "capitals": [
         "Alexandria"
+      ],
+      "funFacts": [
+        {
+          "withCivilizationId": "civilization_aksum",
+          "fact": "Ptolemy II and III ran elephant-capture stations down the African Red Sea coast (e.g. Ptolemais Theron) in the same region Aksum later dominated -- shared geography and Red Sea trade infrastructure, right at the edge of Aksum's own rise."
+        },
+        {
+          "withCivilizationId": "civilization_umayyad_caliphate",
+          "fact": "Territorial succession, not contact: Ptolemaic Egypt -> Rome -> Rashidun Caliphate (conquered Egypt 639-642 CE) -> Umayyad Caliphate (inherited Egypt once it succeeded the Rashidun in 661 CE) all ruled the same Nile Valley territory in sequence. The conquest itself was Rashidun, not Umayyad -- the Umayyads held Egypt as part of what they took over from their predecessor, not by conquering it themselves."
+        },
+        {
+          "withCivilizationId": "civilization_maurya_india",
+          "fact": "Ptolemy II sent an ambassador, Dionysius, to the Mauryan court (recorded by Pliny the Elder). Ashoka's own 13th Rock Edict lists Ptolemy (\"Turamaya\") among the Hellenistic kings he sent Buddhist emissaries to. A rare case of documented contact in both directions."
+        },
+        {
+          "withCivilizationId": "civilization_inca",
+          "fact": "[Independent parallel, no contact possible] Independently, both practiced royal mummification and linked their rulers to a sun deity (Ra / Inti). No contact possible -- this is convergent development, not shared ancestry: two unrelated societies arrived at strikingly similar answers to 'how do you make a ruler sacred and eternal.'"
+        },
+        {
+          "withCivilizationId": "civilization_maori_aotearoa",
+          "fact": "[Independent parallel, no contact possible] Both built political and religious legitimacy on unbroken, precisely preserved genealogy back to divine or founding ancestors -- pharaonic king-lists versus whakapapa. Different media (written vs. oral), same function: proving the right to rule through ancestry."
+        }
       ]
     },
     "details": {
@@ -97,7 +141,9 @@
     },
     "notes": "A Hellenic kingdom in the northern Greek peninsula, home to Philip II and Alexander the Great before falling to Rome.",
     "location": {
-      "continent": "europe"
+      "continent": "europe",
+      "lat": 40.7597,
+      "lng": 22.5236
     },
     "icon": {
       "kind": "emoji",
@@ -110,6 +156,20 @@
       "capitals": [
         "Pella",
         "Aigai"
+      ],
+      "funFacts": [
+        {
+          "withCivilizationId": "civilization_han_china",
+          "fact": "No direct link, but the nearest thing is the Greco-Bactrian Kingdom -- a Macedonian-descended Hellenistic successor state in Central Asia, often treated as the closest cultural bridge toward the Chinese sphere. It's a successor state, not Macedon itself."
+        },
+        {
+          "withCivilizationId": "civilization_maurya_india",
+          "fact": "Alexander's invasion of India (326 BCE) created the power vacuum Chandragupta Maurya exploited to found the Maurya Empire; the later Seleucid-Maurya War (Seleucus being one of Alexander's own successors) is a direct continuation. Arguably the single strongest causal link in the whole set -- Maurya may not exist without it."
+        },
+        {
+          "withCivilizationId": "civilization_inca",
+          "fact": "[Independent parallel, no contact possible] Both are 'small state to huge empire in one or two generations under a near-deified conqueror' stories -- Alexander for Macedon, Pachacuti for the Inca. A recurring shape in history, playing out independently on opposite sides of the world."
+        }
       ]
     }
   },
@@ -125,7 +185,9 @@
     },
     "notes": "A trading kingdom in the Horn of Africa that controlled Red Sea trade routes and minted its own coinage.",
     "location": {
-      "continent": "africa"
+      "continent": "africa",
+      "lat": 14.1211,
+      "lng": 38.7178
     },
     "icon": {
       "kind": "emoji",
@@ -137,6 +199,20 @@
       "wikidataLabel": "Kingdom of Aksum",
       "capitals": [
         "Axum"
+      ],
+      "funFacts": [
+        {
+          "withCivilizationId": "civilization_rome",
+          "fact": "Roman Egypt traded directly with Aksum via the Red Sea port of Adulis. The Periplus of the Erythraean Sea, a 1st-century Greco-Roman merchant's guide, describes Aksum by name as a regional trade power."
+        },
+        {
+          "withCivilizationId": "civilization_ptolemaic_egypt",
+          "fact": "Ptolemy II and III ran elephant-capture stations down the African Red Sea coast (e.g. Ptolemais Theron) in the same region Aksum later dominated -- shared geography and Red Sea trade infrastructure, right at the edge of Aksum's own rise."
+        },
+        {
+          "withCivilizationId": "civilization_umayyad_caliphate",
+          "fact": "The First Hijra (c. 615 CE): early Muslims fleeing persecution in Mecca were given asylum by the Aksumite king, per Islamic tradition. Predates the Umayyad Caliphate's own founding (661 CE) but is a direct part of the same religious-political lineage -- also the historical backdrop to our own 'Year of the Elephant' Aksum event."
+        }
       ]
     }
   },
@@ -152,7 +228,9 @@
     },
     "notes": "A West African empire built on the trans-Saharan gold and salt trade, reaching its height under Mansa Musa.",
     "location": {
-      "continent": "africa"
+      "continent": "africa",
+      "lat": 11.9333,
+      "lng": -8.4167
     },
     "icon": {
       "kind": "emoji",
@@ -164,6 +242,20 @@
       "wikidataLabel": "Mali Empire",
       "capitals": [
         "Kangaba"
+      ],
+      "funFacts": [
+        {
+          "withCivilizationId": "civilization_umayyad_caliphate",
+          "fact": "No temporal overlap (Umayyad ends 750, Mali starts 1235), but the trans-Saharan spread of Islam that shapes Mali's own identity (Mansa Musa's hajj, Sankore's scholarship) traces back to the Umayyad-era Arab conquest of the Maghreb (e.g. Uqba ibn Nafi's campaigns, founding Kairouan c. 670). Legacy/lineage, not direct contact."
+        },
+        {
+          "withCivilizationId": "civilization_inca",
+          "fact": "[Contrast, not a connection] Two wealthy empires with opposite economic logic: Mali's wealth ran on long-distance trade (gold, salt, Mansa Musa's famously gold-heavy hajj); the Inca economy had no markets or currency at all, running instead on labor-tax (mit'a) and centralized redistribution."
+        },
+        {
+          "withCivilizationId": "civilization_maori_aotearoa",
+          "fact": "[Independent parallel, no contact possible] Mali's djeli (griot) were professional oral historians who memorized and performed genealogies and history for rulers -- an close independent match for Maori tohunga whakapapa and oral genealogical tradition. Two societies with zero contact both invented a professional oral-history institution instead of writing."
+        }
       ]
     }
   },
@@ -179,7 +271,9 @@
     },
     "notes": "The second Islamic caliphate, ruling from Damascus over territory stretching from Iberia to Central Asia.",
     "location": {
-      "continent": "transcontinental"
+      "continent": "transcontinental",
+      "lat": 33.5138,
+      "lng": 36.2765
     },
     "icon": {
       "kind": "emoji",
@@ -192,6 +286,28 @@
       "capitals": [
         "Damascus",
         "Harran"
+      ],
+      "funFacts": [
+        {
+          "withCivilizationId": "civilization_rome",
+          "fact": "No overlap for Rome itself (ends 476 CE, Umayyad starts 661 CE), but Rome's direct successor state, the Byzantine Empire, was the Umayyad Caliphate's primary rival for a century, including two sieges of Constantinople. Flagged as indirect since our civilization_rome record doesn't extend into the Byzantine period."
+        },
+        {
+          "withCivilizationId": "civilization_ptolemaic_egypt",
+          "fact": "Territorial succession, not contact: Ptolemaic Egypt -> Rome -> Rashidun Caliphate (conquered Egypt 639-642 CE) -> Umayyad Caliphate (inherited Egypt once it succeeded the Rashidun in 661 CE) all ruled the same Nile Valley territory in sequence. The conquest itself was Rashidun, not Umayyad -- the Umayyads held Egypt as part of what they took over from their predecessor, not by conquering it themselves."
+        },
+        {
+          "withCivilizationId": "civilization_aksum",
+          "fact": "The First Hijra (c. 615 CE): early Muslims fleeing persecution in Mecca were given asylum by the Aksumite king, per Islamic tradition. Predates the Umayyad Caliphate's own founding (661 CE) but is a direct part of the same religious-political lineage -- also the historical backdrop to our own 'Year of the Elephant' Aksum event."
+        },
+        {
+          "withCivilizationId": "civilization_mali",
+          "fact": "No temporal overlap (Umayyad ends 750, Mali starts 1235), but the trans-Saharan spread of Islam that shapes Mali's own identity (Mansa Musa's hajj, Sankore's scholarship) traces back to the Umayyad-era Arab conquest of the Maghreb (e.g. Uqba ibn Nafi's campaigns, founding Kairouan c. 670). Legacy/lineage, not direct contact."
+        },
+        {
+          "withCivilizationId": "civilization_inca",
+          "fact": "[Independent parallel, no contact possible] The same road-and-relay administrative pattern as Rome-Inca, independently arrived at again. Worth noting this specific solution (fast relay communication binding a large empire) recurs across several unrelated civilizations in this set, not just one pair."
+        }
       ]
     }
   },
@@ -207,7 +323,9 @@
     },
     "notes": "An imperial Chinese dynasty that consolidated centralized bureaucratic rule and expanded trade along the Silk Road.",
     "location": {
-      "continent": "asia"
+      "continent": "asia",
+      "lat": 34.3416,
+      "lng": 108.9398
     },
     "icon": {
       "kind": "emoji",
@@ -221,6 +339,28 @@
         "Luoyang",
         "Xuchang",
         "Chang'an"
+      ],
+      "funFacts": [
+        {
+          "withCivilizationId": "civilization_rome",
+          "fact": "In 97 CE the Han general Ban Chao sent an envoy, Gan Ying, toward Rome (\"Daqin\"); he turned back at the Persian Gulf, deterred by Parthian sailors' accounts of a long and dangerous sea voyage. Indirect Silk Road trade is also attested archaeologically (Roman glassware in Han-era tombs, Chinese silk reaching Rome)."
+        },
+        {
+          "withCivilizationId": "civilization_macedon",
+          "fact": "No direct link, but the nearest thing is the Greco-Bactrian Kingdom -- a Macedonian-descended Hellenistic successor state in Central Asia, often treated as the closest cultural bridge toward the Chinese sphere. It's a successor state, not Macedon itself."
+        },
+        {
+          "withCivilizationId": "civilization_maurya_india",
+          "fact": "Buddhism, promoted across the Maurya Empire by Ashoka's edicts and missionaries, reached Han China only much later (~1st century CE) via Central Asian intermediaries -- after both Maurya's fall (185 BCE) and Zhang Qian's mission (138 BCE). Real transmission, but the two civilizations never had direct contact with each other; the gap is the point, not a flaw."
+        },
+        {
+          "withCivilizationId": "civilization_inca",
+          "fact": "[Independent parallel, no contact possible] Both built sophisticated bureaucratic administration over huge, diverse populations -- via opposite information technologies. Han China ran on a literate scholar-official bureaucracy; the Inca ran an equally rigorous administrative and census system through knotted-cord quipu, with no writing at all."
+        },
+        {
+          "withCivilizationId": "civilization_maori_aotearoa",
+          "fact": "[Contrast, not a connection] Both took history-keeping extremely seriously, via opposite technology: Han China's exhaustive written dynastic histories (Records of the Grand Historian and successors) versus Maori oral tradition -- equally rigorous, structurally the reverse of each other."
+        }
       ]
     },
     "details": {
@@ -252,7 +392,9 @@
     },
     "notes": "The first empire to unify most of the Indian subcontinent, reaching its peak under Ashoka.",
     "location": {
-      "continent": "asia"
+      "continent": "asia",
+      "lat": 25.5941,
+      "lng": 85.1376
     },
     "icon": {
       "kind": "emoji",
@@ -265,6 +407,28 @@
       "capitals": [
         "Patna",
         "Pataliputra"
+      ],
+      "funFacts": [
+        {
+          "withCivilizationId": "civilization_ptolemaic_egypt",
+          "fact": "Ptolemy II sent an ambassador, Dionysius, to the Mauryan court (recorded by Pliny the Elder). Ashoka's own 13th Rock Edict lists Ptolemy (\"Turamaya\") among the Hellenistic kings he sent Buddhist emissaries to. A rare case of documented contact in both directions."
+        },
+        {
+          "withCivilizationId": "civilization_macedon",
+          "fact": "Alexander's invasion of India (326 BCE) created the power vacuum Chandragupta Maurya exploited to found the Maurya Empire; the later Seleucid-Maurya War (Seleucus being one of Alexander's own successors) is a direct continuation. Arguably the single strongest causal link in the whole set -- Maurya may not exist without it."
+        },
+        {
+          "withCivilizationId": "civilization_han_china",
+          "fact": "Buddhism, promoted across the Maurya Empire by Ashoka's edicts and missionaries, reached Han China only much later (~1st century CE) via Central Asian intermediaries -- after both Maurya's fall (185 BCE) and Zhang Qian's mission (138 BCE). Real transmission, but the two civilizations never had direct contact with each other; the gap is the point, not a flaw."
+        },
+        {
+          "withCivilizationId": "civilization_inca",
+          "fact": "[Independent parallel, no contact possible] Both unified a large, culturally diverse territory rapidly and legitimized the result through state religion -- Ashoka's Buddhism, the Inca sun-cult."
+        },
+        {
+          "withCivilizationId": "civilization_maori_aotearoa",
+          "fact": "[Independent parallel, no contact possible] Both used durable public media to encode history and legitimacy for an audience that couldn't necessarily read a private archive -- Ashoka's edicts carved into stone pillars across the empire, versus carved whakairo on meeting houses encoding genealogy and history visually."
+        }
       ]
     }
   },
@@ -280,7 +444,9 @@
     },
     "notes": "The largest pre-Columbian empire in the Americas, administered from Cusco across the Andes.",
     "location": {
-      "continent": "south_america"
+      "continent": "south_america",
+      "lat": -13.532,
+      "lng": -71.9675
     },
     "icon": {
       "kind": "emoji",
@@ -292,6 +458,40 @@
       "wikidataLabel": "Inca Empire",
       "capitals": [
         "Cusco"
+      ],
+      "funFacts": [
+        {
+          "withCivilizationId": "civilization_rome",
+          "fact": "[Independent parallel, no contact possible] Both ran empire-spanning road networks built around professional relay runners: Rome's cursus publicus and the Inca chasqui system on the Qhapaq Nan. Independently invented, ~1500 years and an ocean apart, to solve the same problem -- binding a huge empire together with fast, reliable communication."
+        },
+        {
+          "withCivilizationId": "civilization_ptolemaic_egypt",
+          "fact": "[Independent parallel, no contact possible] Independently, both practiced royal mummification and linked their rulers to a sun deity (Ra / Inti). No contact possible -- this is convergent development, not shared ancestry: two unrelated societies arrived at strikingly similar answers to 'how do you make a ruler sacred and eternal.'"
+        },
+        {
+          "withCivilizationId": "civilization_macedon",
+          "fact": "[Independent parallel, no contact possible] Both are 'small state to huge empire in one or two generations under a near-deified conqueror' stories -- Alexander for Macedon, Pachacuti for the Inca. A recurring shape in history, playing out independently on opposite sides of the world."
+        },
+        {
+          "withCivilizationId": "civilization_mali",
+          "fact": "[Contrast, not a connection] Two wealthy empires with opposite economic logic: Mali's wealth ran on long-distance trade (gold, salt, Mansa Musa's famously gold-heavy hajj); the Inca economy had no markets or currency at all, running instead on labor-tax (mit'a) and centralized redistribution."
+        },
+        {
+          "withCivilizationId": "civilization_umayyad_caliphate",
+          "fact": "[Independent parallel, no contact possible] The same road-and-relay administrative pattern as Rome-Inca, independently arrived at again. Worth noting this specific solution (fast relay communication binding a large empire) recurs across several unrelated civilizations in this set, not just one pair."
+        },
+        {
+          "withCivilizationId": "civilization_han_china",
+          "fact": "[Independent parallel, no contact possible] Both built sophisticated bureaucratic administration over huge, diverse populations -- via opposite information technologies. Han China ran on a literate scholar-official bureaucracy; the Inca ran an equally rigorous administrative and census system through knotted-cord quipu, with no writing at all."
+        },
+        {
+          "withCivilizationId": "civilization_maurya_india",
+          "fact": "[Independent parallel, no contact possible] Both unified a large, culturally diverse territory rapidly and legitimized the result through state religion -- Ashoka's Buddhism, the Inca sun-cult."
+        },
+        {
+          "withCivilizationId": "civilization_maori_aotearoa",
+          "fact": "Genetic and botanical evidence (the pre-Columbian spread of the sweet potato/kumara across Polynesia, plus a 2020 genetic study finding Native American ancestry in some Polynesian populations dating to ~1200 CE) supports contact between Polynesian voyagers and South America. The genetic signal specifically traces to the Colombian coast, not Peru/Inca territory -- so this is a real, debated Polynesia-South America contact theory, not specifically an Inca connection. Notably, this is the one connection the vault's own original NZ source material already flagged before this project started."
+        }
       ]
     }
   },
@@ -308,7 +508,9 @@
     "notes": "Polynesian settlement and society in Aotearoa New Zealand from first voyaging arrival to the Treaty of Waitangi. Hand-curated rather than Wikidata-extracted: oral-tradition history has no inception/dissolution/capital triple and no dated point-events to query for Round 2.",
     "location": {
       "continent": "oceania",
-      "label": "Aotearoa / New Zealand"
+      "label": "Aotearoa / New Zealand",
+      "lat": -35.5,
+      "lng": 173.5
     },
     "icon": {
       "kind": "emoji",
@@ -318,7 +520,29 @@
     "metadata": {
       "curated": true,
       "replacesSlot": "3rd Asian civilization (Khmer Empire, dropped for thin Wikidata coverage per context-transfer doc)",
-      "sourceMaterial": "parsingEvents/events.json New Zealand entries"
+      "sourceMaterial": "parsingEvents/events.json New Zealand entries",
+      "funFacts": [
+        {
+          "withCivilizationId": "civilization_ptolemaic_egypt",
+          "fact": "[Independent parallel, no contact possible] Both built political and religious legitimacy on unbroken, precisely preserved genealogy back to divine or founding ancestors -- pharaonic king-lists versus whakapapa. Different media (written vs. oral), same function: proving the right to rule through ancestry."
+        },
+        {
+          "withCivilizationId": "civilization_mali",
+          "fact": "[Independent parallel, no contact possible] Mali's djeli (griot) were professional oral historians who memorized and performed genealogies and history for rulers -- an close independent match for Maori tohunga whakapapa and oral genealogical tradition. Two societies with zero contact both invented a professional oral-history institution instead of writing."
+        },
+        {
+          "withCivilizationId": "civilization_han_china",
+          "fact": "[Contrast, not a connection] Both took history-keeping extremely seriously, via opposite technology: Han China's exhaustive written dynastic histories (Records of the Grand Historian and successors) versus Maori oral tradition -- equally rigorous, structurally the reverse of each other."
+        },
+        {
+          "withCivilizationId": "civilization_maurya_india",
+          "fact": "[Independent parallel, no contact possible] Both used durable public media to encode history and legitimacy for an audience that couldn't necessarily read a private archive -- Ashoka's edicts carved into stone pillars across the empire, versus carved whakairo on meeting houses encoding genealogy and history visually."
+        },
+        {
+          "withCivilizationId": "civilization_inca",
+          "fact": "Genetic and botanical evidence (the pre-Columbian spread of the sweet potato/kumara across Polynesia, plus a 2020 genetic study finding Native American ancestry in some Polynesian populations dating to ~1200 CE) supports contact between Polynesian voyagers and South America. The genetic signal specifically traces to the Colombian coast, not Peru/Inca territory -- so this is a real, debated Polynesia-South America contact theory, not specifically an Inca connection. Notably, this is the one connection the vault's own original NZ source material already flagged before this project started."
+        }
+      ]
     }
   }
 ]

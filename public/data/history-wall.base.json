@@ -14,7 +14,9 @@
       "notes": "A civilization centred on the Nile Valley in northeast Africa.",
       "location": {
         "continent": "africa",
-        "label": "Nile Valley"
+        "label": "Nile Valley",
+        "lat": 26.8206,
+        "lng": 30.8025
       },
       "icon": {
         "kind": "emoji",
@@ -24,7 +26,10 @@
       "color": "#D4A72C",
       "details": {
         "markdown": "## Ancient Egypt\n\nUse this full note for study context, interpretations, and links that do not fit in the timeline label.",
-        "tags": ["nile", "north-africa"],
+        "tags": [
+          "nile",
+          "north-africa"
+        ],
         "sources": [],
         "media": []
       },
@@ -65,8 +70,13 @@
         "displayLabel": "c. 1507–1458 BCE",
         "certainty": "approximate"
       },
-      "civilizationIds": ["civilization_egypt"],
-      "roles": ["monarch", "political_leader"],
+      "civilizationIds": [
+        "civilization_egypt"
+      ],
+      "roles": [
+        "monarch",
+        "political_leader"
+      ],
       "roleTitle": "Pharaoh",
       "notes": "A pharaoh of Egypt's Eighteenth Dynasty known for extensive building and trade projects.",
       "location": {
@@ -80,7 +90,10 @@
       },
       "details": {
         "markdown": "## Hatshepsut\n\nA full person detail can hold biography, historical significance, disputed interpretations, media, and sources.",
-        "tags": ["pharaoh", "eighteenth-dynasty"],
+        "tags": [
+          "pharaoh",
+          "eighteenth-dynasty"
+        ],
         "sources": [],
         "media": []
       },
@@ -133,7 +146,11 @@
       "notes": "Goods and ideas moved through connected eastern Mediterranean exchange networks.",
       "details": {
         "markdown": "Trade interactions can connect two or many civilizations. The wall renders one relationship line with every participant attached.",
-        "tags": ["trade", "bronze-age", "mediterranean"],
+        "tags": [
+          "trade",
+          "bronze-age",
+          "mediterranean"
+        ],
         "sources": [],
         "media": []
       },
