@@ -142,3 +142,29 @@ body {
 }
 .pika-bob { animation: pika-bob 1.6s ease-in-out infinite; transform-origin: center bottom; }
 .pika-hop { animation: pika-hop 0.6s ease-out; }
+
+/* Cross-civilization fun-fact spark */
+@keyframes fun-bolt-flicker {
+  0% { opacity: 0; }
+  8% { opacity: 1; }
+  16% { opacity: 0.35; }
+  26% { opacity: 1; }
+  70% { opacity: 0.9; }
+  100% { opacity: 0; }
+}
+@keyframes fun-node-pop {
+  0% { opacity: 0; transform: scale(0.2); }
+  20% { opacity: 1; transform: scale(1.25); }
+  40% { transform: scale(1); }
+  85% { opacity: 0.9; }
+  100% { opacity: 0; }
+}
+@keyframes fun-card-in {
+  0% { opacity: 0; transform: translate(-50%, -110%) scale(0.9); }
+  12% { opacity: 1; transform: translate(-50%, -120%) scale(1); }
+  82% { opacity: 1; transform: translate(-50%, -120%) scale(1); }
+  100% { opacity: 0; transform: translate(-50%, -128%) scale(0.98); }
+}
+.fun-bolt { filter: drop-shadow(0 0 5px rgba(232,169,12,.9)); animation: fun-bolt-flicker 4.6s ease-out forwards; }
+.fun-node { transform-box: fill-box; transform-origin: center; animation: fun-node-pop 4.6s ease-out forwards; }
+.fun-card { animation: fun-card-in 4.6s ease-out forwards; }

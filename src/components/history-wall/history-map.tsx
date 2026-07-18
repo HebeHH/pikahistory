@@ -131,6 +131,7 @@ export default function HistoryMap({ data, activeId, onSelect }: HistoryMapProps
           return (
             <g
               key={civ.id}
+              data-civ-id={civ.id}
               transform={`translate(${x},${y})`}
               onClick={() => onSelect(civ.id)}
               style={{ cursor: "pointer" }}

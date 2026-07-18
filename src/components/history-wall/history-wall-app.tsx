@@ -1,15 +1,17 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 
 import type { HistoryWallData, HistoryWallRecord } from "@/contracts/history-wall.types";
 import { updateRecord } from "@/lib/history-wall/data-client";
 import { buildWallLayout } from "@/lib/history-wall/layout";
+import { funFactBetween } from "@/lib/history-wall/fun-facts";
 import { clampZoom } from "@/lib/history-wall/time-scale";
 import TimelineHeader from "./timeline-header";
 import TimelineWall from "./timeline-wall";
 import HistoryMap from "./history-map";
 import NoteDock from "./note-dock";
+import FunFactBurst from "./fun-fact-burst";
 
 export type WallView = "timeline" | "map";
 
@@ -52,6 +54,8 @@ export default function HistoryWallApp({ initialData }: { initialData: HistoryWa
   const [activeId, setActiveId] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
   const [view, setView] = useState<WallView>("timeline");
+  const [funFact, setFunFact] = useState<{ aId: string; bId: string; fact: string } | null>(null);
+  const lastCivRef = useRef<string | null>(null);
 
   const bands = useMemo(() => buildWallLayout(data), [data]);
   const activeRecord = useMemo(
@@ -72,6 +76,19 @@ export default function HistoryWallApp({ initialData }: { initialData: HistoryWa
     }
   };
 
+  const handleSelect = (id: string) => {
+    setActiveId(id);
+    const record = allRecords(data).find((r) => r.id === id);
+    if (record?.type === "civilization") {
+      const previous = lastCivRef.current;
+      if (previous && previous !== id) {
+        const fact = funFactBetween(previous, id, data.civilizations);
+        if (fact) setFunFact({ aId: previous, bId: id, fact });
+      }
+      lastCivRef.current = id;
+    }
+  };
+
   return (
     <div className="flex flex-col" style={{ height: "100vh", overflow: "hidden" }}>
       <TimelineHeader view={view} onViewChange={setView} />
@@ -81,13 +98,13 @@ export default function HistoryWallApp({ initialData }: { initialData: HistoryWa
           zoom={zoom}
           activeId={activeId}
           activeYear={activeRecord ? activeRecord.span.startYear : null}
-          onSelect={setActiveId}
+          onSelect={handleSelect}
           onZoomIn={() => setZoom((z) => clampZoom(z * 1.25))}
           onZoomOut={() => setZoom((z) => clampZoom(z / 1.25))}
           onZoomFit={() => setZoom(1)}
         />
       ) : (
-        <HistoryMap data={data} activeId={activeId} onSelect={setActiveId} />
+        <HistoryMap data={data} activeId={activeId} onSelect={handleSelect} />
       )}
       <NoteDock
         record={activeRecord}
@@ -100,6 +117,14 @@ export default function HistoryWallApp({ initialData }: { initialData: HistoryWa
           console.log("Explore suggestion for", activeRecord?.id);
         }}
       />
+      {funFact && (
+        <FunFactBurst
+          aId={funFact.aId}
+          bId={funFact.bId}
+          fact={funFact.fact}
+          onDone={() => setFunFact(null)}
+        />
+      )}
     </div>
   );
 }

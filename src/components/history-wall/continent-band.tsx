@@ -154,6 +154,7 @@ export default function ContinentBand({ band, zoom, activeId, onSelect }: Contin
               active={civActive}
               onClick={() => onSelect(civ.id)}
               title={civ.title}
+              dataCivId={civ.id}
             >
               <IconGlyph visual={civ.icon} fallback="account_balance" />
             </IconButton>
@@ -184,6 +185,7 @@ export default function ContinentBand({ band, zoom, activeId, onSelect }: Contin
 }
 
 interface IconButtonProps {
+  dataCivId?: string;
   left: number;
   top: number;
   size: number;
@@ -193,7 +195,7 @@ interface IconButtonProps {
   children: React.ReactNode;
 }
 
-function IconButton({ left, top, size, active, onClick, title, children }: IconButtonProps) {
+function IconButton({ dataCivId, left, top, size, active, onClick, title, children }: IconButtonProps) {
   const base: CSSProperties = {
     position: "absolute",
     left,
@@ -222,7 +224,7 @@ function IconButton({ left, top, size, active, onClick, title, children }: IconB
         boxShadow: "0 1px 3px rgba(0,0,0,.05)",
       };
   return (
-    <button type="button" title={title} onClick={onClick} style={{ ...base, ...skin }}>
+    <button type="button" title={title} onClick={onClick} data-civ-id={dataCivId} style={{ ...base, ...skin }}>
       {children}
     </button>
   );
