@@ -2,6 +2,8 @@
 
 import { useEffect, useMemo, useState } from "react";
 
+import { playPikaZap } from "@/lib/history-wall/pika-sound";
+
 interface FunFactBurstProps {
   aId: string;
   bId: string;
@@ -50,6 +52,7 @@ export default function FunFactBurst({ aId, bId, fact, onDone }: FunFactBurstPro
     // Measure both node positions after mount, then render the bolt between them.
     // eslint-disable-next-line react-hooks/set-state-in-effect
     if (a && b) setEnds({ a, b });
+    playPikaZap(); // ⚡ cute electric zap as the shock lands
     const timer = setTimeout(onDone, LIFETIME_MS);
     return () => clearTimeout(timer);
   }, [aId, bId, onDone]);
@@ -70,7 +73,15 @@ export default function FunFactBurst({ aId, bId, fact, onDone }: FunFactBurstPro
           style={{ position: "absolute", inset: 0 }}
         >
           {[ends.a, ends.b].map((p, i) => (
-            <circle key={i} cx={p.x} cy={p.y} r={7} fill="var(--accent)" className="fun-node" />
+            <g key={i} transform={`translate(${p.x},${p.y})`}>
+              <circle r={5} fill="#fff6d8" className="fun-flash" />
+              {[0, 45, 90, 135, 180, 225, 270, 315].map((deg) => (
+                <g key={deg} transform={`rotate(${deg})`}>
+                  <line x1={0} y1={-8} x2={0} y2={-18} stroke="var(--accent)" strokeWidth={2.5} strokeLinecap="round" className="fun-ray" />
+                </g>
+              ))}
+              <circle r={7} fill="var(--accent)" className="fun-node" />
+            </g>
           ))}
           <polyline
             className="fun-bolt"

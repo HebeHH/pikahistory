@@ -173,3 +173,18 @@ body {
   100% { opacity: 1; transform: translateY(0) scale(1); }
 }
 .note-pop { animation: note-pop-in 0.18s ease-out; }
+
+/* Cross-link "shock" burst at each civilization node */
+@keyframes fun-flash {
+  0% { transform: scale(0.2); opacity: 0.9; }
+  60% { transform: scale(3.4); opacity: 0; }
+  100% { opacity: 0; }
+}
+@keyframes fun-ray-flash {
+  0% { opacity: 0; }
+  15% { opacity: 1; }
+  50% { opacity: 0; }
+  100% { opacity: 0; }
+}
+.fun-flash { transform-box: fill-box; transform-origin: center; animation: fun-flash 0.7s ease-out; }
+.fun-ray { animation: fun-ray-flash 0.6s ease-out; }

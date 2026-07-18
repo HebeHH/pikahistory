@@ -83,7 +83,7 @@ export default function HistoryWallApp({ initialData }: { initialData: HistoryWa
   };
 
   const openNote = (id: string) => {
-    setOpenIds((prev) => (prev.includes(id) ? [...prev.filter((x) => x !== id), id] : [...prev, id]));
+    setOpenIds([id]); // one bubble at a time — opening a new note closes the others
     setActiveId(id);
   };
 
