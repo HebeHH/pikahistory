@@ -1,6 +1,14 @@
 "use client";
 
-export default function TimelineHeader() {
+import type { WallView } from "./history-wall-app";
+
+export default function TimelineHeader({
+  view,
+  onViewChange,
+}: {
+  view: WallView;
+  onViewChange: (view: WallView) => void;
+}) {
   return (
     <header
       className="flex items-center justify-between"
@@ -43,8 +51,38 @@ export default function TimelineHeader() {
         </div>
       </div>
 
-      {/* Controls (decorative placeholders) */}
+      {/* Controls */}
       <div className="flex items-center gap-3">
+        {/* Timeline ⇄ Map toggle */}
+        <div
+          className="flex items-center"
+          style={{ background: "var(--app-bg)", border: "1px solid var(--line)", borderRadius: 999, padding: 2 }}
+        >
+          {(["timeline", "map"] as const).map((v) => {
+            const on = view === v;
+            return (
+              <button
+                key={v}
+                type="button"
+                onClick={() => onViewChange(v)}
+                className="flex items-center gap-1"
+                style={{
+                  borderRadius: 999,
+                  padding: "5px 12px",
+                  fontSize: 12,
+                  fontWeight: 600,
+                  background: on ? "var(--accent)" : "transparent",
+                  color: on ? "var(--text)" : "var(--muted)",
+                }}
+              >
+                <span className="material-symbols-outlined" style={{ fontSize: 16 }}>
+                  {v === "timeline" ? "timeline" : "public"}
+                </span>
+                {v === "timeline" ? "Timeline" : "Map"}
+              </button>
+            );
+          })}
+        </div>
         <div
           className="flex items-center gap-2"
           style={{

@@ -8,7 +8,10 @@ import { buildWallLayout } from "@/lib/history-wall/layout";
 import { clampZoom } from "@/lib/history-wall/time-scale";
 import TimelineHeader from "./timeline-header";
 import TimelineWall from "./timeline-wall";
+import HistoryMap from "./history-map";
 import NoteDock from "./note-dock";
+
+export type WallView = "timeline" | "map";
 
 function allRecords(data: HistoryWallData): HistoryWallRecord[] {
   return [...data.civilizations, ...data.events, ...data.eras];
@@ -48,6 +51,7 @@ export default function HistoryWallApp({ initialData }: { initialData: HistoryWa
   const [zoom, setZoom] = useState(1);
   const [activeId, setActiveId] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
+  const [view, setView] = useState<WallView>("timeline");
 
   const bands = useMemo(() => buildWallLayout(data), [data]);
   const activeRecord = useMemo(
@@ -70,17 +74,21 @@ export default function HistoryWallApp({ initialData }: { initialData: HistoryWa
 
   return (
     <div className="flex flex-col" style={{ height: "100vh", overflow: "hidden" }}>
-      <TimelineHeader />
-      <TimelineWall
-        bands={bands}
-        zoom={zoom}
-        activeId={activeId}
-        activeYear={activeRecord ? activeRecord.span.startYear : null}
-        onSelect={setActiveId}
-        onZoomIn={() => setZoom((z) => clampZoom(z * 1.25))}
-        onZoomOut={() => setZoom((z) => clampZoom(z / 1.25))}
-        onZoomFit={() => setZoom(1)}
-      />
+      <TimelineHeader view={view} onViewChange={setView} />
+      {view === "timeline" ? (
+        <TimelineWall
+          bands={bands}
+          zoom={zoom}
+          activeId={activeId}
+          activeYear={activeRecord ? activeRecord.span.startYear : null}
+          onSelect={setActiveId}
+          onZoomIn={() => setZoom((z) => clampZoom(z * 1.25))}
+          onZoomOut={() => setZoom((z) => clampZoom(z / 1.25))}
+          onZoomFit={() => setZoom(1)}
+        />
+      ) : (
+        <HistoryMap data={data} activeId={activeId} onSelect={setActiveId} />
+      )}
       <NoteDock
         record={activeRecord}
         saving={saving}
