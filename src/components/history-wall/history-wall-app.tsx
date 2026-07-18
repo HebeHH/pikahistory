@@ -65,6 +65,11 @@ export default function HistoryWallApp({ initialData }: { initialData: HistoryWa
     () => allRecords(data).find((r) => r.id === activeId) ?? null,
     [data, activeId],
   );
+  const civilizationTitles = useMemo(
+    () => new Map(data.civilizations.map((c) => [c.id, c.title])),
+    [data.civilizations],
+  );
+
   const handleSave = async (updated: HistoryWallRecord) => {
     setData((prev) => replaceRecord(prev, updated)); // optimistic
     setSaving(true);
@@ -149,9 +154,11 @@ export default function HistoryWallApp({ initialData }: { initialData: HistoryWa
             record={record}
             saving={saving}
             suggestion={suggestFromNotes(record)}
+            civilizationTitles={civilizationTitles}
             startEditing={draftIds.includes(record.id)}
             onClose={() => closeNote(record.id)}
             onSave={handleSave}
+            onSelect={handleSelect}
             onExplore={() => console.log("Explore suggestion for", record.id)}
           />
         ))}

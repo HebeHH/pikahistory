@@ -13,9 +13,12 @@ interface NoteDockProps {
   record: HistoryWallRecord | null;
   saving: boolean;
   suggestion: string | null;
+  /** id -> title, used to label fun-fact chips without a separate lookup per render. */
+  civilizationTitles: Map<string, string>;
   onClose: () => void;
   onSave: (record: HistoryWallRecord) => void;
   onExplore: () => void;
+  onSelect: (id: string) => void;
 }
 
 /* ---- Minimal Web Speech API typing (avoids `any`) ---- */
@@ -57,7 +60,36 @@ function readMedia(record: HistoryWallRecord): VisualReference[] {
   return record.details?.media ?? [];
 }
 
-export default function NoteDock({ record, saving, suggestion, onClose, onSave, onExplore }: NoteDockProps) {
+interface FunFact {
+  withCivilizationId: string;
+  fact: string;
+}
+/** funFacts lives in the metadata escape hatch (civilization records only) -- validate shape at read time. */
+function readFunFacts(record: HistoryWallRecord): FunFact[] {
+  if (record.type !== "civilization") return [];
+  const raw: unknown = record.metadata.funFacts;
+  if (!Array.isArray(raw)) return [];
+  return raw.filter((f: unknown): f is FunFact => {
+    const candidate = f as Partial<FunFact> | null;
+    return (
+      typeof candidate === "object" &&
+      candidate !== null &&
+      typeof candidate.withCivilizationId === "string" &&
+      typeof candidate.fact === "string"
+    );
+  });
+}
+
+export default function NoteDock({
+  record,
+  saving,
+  suggestion,
+  civilizationTitles,
+  onClose,
+  onSave,
+  onExplore,
+  onSelect,
+}: NoteDockProps) {
   const open = record !== null;
   return (
     <div
@@ -81,9 +113,11 @@ export default function NoteDock({ record, saving, suggestion, onClose, onSave, 
           record={record}
           saving={saving}
           suggestion={suggestion}
+          civilizationTitles={civilizationTitles}
           onClose={onClose}
           onSave={onSave}
           onExplore={onExplore}
+          onSelect={onSelect}
         />
       )}
     </div>
@@ -94,9 +128,11 @@ export function DockContent({
   record,
   saving,
   suggestion,
+  civilizationTitles,
   onClose,
   onSave,
   onExplore,
+  onSelect,
   startEditing = false,
 }: NoteDockProps & { record: HistoryWallRecord; startEditing?: boolean }) {
   const [editing, setEditing] = useState(startEditing);
@@ -192,6 +228,7 @@ export function DockContent({
     ...(landmark ? [{ kind: "url" as const, value: landmark.url, alt: landmark.credit }] : []),
     ...readMedia(record),
   ];
+  const funFacts = readFunFacts(record);
   const inputCls = "w-full rounded-md border px-2 py-1 text-sm outline-none focus:ring-2 focus:ring-[var(--accent)]";
 
   return (
@@ -328,6 +365,29 @@ export function DockContent({
             </ul>
           ) : (
             <span style={{ fontSize: 12, color: "var(--faint)" }}>No sources yet.</span>
+          )}
+
+          {funFacts.length > 0 && (
+            <>
+              <div className="font-mono" style={{ fontSize: 10, letterSpacing: "0.15em", color: "var(--faint)", margin: "18px 0 8px" }}>
+                CONNECTIONS
+              </div>
+              <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: 10 }}>
+                {funFacts.map((f, i) => (
+                  <li key={i}>
+                    <button
+                      type="button"
+                      onClick={() => onSelect(f.withCivilizationId)}
+                      style={{ ...chip, cursor: "pointer", marginBottom: 4, fontWeight: 600 }}
+                      title={`Jump to ${civilizationTitles.get(f.withCivilizationId) ?? f.withCivilizationId}`}
+                    >
+                      {civilizationTitles.get(f.withCivilizationId) ?? f.withCivilizationId}
+                    </button>
+                    <p style={{ fontSize: 12.5, color: "var(--muted)", margin: 0, lineHeight: 1.45 }}>{f.fact}</p>
+                  </li>
+                ))}
+              </ul>
+            </>
           )}
         </div>
       </div>

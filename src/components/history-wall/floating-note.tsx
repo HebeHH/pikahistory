@@ -8,10 +8,12 @@ interface FloatingNoteProps {
   index: number;
   saving: boolean;
   suggestion: string | null;
+  civilizationTitles: Map<string, string>;
   startEditing?: boolean;
   onClose: () => void;
   onSave: (record: HistoryWallRecord) => void;
   onExplore: () => void;
+  onSelect: (id: string) => void;
 }
 
 /**
