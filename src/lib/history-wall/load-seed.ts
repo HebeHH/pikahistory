@@ -6,7 +6,9 @@ import type { HistoryWallData } from "@/contracts/history-wall.types";
 
 import baseData from "../../../public/data/history-wall.base.json";
 import seedCiv from "../../../public/data/seed-civ.json";
+import seedEras from "../../../public/data/seed-eras.json";
 import seedEvents from "../../../public/data/seed-events.json";
+import seedPeople from "../../../public/data/seed-people.json";
 
 /**
  * Initial wall data for the demo. Prefers the rich seed (seed-civ + seed-events
@@ -19,9 +21,9 @@ export function loadInitialData(): HistoryWallData {
     return parseHistoryWallData({
       schemaVersion: HISTORY_WALL_SCHEMA_VERSION,
       civilizations: seedCiv,
-      people: [],
+      people: seedPeople,
       events: seedEvents,
-      eras: [],
+      eras: seedEras,
     });
   } catch (error) {
     console.warn("[history-wall] rich seed failed validation, using base payload:", error);
