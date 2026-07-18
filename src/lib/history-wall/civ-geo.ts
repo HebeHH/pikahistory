@@ -25,10 +25,20 @@ export const CIV_GEO: Record<string, LngLat> = {
 
 /** The pin location for a record: civ uses its own id; events/eras use their civ. */
 export function geoForRecord(record: HistoryWallRecord): LngLat | undefined {
-  if (record.type === "civilization") return CIV_GEO[record.id];
-  const civId =
-    record.type === "era"
-      ? record.civilizationId
-      : record.civilizationId ?? record.interaction?.participants[0]?.civilizationId;
+  const civId = linkedCivId(record);
   return civId ? CIV_GEO[civId] : undefined;
+}
+
+/** The civilization a record belongs to (for placing it on the map). */
+export function linkedCivId(record: HistoryWallRecord): string | undefined {
+  switch (record.type) {
+    case "civilization":
+      return record.id;
+    case "era":
+      return record.civilizationId;
+    case "person":
+      return record.civilizationIds[0];
+    case "event":
+      return record.civilizationId ?? record.interaction?.participants[0]?.civilizationId;
+  }
 }

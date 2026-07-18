@@ -17,15 +17,17 @@ contract; it is legacy source material with a different shape.
 
 ## Core model
 
-The top-level payload has a `schemaVersion` and three arrays:
+The v2 top-level payload has a `schemaVersion` and four arrays:
 
 - `civilizations`: timeline lanes with dates, title, notes, location, icon, and
   color
+- `people`: historical people with a lifespan/active span, zero-or-more
+  civilization affiliations, role tags, notes, location, and portrait
 - `events`: dated wall items, optionally linked to a civilization
 - `eras`: dated sentiment bands, always linked to one civilization
 
-Every record also has a literal `type` discriminator: `civilization`, `event`,
-or `era`. The arrays make whole-wall access simple, while the discriminator
+Every record also has a literal `type` discriminator: `civilization`, `person`,
+`event`, or `era`. The arrays make whole-wall access simple, while the discriminator
 makes it safe for code to handle records as a combined union.
 
 All record IDs are globally unique. Civilization links use the stable
@@ -79,3 +81,10 @@ to a named Zod field and update all four of these together:
 
 Increment `schemaVersion` only for a breaking change that makes existing JSON
 invalid or changes a field's meaning.
+
+Schema v2 adds the required `people` collection. Existing database rows remain
+valid v1 records; new writes use v2.
+
+`location` (on civilizations and people) now carries optional `lat`/`lng`
+(WGS84 decimal degrees) alongside `continent`/`label`, for map pins. Additive
+and optional -- no version bump. Not every record needs a pin.

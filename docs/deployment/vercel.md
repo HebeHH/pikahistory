@@ -30,6 +30,10 @@ production. If using an existing Neon project instead, add its pooled,
 TLS-enabled connection string as `DATABASE_URL` in Vercel Project Settings →
 Environment Variables.
 
+Also set a long random `HISTORY_WALL_WRITE_SECRET` in each environment where
+record creation and note editing should be enabled. Without it, write endpoints
+return `503` while reads remain available.
+
 ## Create the production table
 
 Apply the Drizzle schema using Vercel's production environment without writing

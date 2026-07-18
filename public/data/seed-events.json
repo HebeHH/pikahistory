@@ -1,54 +1,6 @@
 [
   {
     "type": "event",
-    "id": "event_battle_of_mount_gindarus",
-    "title": "Battle of Mount Gindarus",
-    "span": {
-      "startYear": -38,
-      "displayLabel": "38 BCE",
-      "certainty": "approximate"
-    },
-    "civilizationId": "civilization_rome",
-    "notes": "The Battle of Mount Gindarus or battle of Cyrrhestica in 38 BC was a decisive victory for the Roman general Publius Ventidius Bassus over the Parthian army of Pacorus, son of King Orodes, in the Greater Syria district of Cyrrhestica.",
-    "visual": {
-      "kind": "emoji",
-      "value": "⚔️"
-    },
-    "metadata": {
-      "wikidataQid": "Q3498428",
-      "coord": [
-        36.6889,
-        36.3947
-      ],
-      "wiki": "https://en.wikipedia.org/wiki/Battle_of_Mount_Gindarus"
-    }
-  },
-  {
-    "type": "event",
-    "id": "event_siege_of_cyzicus",
-    "title": "Siege of Cyzicus",
-    "span": {
-      "startYear": -73,
-      "displayLabel": "73 BCE",
-      "certainty": "approximate"
-    },
-    "civilizationId": "civilization_rome",
-    "notes": "The siege of Cyzicus took place in 73 BC between the armies of Mithridates VI of Pontus and the Roman-allied citizens of Cyzicus in Mysia and Roman Republican forces under Lucius Licinius Lucullus. It was in fact a siege and a counter-siege. It ended in a decisive Roman victory.",
-    "visual": {
-      "kind": "emoji",
-      "value": "🏰"
-    },
-    "metadata": {
-      "wikidataQid": "Q972445",
-      "coord": [
-        27.7999,
-        40.3998
-      ],
-      "wiki": "https://en.wikipedia.org/wiki/Siege_of_Cyzicus"
-    }
-  },
-  {
-    "type": "event",
     "id": "event_battle_of_clastidium",
     "title": "Battle of Clastidium",
     "span": {
@@ -73,30 +25,6 @@
   },
   {
     "type": "event",
-    "id": "event_battle_of_the_cremera",
-    "title": "Battle of the Cremera",
-    "span": {
-      "startYear": -477,
-      "displayLabel": "477 BCE",
-      "certainty": "approximate"
-    },
-    "civilizationId": "civilization_rome",
-    "notes": "The Battle of the Cremera was fought between the Roman Republic and the Etruscan city of Veii, in 477 BC.",
-    "visual": {
-      "kind": "emoji",
-      "value": "⚔️"
-    },
-    "metadata": {
-      "wikidataQid": "Q2487876",
-      "coord": [
-        12.4245,
-        42.0288
-      ],
-      "wiki": "https://en.wikipedia.org/wiki/Battle_of_the_Cremera"
-    }
-  },
-  {
-    "type": "event",
     "id": "event_battle_of_emesa",
     "title": "Battle of Emesa",
     "span": {
@@ -117,26 +45,6 @@
         34.72
       ],
       "wiki": "https://en.wikipedia.org/wiki/Battle_of_Emesa"
-    }
-  },
-  {
-    "type": "event",
-    "id": "event_battle_of_arbalo",
-    "title": "Battle of Arbalo",
-    "span": {
-      "startYear": -11,
-      "displayLabel": "11 BCE",
-      "certainty": "approximate"
-    },
-    "civilizationId": "civilization_rome",
-    "notes": "The Battle of Arbalo was fought between the Romans and the Germani in 11 BC. It was part of the Drusus' campaigns, which started in the unstable north of the Roman Empire near Gaul. With the Germanic from the east of Gaul constantly attacking Rome, Augustus would send Drusus.",
-    "visual": {
-      "kind": "emoji",
-      "value": "⚔️"
-    },
-    "metadata": {
-      "wikidataQid": "Q2237314",
-      "wiki": "https://en.wikipedia.org/wiki/Battle_of_Arbalo"
     }
   },
   {
@@ -168,7 +76,6 @@
       "displayLabel": "47 BCE",
       "certainty": "approximate"
     },
-    "civilizationId": "civilization_ptolemaic_egypt",
     "notes": "The Battle of the Nile in early 47 BC saw the combined Roman–Egyptian armies of Julius Caesar and Cleopatra VII defeat those of the rival Queen Arsinoe IV and King Ptolemy XIII and secure the throne of Egypt.",
     "visual": {
       "kind": "emoji",
@@ -181,30 +88,37 @@
         30.9
       ],
       "wiki": "https://en.wikipedia.org/wiki/Battle_of_the_Nile_(47_BC)"
-    }
-  },
-  {
-    "type": "event",
-    "id": "event_battle_of_the_oenoparus",
-    "title": "Battle of the Oenoparus",
-    "span": {
-      "startYear": -145,
-      "displayLabel": "145 BCE",
-      "certainty": "approximate"
     },
-    "civilizationId": "civilization_ptolemaic_egypt",
-    "notes": "The Battle of the Oenoparus took place in 145 BC on the Oenoparus river in the adjoining countryside of Antioch on the Orontes, the capital of the Seleucid Empire. It was fought between a coalition of Ptolemaic Egypt led by Ptolemy VI and Seleucids who favored the royal claim of Demetrius II Nicator against Seleucids who favored the claim of Alexander Balas. Both the Seleucid Empire and the Ptolemaic kingdom were diadochi, Greek-ruled successor states established after the conquests of Alexander the Great.",
-    "visual": {
-      "kind": "emoji",
-      "value": "⚔️"
+    "interaction": {
+      "type": "war",
+      "participants": [
+        {
+          "civilizationId": "civilization_rome",
+          "role": "ally"
+        },
+        {
+          "civilizationId": "civilization_ptolemaic_egypt",
+          "role": "victor"
+        }
+      ]
     },
-    "metadata": {
-      "wikidataQid": "Q2542852",
-      "coord": [
-        36.1606,
-        36.1989
+    "details": {
+      "markdown": "Julius Caesar's intervention on Cleopatra's behalf against her co-ruler siblings is the clearest direct link between Rome and Ptolemaic Egypt in our data -- it's the same event from both civilizations' side, not two separate battles.",
+      "tags": [
+        "egypt",
+        "rome",
+        "succession-war",
+        "caesar",
+        "cleopatra"
       ],
-      "wiki": "https://en.wikipedia.org/wiki/Battle_of_the_Oenoparus"
+      "sources": [
+        {
+          "title": "Battle of the Nile (47 BC)",
+          "url": "https://en.wikipedia.org/wiki/Battle_of_the_Nile_(47_BC)",
+          "publisher": "Wikipedia"
+        }
+      ],
+      "media": []
     }
   },
   {
@@ -233,44 +147,6 @@
   },
   {
     "type": "event",
-    "id": "event_battle_of_castra_iudaeorum",
-    "title": "Battle of Castra Iudaeorum",
-    "span": {
-      "startYear": -47,
-      "displayLabel": "47 BCE",
-      "certainty": "approximate"
-    },
-    "civilizationId": "civilization_ptolemaic_egypt",
-    "notes": "47 BCE battle",
-    "visual": {
-      "kind": "emoji",
-      "value": "⚔️"
-    },
-    "metadata": {
-      "wikidataQid": "Q9172857"
-    }
-  },
-  {
-    "type": "event",
-    "id": "event_battle_of_pelusium",
-    "title": "Battle of Pelusium",
-    "span": {
-      "startYear": -55,
-      "displayLabel": "55 BCE",
-      "certainty": "approximate"
-    },
-    "civilizationId": "civilization_ptolemaic_egypt",
-    "notes": "55 BCE battle",
-    "visual": {
-      "kind": "emoji",
-      "value": "⚔️"
-    },
-    "metadata": {
-      "wikidataQid": "Q60854738"
-    }
-  },
-  {
-    "type": "event",
     "id": "event_expedition_of_ptolemy_ii_philadelphus_to_the_black_sea",
     "title": "Expedition of Ptolemy II Philadelphus to the Black Sea",
     "span": {
@@ -286,78 +162,6 @@
     },
     "metadata": {
       "wikidataQid": "Q97306229"
-    }
-  },
-  {
-    "type": "event",
-    "id": "event_battle_of_gythium",
-    "title": "Battle of Gythium",
-    "span": {
-      "startYear": -195,
-      "displayLabel": "195 BCE",
-      "certainty": "approximate"
-    },
-    "civilizationId": "civilization_macedon",
-    "notes": "part of the War against Nabis",
-    "visual": {
-      "kind": "emoji",
-      "value": "⚔️"
-    },
-    "metadata": {
-      "wikidataQid": "Q3774767",
-      "coord": [
-        22.5661,
-        36.7617
-      ],
-      "wiki": "https://en.wikipedia.org/wiki/Siege_of_Gythium"
-    }
-  },
-  {
-    "type": "event",
-    "id": "event_second_battle_of_lamia",
-    "title": "Second Battle of Lamia",
-    "span": {
-      "startYear": -209,
-      "displayLabel": "209 BCE",
-      "certainty": "approximate"
-    },
-    "civilizationId": "civilization_macedon",
-    "notes": "battle of the First Macedonian War",
-    "visual": {
-      "kind": "emoji",
-      "value": "⚔️"
-    },
-    "metadata": {
-      "wikidataQid": "Q2498572",
-      "coord": [
-        22.4333,
-        38.9
-      ],
-      "wiki": "https://en.wikipedia.org/wiki/Second_Battle_of_Lamia"
-    }
-  },
-  {
-    "type": "event",
-    "id": "event_battle_of_amorgos",
-    "title": "Battle of Amorgos",
-    "span": {
-      "startYear": -322,
-      "displayLabel": "322 BCE",
-      "certainty": "approximate"
-    },
-    "civilizationId": "civilization_macedon",
-    "notes": "naval battle in 322 BC during the Lamian War, between Athens and Macedonia, ending in Macedonian victory: one of the battles that ended Athenian thalassocracy",
-    "visual": {
-      "kind": "emoji",
-      "value": "⚔️"
-    },
-    "metadata": {
-      "wikidataQid": "Q2265548",
-      "coord": [
-        25.54,
-        36.5
-      ],
-      "wiki": "https://en.wikipedia.org/wiki/Battle_of_Amorgos"
     }
   },
   {
@@ -382,70 +186,6 @@
         38.3242
       ],
       "wiki": "https://en.wikipedia.org/wiki/Battle_of_Thebes"
-    }
-  },
-  {
-    "type": "event",
-    "id": "event_siege_of_olynthus",
-    "title": "Siege of Olynthus",
-    "span": {
-      "startYear": -348,
-      "displayLabel": "348 BCE",
-      "certainty": "approximate"
-    },
-    "civilizationId": "civilization_macedon",
-    "notes": "348 BCE siege",
-    "visual": {
-      "kind": "emoji",
-      "value": "🏰"
-    },
-    "metadata": {
-      "wikidataQid": "Q133734377",
-      "coord": [
-        23.354,
-        40.296
-      ],
-      "wiki": "https://en.wikipedia.org/wiki/Siege_of_Olynthus_(348_BC)"
-    }
-  },
-  {
-    "type": "event",
-    "id": "event_war_against_nabis",
-    "title": "War against Nabis",
-    "span": {
-      "startYear": -195,
-      "displayLabel": "195 BCE",
-      "certainty": "approximate"
-    },
-    "civilizationId": "civilization_macedon",
-    "notes": "war in 195 BC fought between the Greek city-state of Sparta and a coalition composed of Rome, the Achaean League, Pergamum, Rhodes, and Macedon",
-    "visual": {
-      "kind": "emoji",
-      "value": "📌"
-    },
-    "metadata": {
-      "wikidataQid": "Q2073517",
-      "wiki": "https://en.wikipedia.org/wiki/War_against_Nabis"
-    }
-  },
-  {
-    "type": "event",
-    "id": "event_epirote_macedonian_war",
-    "title": "Epirote-Macedonian War",
-    "span": {
-      "startYear": -289,
-      "displayLabel": "289 BCE",
-      "certainty": "approximate"
-    },
-    "civilizationId": "civilization_macedon",
-    "notes": "289 BCE war",
-    "visual": {
-      "kind": "emoji",
-      "value": "📌"
-    },
-    "metadata": {
-      "wikidataQid": "Q132068862",
-      "wiki": "https://en.wikipedia.org/wiki/Epirote-Macedonian_War_of_289_BC"
     }
   },
   {
@@ -498,50 +238,6 @@
   },
   {
     "type": "event",
-    "id": "event_portuguese_raids_in_senegambia",
-    "title": "Portuguese raids in Senegambia",
-    "span": {
-      "startYear": 1500,
-      "displayLabel": "1500 CE",
-      "certainty": "approximate"
-    },
-    "civilizationId": "civilization_mali",
-    "notes": "15th-century raids",
-    "visual": {
-      "kind": "emoji",
-      "value": "📌"
-    },
-    "metadata": {
-      "wikidataQid": "Q137187451",
-      "wiki": "https://en.wikipedia.org/wiki/Portuguese_raids_in_Senegambia"
-    }
-  },
-  {
-    "type": "event",
-    "id": "event_battle_of_vescera",
-    "title": "Battle of Vescera",
-    "span": {
-      "startYear": 682,
-      "displayLabel": "682 CE",
-      "certainty": "approximate"
-    },
-    "civilizationId": "civilization_umayyad_caliphate",
-    "notes": "682 battle between Byzantium and Umayyad Caliphate",
-    "visual": {
-      "kind": "emoji",
-      "value": "⚔️"
-    },
-    "metadata": {
-      "wikidataQid": "Q2237785",
-      "coord": [
-        5.7333,
-        34.8333
-      ],
-      "wiki": "https://en.wikipedia.org/wiki/Battle_of_Vescera"
-    }
-  },
-  {
-    "type": "event",
     "id": "event_battle_of_guadalete",
     "title": "Battle of Guadalete",
     "span": {
@@ -562,110 +258,6 @@
         36.6
       ],
       "wiki": "https://en.wikipedia.org/wiki/Battle_of_Guadalete"
-    }
-  },
-  {
-    "type": "event",
-    "id": "event_battle_of_avignon",
-    "title": "Battle of Avignon",
-    "span": {
-      "startYear": 737,
-      "displayLabel": "737 CE",
-      "certainty": "approximate"
-    },
-    "civilizationId": "civilization_umayyad_caliphate",
-    "notes": "737 battle",
-    "visual": {
-      "kind": "emoji",
-      "value": "⚔️"
-    },
-    "metadata": {
-      "wikidataQid": "Q1747219",
-      "coord": [
-        4.8167,
-        43.95
-      ],
-      "wiki": "https://en.wikipedia.org/wiki/Siege_of_Avignon_(737)"
-    }
-  },
-  {
-    "type": "event",
-    "id": "event_battle_of_tabarka",
-    "title": "Battle of Tabarka",
-    "span": {
-      "startYear": 700,
-      "displayLabel": "700 CE",
-      "certainty": "approximate"
-    },
-    "civilizationId": "civilization_umayyad_caliphate",
-    "notes": "battle",
-    "visual": {
-      "kind": "emoji",
-      "value": "⚔️"
-    },
-    "metadata": {
-      "wikidataQid": "Q97523166",
-      "wiki": "https://en.wikipedia.org/wiki/Battle_of_El_Jem"
-    }
-  },
-  {
-    "type": "event",
-    "id": "event_conquest_of_carmona",
-    "title": "Conquest of Carmona",
-    "span": {
-      "startYear": 712,
-      "displayLabel": "712 CE",
-      "certainty": "exact"
-    },
-    "civilizationId": "civilization_umayyad_caliphate",
-    "notes": "712 conquest",
-    "visual": {
-      "kind": "emoji",
-      "value": "🗡️"
-    },
-    "metadata": {
-      "wikidataQid": "Q133799911",
-      "wiki": "https://en.wikipedia.org/wiki/Conquest_of_Carmona_(712)"
-    }
-  },
-  {
-    "type": "event",
-    "id": "event_battle_of_bajarwan",
-    "title": "Battle of Bajarwan",
-    "span": {
-      "startYear": 730,
-      "displayLabel": "730 CE",
-      "certainty": "exact"
-    },
-    "civilizationId": "civilization_umayyad_caliphate",
-    "notes": "730 battle",
-    "visual": {
-      "kind": "emoji",
-      "value": "⚔️"
-    },
-    "metadata": {
-      "wikidataQid": "Q20386327",
-      "wiki": "https://en.wikipedia.org/wiki/Battle_of_Bajarwan"
-    }
-  },
-  {
-    "type": "event",
-    "id": "event_battle_of_the_nobles",
-    "title": "Battle of the Nobles",
-    "span": {
-      "startYear": 740,
-      "displayLabel": "740 CE",
-      "certainty": "exact"
-    },
-    "civilizationId": "civilization_umayyad_caliphate",
-    "notes": "740 battle",
-    "visual": {
-      "kind": "emoji",
-      "value": "⚔️"
-    },
-    "metadata": {
-      "wikidataQid": "Q4872968",
-      "wiki": "https://en.wikipedia.org/wiki/Battle_of_the_Nobles"
     }
   },
   {
@@ -730,84 +322,6 @@
   },
   {
     "type": "event",
-    "id": "event_battle_of_chang_an",
-    "title": "Battle of Chang'an",
-    "span": {
-      "startYear": 192,
-      "displayLabel": "192 CE",
-      "certainty": "exact"
-    },
-    "civilizationId": "civilization_han_china",
-    "notes": "Sack of Han capital Chang'an (192)",
-    "visual": {
-      "kind": "emoji",
-      "value": "⚔️"
-    },
-    "metadata": {
-      "wikidataQid": "Q11152051",
-      "wiki": "https://en.wikipedia.org/wiki/Battle_of_Chang%27an"
-    }
-  },
-  {
-    "type": "event",
-    "id": "event_battle_of_hexi",
-    "title": "Battle of Hexi",
-    "span": {
-      "startYear": -121,
-      "displayLabel": "121 BCE",
-      "certainty": "approximate"
-    },
-    "civilizationId": "civilization_han_china",
-    "notes": "Battle of Hexi",
-    "visual": {
-      "kind": "emoji",
-      "value": "⚔️"
-    },
-    "metadata": {
-      "wikidataQid": "Q31895738"
-    }
-  },
-  {
-    "type": "event",
-    "id": "event_battle_of_wuchao",
-    "title": "Battle of Wuchao",
-    "span": {
-      "startYear": 200,
-      "displayLabel": "200 CE",
-      "certainty": "approximate"
-    },
-    "civilizationId": "civilization_han_china",
-    "notes": "200 battle in China",
-    "visual": {
-      "kind": "emoji",
-      "value": "⚔️"
-    },
-    "metadata": {
-      "wikidataQid": "Q10878014"
-    }
-  },
-  {
-    "type": "event",
-    "id": "event_demetrius_i_s_invasion_of_india",
-    "title": "Demetrius I's invasion of India",
-    "span": {
-      "startYear": -186,
-      "displayLabel": "186 BCE",
-      "certainty": "approximate"
-    },
-    "civilizationId": "civilization_maurya_india",
-    "notes": "Demetrius I Anicetus, also called Dimetriya or Dhammamita in Indian sources, was a Greco-Bactrian king and the founder of the Indo-Greek kingdom, who ruled areas from Bactria to ancient northwestern India.",
-    "visual": {
-      "kind": "emoji",
-      "value": "📌"
-    },
-    "metadata": {
-      "wikidataQid": "Q130994471",
-      "wiki": "https://en.wikipedia.org/wiki/Demetrius_I%27s_invasion_of_India"
-    }
-  },
-  {
-    "type": "event",
     "id": "event_shunga_coup_d_etat",
     "title": "Shunga coup d'état",
     "span": {
@@ -867,122 +381,6 @@
     "metadata": {
       "wikidataQid": "Q5643516",
       "wiki": "https://en.wikipedia.org/wiki/Chanka%E2%80%93Inca_War"
-    }
-  },
-  {
-    "type": "event",
-    "id": "event_battle_of_chimborazo",
-    "title": "Battle of Chimborazo",
-    "span": {
-      "startYear": 1532,
-      "displayLabel": "1532 CE",
-      "certainty": "approximate"
-    },
-    "civilizationId": "civilization_inca",
-    "notes": "The Battle of Chimborazo was among the first confrontations in the War of the two brothers, a struggle between Huáscar and Atahualpa for power over the Inca Empire. Atahualpa won, having the more capable generals; he drove Huáscar back onto the defensive.",
-    "visual": {
-      "kind": "emoji",
-      "value": "⚔️"
-    },
-    "metadata": {
-      "wikidataQid": "Q3636390",
-      "wiki": "https://en.wikipedia.org/wiki/Battle_of_Chimborazo"
-    }
-  },
-  {
-    "type": "event",
-    "id": "event_huanca_inca_war",
-    "title": "Huanca–Inca War",
-    "span": {
-      "startYear": 1451,
-      "displayLabel": "1451 CE",
-      "certainty": "approximate"
-    },
-    "civilizationId": "civilization_inca",
-    "notes": "Huanca–Inca War",
-    "visual": {
-      "kind": "emoji",
-      "value": "📌"
-    },
-    "metadata": {
-      "wikidataQid": "Q125753108"
-    }
-  },
-  {
-    "type": "event",
-    "id": "event_battle_of_the_mangroves",
-    "title": "Battle of the Mangroves",
-    "span": {
-      "startYear": 1532,
-      "displayLabel": "1532 CE",
-      "certainty": "exact"
-    },
-    "civilizationId": "civilization_inca",
-    "notes": "1532 battle",
-    "visual": {
-      "kind": "emoji",
-      "value": "⚔️"
-    },
-    "metadata": {
-      "wikidataQid": "Q140160443"
-    }
-  },
-  {
-    "type": "event",
-    "id": "event_battle_of_huaripampa",
-    "title": "Battle of Huaripampa",
-    "span": {
-      "startYear": 1533,
-      "displayLabel": "1533 CE",
-      "certainty": "exact"
-    },
-    "civilizationId": "civilization_inca",
-    "notes": "1533 battle",
-    "visual": {
-      "kind": "emoji",
-      "value": "⚔️"
-    },
-    "metadata": {
-      "wikidataQid": "Q9173030"
-    }
-  },
-  {
-    "type": "event",
-    "id": "event_battle_of_capi",
-    "title": "Battle of Capi",
-    "span": {
-      "startYear": 1533,
-      "displayLabel": "1533 CE",
-      "certainty": "exact"
-    },
-    "civilizationId": "civilization_inca",
-    "notes": "1533 battle",
-    "visual": {
-      "kind": "emoji",
-      "value": "⚔️"
-    },
-    "metadata": {
-      "wikidataQid": "Q137641850"
-    }
-  },
-  {
-    "type": "event",
-    "id": "event_periplus_mentions_aksum",
-    "title": "Periplus mentions Aksum",
-    "span": {
-      "startYear": 50,
-      "displayLabel": "c. 50 CE",
-      "certainty": "estimated"
-    },
-    "civilizationId": "civilization_aksum",
-    "notes": "The Greek merchant's guide Periplus of the Erythraean Sea describes Aksum as a major Red Sea trading power, the earliest outside written record of the kingdom.",
-    "visual": {
-      "kind": "emoji",
-      "value": "📜"
-    },
-    "metadata": {
-      "curated": true,
-      "curationReason": "Wikidata P17/P361/P710 relational query returned too few results for this civilization"
     }
   },
   {
@@ -1283,6 +681,583 @@
     "metadata": {
       "curated": true,
       "curationReason": "Wikidata P17/P361/P710 relational query returned too few results for this civilization"
+    }
+  },
+  {
+    "type": "event",
+    "id": "event_twelve_tables",
+    "title": "The Twelve Tables",
+    "span": {
+      "startYear": -451,
+      "displayLabel": "451 BCE",
+      "certainty": "approximate"
+    },
+    "civilizationId": "civilization_rome",
+    "notes": "Rome's first written law code, posted in the Forum after plebeian pressure for legal transparency. The foundation of later Roman law.",
+    "visual": {
+      "kind": "emoji",
+      "value": "📜"
+    },
+    "metadata": {
+      "curated": true,
+      "curationReason": "rebalance pass: reduce battle-event share"
+    }
+  },
+  {
+    "type": "event",
+    "id": "event_colosseum_completed",
+    "title": "Colosseum completed",
+    "span": {
+      "startYear": 80,
+      "displayLabel": "80 CE",
+      "certainty": "exact"
+    },
+    "civilizationId": "civilization_rome",
+    "notes": "The Flavian Amphitheatre opens under Emperor Titus with a hundred days of games, becoming Rome's largest and most enduring public monument.",
+    "visual": {
+      "kind": "emoji",
+      "value": "🏟️"
+    },
+    "metadata": {
+      "curated": true,
+      "curationReason": "rebalance pass: reduce battle-event share"
+    }
+  },
+  {
+    "type": "event",
+    "id": "event_edict_of_caracalla",
+    "title": "Edict of Caracalla",
+    "span": {
+      "startYear": 212,
+      "displayLabel": "212 CE",
+      "certainty": "exact"
+    },
+    "civilizationId": "civilization_rome",
+    "notes": "Emperor Caracalla grants Roman citizenship to nearly all free inhabitants of the empire, dissolving the old distinction between citizen and subject.",
+    "visual": {
+      "kind": "emoji",
+      "value": "📜"
+    },
+    "metadata": {
+      "curated": true,
+      "curationReason": "rebalance pass: reduce battle-event share"
+    }
+  },
+  {
+    "type": "event",
+    "id": "event_zhang_qian_mission",
+    "title": "Zhang Qian's mission west",
+    "span": {
+      "startYear": -138,
+      "displayLabel": "138 BCE",
+      "certainty": "approximate"
+    },
+    "civilizationId": "civilization_han_china",
+    "notes": "Emperor Wu sends the envoy Zhang Qian to seek allies against the Xiongnu. He returns 13 years later with the first detailed Chinese account of Central Asia, opening the route that becomes the Silk Road.",
+    "visual": {
+      "kind": "emoji",
+      "value": "🧭"
+    },
+    "metadata": {
+      "curated": true,
+      "curationReason": "rebalance pass: reduce battle-event share"
+    }
+  },
+  {
+    "type": "event",
+    "id": "event_cai_lun_papermaking",
+    "title": "Cai Lun improves papermaking",
+    "span": {
+      "startYear": 105,
+      "displayLabel": "c. 105 CE",
+      "certainty": "approximate"
+    },
+    "civilizationId": "civilization_han_china",
+    "notes": "Court official Cai Lun refines a cheap, standardized papermaking process using bark, hemp, and rags -- a technology that will eventually spread west through the Islamic world to Europe.",
+    "visual": {
+      "kind": "emoji",
+      "value": "📄"
+    },
+    "metadata": {
+      "curated": true,
+      "curationReason": "rebalance pass: reduce battle-event share"
+    }
+  },
+  {
+    "type": "event",
+    "id": "event_records_of_grand_historian",
+    "title": "Records of the Grand Historian completed",
+    "span": {
+      "startYear": -94,
+      "displayLabel": "c. 94 BCE",
+      "certainty": "approximate"
+    },
+    "civilizationId": "civilization_han_china",
+    "notes": "Sima Qian completes his sweeping history of China from legendary times to his own -- the model for all later Chinese dynastic histories.",
+    "visual": {
+      "kind": "emoji",
+      "value": "📚"
+    },
+    "metadata": {
+      "curated": true,
+      "curationReason": "rebalance pass: reduce battle-event share"
+    }
+  },
+  {
+    "type": "event",
+    "id": "event_pachacuti_ascension",
+    "title": "Pachacuti founds the Inca Empire",
+    "span": {
+      "startYear": 1438,
+      "displayLabel": "1438 CE",
+      "certainty": "approximate"
+    },
+    "civilizationId": "civilization_inca",
+    "notes": "After defeating the Chanka, Pachacuti takes the throne and transforms Cusco from a regional chiefdom into an expanding imperial state.",
+    "visual": {
+      "kind": "emoji",
+      "value": "👑"
+    },
+    "metadata": {
+      "curated": true,
+      "curationReason": "rebalance pass: reduce battle-event share"
+    }
+  },
+  {
+    "type": "event",
+    "id": "event_qhapaq_nan",
+    "title": "Qhapaq Nan road network built",
+    "span": {
+      "startYear": 1450,
+      "displayLabel": "c. 1450 CE",
+      "certainty": "approximate"
+    },
+    "civilizationId": "civilization_inca",
+    "notes": "The Inca build a road system eventually spanning some 40,000 km across the Andes, with rope bridges, waystations, and relay runners connecting the empire.",
+    "visual": {
+      "kind": "emoji",
+      "value": "🛤️"
+    },
+    "metadata": {
+      "curated": true,
+      "curationReason": "rebalance pass: reduce battle-event share"
+    }
+  },
+  {
+    "type": "event",
+    "id": "event_machu_picchu",
+    "title": "Machu Picchu built",
+    "span": {
+      "startYear": 1450,
+      "displayLabel": "c. 1450 CE",
+      "certainty": "approximate"
+    },
+    "civilizationId": "civilization_inca",
+    "notes": "An estate is built high in the Andes for Pachacuti, likely as a royal retreat -- abandoned a century later and never found by the Spanish.",
+    "visual": {
+      "kind": "emoji",
+      "value": "🏔️"
+    },
+    "metadata": {
+      "curated": true,
+      "curationReason": "rebalance pass: reduce battle-event share"
+    }
+  },
+  {
+    "type": "event",
+    "id": "event_mita_labor_system",
+    "title": "Mit'a labor system formalized",
+    "span": {
+      "startYear": 1460,
+      "displayLabel": "c. 1460 CE",
+      "certainty": "approximate"
+    },
+    "civilizationId": "civilization_inca",
+    "notes": "The Inca state formalizes mit'a, a rotational labor tax used instead of money to build roads, temples, and terraces across the empire.",
+    "visual": {
+      "kind": "emoji",
+      "value": "🧱"
+    },
+    "metadata": {
+      "curated": true,
+      "curationReason": "rebalance pass: reduce battle-event share"
+    }
+  },
+  {
+    "type": "event",
+    "id": "event_philip_ii_phalanx_reform",
+    "title": "Philip II reforms the Macedonian army",
+    "span": {
+      "startYear": -359,
+      "displayLabel": "359 BCE",
+      "certainty": "approximate"
+    },
+    "civilizationId": "civilization_macedon",
+    "notes": "Philip II professionalizes the Macedonian army and introduces the sarissa-armed phalanx, laying the military foundation his son Alexander will use to conquer Persia.",
+    "visual": {
+      "kind": "emoji",
+      "value": "🛡️"
+    },
+    "metadata": {
+      "curated": true,
+      "curationReason": "rebalance pass: reduce battle-event share"
+    }
+  },
+  {
+    "type": "event",
+    "id": "event_league_of_corinth",
+    "title": "League of Corinth formed",
+    "span": {
+      "startYear": -337,
+      "displayLabel": "337 BCE",
+      "certainty": "approximate"
+    },
+    "civilizationId": "civilization_macedon",
+    "notes": "Philip II organizes the Greek city-states (except Sparta) into a league under Macedonian leadership, ending centuries of Greek city-state independence.",
+    "visual": {
+      "kind": "emoji",
+      "value": "🏛️"
+    },
+    "metadata": {
+      "curated": true,
+      "curationReason": "rebalance pass: reduce battle-event share"
+    }
+  },
+  {
+    "type": "event",
+    "id": "event_aristotle_tutors_alexander",
+    "title": "Aristotle tutors Alexander",
+    "span": {
+      "startYear": -343,
+      "displayLabel": "c. 343 BCE",
+      "certainty": "approximate"
+    },
+    "civilizationId": "civilization_macedon",
+    "notes": "Philip II hires Aristotle to tutor the young Alexander at Mieza, a three-year education that shapes Alexander's lifelong interest in science, medicine, and philosophy.",
+    "visual": {
+      "kind": "emoji",
+      "value": "📖"
+    },
+    "metadata": {
+      "curated": true,
+      "curationReason": "rebalance pass: reduce battle-event share"
+    }
+  },
+  {
+    "type": "event",
+    "id": "event_founding_of_alexandria",
+    "title": "Alexander founds Alexandria",
+    "span": {
+      "startYear": -331,
+      "displayLabel": "331 BCE",
+      "certainty": "approximate"
+    },
+    "civilizationId": "civilization_macedon",
+    "notes": "Alexander the Great founds a city on the Egyptian coast bearing his name. After his death it becomes the capital of the Ptolemaic dynasty founded by his general Ptolemy.",
+    "visual": {
+      "kind": "emoji",
+      "value": "🏗️"
+    },
+    "metadata": {
+      "curated": true,
+      "curationReason": "rebalance pass: reduce battle-event share"
+    }
+  },
+  {
+    "type": "event",
+    "id": "event_library_of_alexandria",
+    "title": "Library of Alexandria founded",
+    "span": {
+      "startYear": -285,
+      "displayLabel": "c. 285 BCE",
+      "certainty": "approximate"
+    },
+    "civilizationId": "civilization_ptolemaic_egypt",
+    "notes": "Ptolemy II establishes the great Library and Mouseion at Alexandria, drawing scholars from across the Greek world and aiming to collect all the world's texts.",
+    "visual": {
+      "kind": "emoji",
+      "value": "📚"
+    },
+    "metadata": {
+      "curated": true,
+      "curationReason": "rebalance pass: reduce battle-event share"
+    }
+  },
+  {
+    "type": "event",
+    "id": "event_pharos_lighthouse",
+    "title": "Lighthouse of Alexandria completed",
+    "span": {
+      "startYear": -280,
+      "displayLabel": "c. 280 BCE",
+      "certainty": "approximate"
+    },
+    "civilizationId": "civilization_ptolemaic_egypt",
+    "notes": "The Pharos of Alexandria, one of the Seven Wonders of the Ancient World, is completed to guide ships into the harbor -- and stands for over a thousand years.",
+    "visual": {
+      "kind": "emoji",
+      "value": "🗼"
+    },
+    "metadata": {
+      "curated": true,
+      "curationReason": "rebalance pass: reduce battle-event share"
+    }
+  },
+  {
+    "type": "event",
+    "id": "event_rosetta_stone",
+    "title": "Rosetta Stone inscribed",
+    "span": {
+      "startYear": -196,
+      "displayLabel": "196 BCE",
+      "certainty": "exact"
+    },
+    "civilizationId": "civilization_ptolemaic_egypt",
+    "notes": "A priestly decree for Ptolemy V is inscribed in three scripts -- hieroglyphic, Demotic, and Greek. Rediscovered in 1799, it becomes the key that finally lets scholars read hieroglyphs.",
+    "visual": {
+      "kind": "emoji",
+      "value": "🪨"
+    },
+    "metadata": {
+      "curated": true,
+      "curationReason": "rebalance pass: reduce battle-event share"
+    }
+  },
+  {
+    "type": "event",
+    "id": "event_battle_of_tours",
+    "title": "Battle of Tours",
+    "span": {
+      "startYear": 732,
+      "displayLabel": "732 CE",
+      "certainty": "exact"
+    },
+    "civilizationId": "civilization_umayyad_caliphate",
+    "notes": "Charles Martel's Frankish army halts an Umayyad force near Tours, in what later European histories treat as the high-water mark of the Umayyad advance into Western Europe.",
+    "visual": {
+      "kind": "emoji",
+      "value": "⚔️"
+    },
+    "metadata": {
+      "curated": true,
+      "curationReason": "rebalance pass: reduce battle-event share"
+    }
+  },
+  {
+    "type": "event",
+    "id": "event_dome_of_the_rock",
+    "title": "Dome of the Rock completed",
+    "span": {
+      "startYear": 691,
+      "displayLabel": "691 CE",
+      "certainty": "exact"
+    },
+    "civilizationId": "civilization_umayyad_caliphate",
+    "notes": "Caliph Abd al-Malik completes the Dome of the Rock in Jerusalem, one of the earliest and most enduring works of Islamic architecture.",
+    "visual": {
+      "kind": "emoji",
+      "value": "🕌"
+    },
+    "metadata": {
+      "curated": true,
+      "curationReason": "rebalance pass: reduce battle-event share"
+    }
+  },
+  {
+    "type": "event",
+    "id": "event_abd_al_malik_reforms",
+    "title": "Abd al-Malik's currency and administrative reforms",
+    "span": {
+      "startYear": 697,
+      "displayLabel": "697 CE",
+      "certainty": "approximate"
+    },
+    "civilizationId": "civilization_umayyad_caliphate",
+    "notes": "Abd al-Malik introduces a standardized Islamic gold and silver coinage and makes Arabic the administrative language across the caliphate, replacing Greek and Persian bureaucratic systems.",
+    "visual": {
+      "kind": "emoji",
+      "value": "🪙"
+    },
+    "metadata": {
+      "curated": true,
+      "curationReason": "rebalance pass: reduce battle-event share"
+    }
+  },
+  {
+    "type": "event",
+    "id": "event_great_mosque_damascus",
+    "title": "Great Mosque of Damascus completed",
+    "span": {
+      "startYear": 715,
+      "displayLabel": "715 CE",
+      "certainty": "exact"
+    },
+    "civilizationId": "civilization_umayyad_caliphate",
+    "notes": "Caliph al-Walid I completes the Great Mosque of Damascus on the site of a former Byzantine church, a model for congregational mosques across the Islamic world.",
+    "visual": {
+      "kind": "emoji",
+      "value": "🕌"
+    },
+    "metadata": {
+      "curated": true,
+      "curationReason": "rebalance pass: reduce battle-event share"
+    }
+  },
+  {
+    "type": "event",
+    "id": "event_battle_of_pydna",
+    "title": "Battle of Pydna",
+    "span": {
+      "startYear": -168,
+      "displayLabel": "168 BCE",
+      "certainty": "exact"
+    },
+    "interaction": {
+      "type": "conquest",
+      "participants": [
+        {
+          "civilizationId": "civilization_rome",
+          "role": "victor"
+        },
+        {
+          "civilizationId": "civilization_macedon",
+          "role": "defeated"
+        }
+      ]
+    },
+    "notes": "Rome decisively defeats King Perseus of Macedon, ending the Antigonid dynasty and Macedon's independence -- the event behind civilization_macedon's own end date.",
+    "visual": {
+      "kind": "emoji",
+      "value": "⚔️"
+    },
+    "details": {
+      "markdown": "The Roman legion's flexibility famously exploited gaps that opened in the Macedonian phalanx on broken ground -- a tactical lesson later Roman writers returned to repeatedly. Macedon was carved into four Roman client republics afterward, then annexed outright in 148 BCE.",
+      "tags": [
+        "rome",
+        "macedon",
+        "conquest",
+        "phalanx",
+        "legion"
+      ],
+      "sources": [
+        {
+          "title": "Battle of Pydna",
+          "url": "https://en.wikipedia.org/wiki/Battle_of_Pydna",
+          "publisher": "Wikipedia"
+        }
+      ],
+      "media": []
+    },
+    "metadata": {
+      "curated": true,
+      "curationReason": "demonstrates a multi-civilization interaction event"
+    }
+  },
+  {
+    "type": "event",
+    "id": "event_ptolemaic_embassy_to_maurya",
+    "title": "Ptolemy II's embassy to the Mauryan court",
+    "span": {
+      "startYear": -275,
+      "displayLabel": "c. 275 BCE",
+      "certainty": "approximate"
+    },
+    "interaction": {
+      "type": "diplomacy",
+      "participants": [
+        {
+          "civilizationId": "civilization_ptolemaic_egypt",
+          "role": "initiator"
+        },
+        {
+          "civilizationId": "civilization_maurya_india",
+          "role": "encountered"
+        }
+      ]
+    },
+    "notes": "Ptolemy II Philadelphus sends an ambassador, Dionysius, to the Mauryan court -- recorded by Pliny the Elder. Ashoka's own 13th Rock Edict lists Ptolemy among the Hellenistic kings he sent Buddhist emissaries to in return, making this one of the rare documented two-way diplomatic contacts in our data.",
+    "visual": {
+      "kind": "emoji",
+      "value": "🤝"
+    },
+    "details": {
+      "markdown": "Confirmed independently from both sides: a Greco-Roman source (Pliny) names the Ptolemaic ambassador, and Ashoka's own inscribed edict names Ptolemy as a recipient of his missionaries. Not many ancient diplomatic contacts have this kind of two-source corroboration.",
+      "tags": [
+        "egypt",
+        "maurya",
+        "diplomacy",
+        "ashoka"
+      ],
+      "sources": [],
+      "media": []
+    },
+    "metadata": {
+      "curated": true,
+      "curationReason": "non-war interaction event, from civilization_links.json research"
+    }
+  },
+  {
+    "type": "event",
+    "id": "event_roman_aksumite_red_sea_trade",
+    "title": "Roman-Aksumite Red Sea trade flourishes",
+    "span": {
+      "startYear": 50,
+      "displayLabel": "c. 50 CE",
+      "certainty": "approximate"
+    },
+    "interaction": {
+      "type": "trade",
+      "participants": [
+        {
+          "civilizationId": "civilization_rome",
+          "role": "trader"
+        },
+        {
+          "civilizationId": "civilization_aksum",
+          "role": "trader"
+        }
+      ]
+    },
+    "notes": "The Periplus of the Erythraean Sea, a Greco-Roman merchant's guide from Roman Egypt, names Aksum's port of Adulis as a major Red Sea trade hub -- direct written evidence of regular Roman-Aksumite commercial contact.",
+    "visual": {
+      "kind": "emoji",
+      "value": "⛵"
+    },
+    "metadata": {
+      "curated": true,
+      "curationReason": "non-war interaction event, from civilization_links.json research"
+    }
+  },
+  {
+    "type": "event",
+    "id": "event_gan_ying_mission",
+    "title": "Gan Ying's mission toward Rome",
+    "span": {
+      "startYear": 97,
+      "displayLabel": "97 CE",
+      "certainty": "exact"
+    },
+    "interaction": {
+      "type": "exploration_contact",
+      "participants": [
+        {
+          "civilizationId": "civilization_han_china",
+          "role": "explorer"
+        },
+        {
+          "civilizationId": "civilization_rome",
+          "role": "encountered"
+        }
+      ]
+    },
+    "notes": "The Han general Ban Chao sends envoy Gan Ying west to reach Rome (\"Daqin\"). He turns back at the Persian Gulf, deterred by Parthian sailors' accounts of a long and dangerous sea voyage -- Parthia had every reason to keep China and Rome from trading directly and cutting out the middleman.",
+    "visual": {
+      "kind": "emoji",
+      "value": "🧭"
+    },
+    "metadata": {
+      "curated": true,
+      "curationReason": "non-war interaction event, from civilization_links.json research"
     }
   }
 ]

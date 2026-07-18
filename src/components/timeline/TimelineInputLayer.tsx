@@ -1,6 +1,11 @@
 "use client";
 
-export type TimelineInputMode = "inspect" | "event" | "era" | "civilization";
+export type TimelineInputMode =
+  | "inspect"
+  | "person"
+  | "event"
+  | "era"
+  | "civilization";
 
 type TimelineInputLayerProps = {
   domainStart: number;
@@ -39,6 +44,7 @@ export function TimelineInputLayer({
         {(
           [
             ["inspect", "Inspect"],
+            ["person", "Person · tap"],
             ["event", "Event · tap"],
             ["era", "Era · drag"],
             ["civilization", "Civilization · drag"],

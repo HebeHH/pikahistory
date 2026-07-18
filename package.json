@@ -8,6 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
+    "validate:data": "tsx scripts/validate-base-data.ts",
     "db:local:up": "node scripts/local-dev.mjs up",
     "db:local:down": "node scripts/local-dev.mjs down",
     "db:local:url": "node scripts/local-dev.mjs url",
@@ -15,6 +16,7 @@
     "db:studio": "drizzle-kit studio"
   },
   "dependencies": {
+    "ably": "^2.25.0",
     "d3-geo": "^3.1.1",
     "drizzle-orm": "0.45.2",
     "next": "16.2.10",
@@ -37,6 +39,7 @@
     "eslint": "9.39.5",
     "eslint-config-next": "16.2.10",
     "tailwindcss": "4.3.3",
+    "tsx": "^4.23.1",
     "typescript": "5.9.3"
   },
   "packageManager": "pnpm@10.6.2",

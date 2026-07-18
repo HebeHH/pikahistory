@@ -1,6 +1,6 @@
 # History Wall
 
-A Next.js application for exploring civilizations, eras, and world events on a
+A Next.js application for exploring civilizations, people, eras, and world events on a
 shared timeline. The project stack and contribution constraints are documented
 in [`docs/tech-stack/README.md`](docs/tech-stack/README.md).
 
@@ -64,16 +64,24 @@ The append-only v1 API is documented in
 - `GET /api/v1/records` — all record summaries
 - `GET /api/v1/records?detail=full` — all complete records
 - `GET /api/v1/records/:id` — one complete record
-- `POST /api/v1/records` — append one civilization, event, or era
+- `POST /api/v1/records` — append one civilization, person, event, or era
+- `PATCH /api/v1/records/:id` — edit an existing record's notes/details
 - `POST /api/v1/images/generate` — protected OpenAI/Gemini event-image preview
+- `POST /api/v1/wall/rooms` — create a controller-owned multi-screen room
 
-There are intentionally no update or delete endpoints.
+Record identity and historical fields cannot be updated, and there is no delete
+endpoint. Only author notes/details are editable.
 
 Timeline interaction types, drag/tap input behavior, era colors, structured
 notes, and image-generation behavior are documented in
 [`docs/product/timeline-interactions.md`](docs/product/timeline-interactions.md).
 
-To enable event images locally or on Vercel, set `IMAGE_GENERATION_SECRET` and
+The multi-screen room backend, realtime synchronization, controller security,
+and UI integration lifecycle are documented in
+[`docs/product/multi-screen-backend-integration.md`](docs/product/multi-screen-backend-integration.md).
+
+Set `HISTORY_WALL_WRITE_SECRET` to enable authenticated record creation and
+note editing. To enable event images locally or on Vercel, set `IMAGE_GENERATION_SECRET` and
 at least one of `GEMINI_API_KEY` or `OPENAI_API_KEY`. Keep these server-only;
 never use a `NEXT_PUBLIC_` prefix. The cost-oriented defaults and optional model
 overrides are listed in [`.env.example`](.env.example).
@@ -88,6 +96,7 @@ API with Vercel CLI.
 
 ```bash
 pnpm lint
+pnpm validate:data
 pnpm exec tsc --noEmit
 pnpm build
 ```

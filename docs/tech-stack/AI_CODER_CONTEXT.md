@@ -35,11 +35,14 @@ Optimize for a working demo, fast integration, and minimal code. Follow
    inferred types in `src/contracts/history-wall.types.ts` and an example at
    `public/data/history-wall.base.json`. Read it before producing or consuming
    History Wall data; do not invent alternate fields or date formats.
+   People are first-class `person` records in the top-level `people` collection;
+   do not bury biographies inside civilization or event metadata.
    Cross-civilization relationships are event `interaction` objects with 2+
    participants; never duplicate one war/trade relationship as unrelated events.
 0. The public REST contract is documented in `docs/api/v1.md`. It is
-   append-only: POST adds a new stable ID, GET reads, and duplicate IDs return
-   a conflict. Do not add PUT, PATCH, DELETE, or upsert behaviour. The records
+   append-only for identity/history fields: POST adds a new stable ID, GET reads,
+   PATCH edits only notes/details, and duplicate IDs return a conflict. Do not add
+   PUT, DELETE, or upsert behaviour. The records
    list returns summaries unless `detail=full` is explicitly requested.
 1. Keep the product on one main page unless the task cannot work without
    another route.

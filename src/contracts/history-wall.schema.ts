@@ -14,7 +14,7 @@ import { z } from "zod";
  * same commit.
  */
 
-export const HISTORY_WALL_SCHEMA_VERSION = 1 as const;
+export const HISTORY_WALL_SCHEMA_VERSION = 2 as const;
 
 /** Stable, URL-safe IDs such as `civilization_egypt` or `event_pyramids`. */
 export const HistoryWallIdSchema = z
@@ -47,7 +47,7 @@ export const DateCertaintySchema = z.enum([
 ]);
 
 /**
- * A shared date range for civilizations, events, and eras.
+ * A shared date range for civilizations, people, events, and eras.
  * Omit `endYear` for a single-year event. The renderer should treat a missing
  * `endYear` as equal to `startYear`.
  */
@@ -87,11 +87,14 @@ export const GeographySchema = z
     continent: ContinentSchema,
     /** Human-readable detail such as `Nile Valley` or `Eastern Mediterranean`. */
     label: z.string().trim().min(1).max(160).optional(),
+    /** Map pin coordinates, WGS84 decimal degrees. Optional: not every record needs a pin. */
+    lat: z.number().min(-90).max(90).optional(),
+    lng: z.number().min(-180).max(180).optional(),
   })
   .strict();
 
 /**
- * One visual reference shape covers both civilization icons and event media.
+ * One visual reference shape covers civilization icons, person portraits, and event media.
  * `asset` means a repository path such as `/images/pyramids.webp`.
  */
 export const VisualReferenceSchema = z
@@ -112,7 +115,7 @@ export const SourceReferenceSchema = z
   .strict();
 
 /**
- * Optional long-form detail shared by civilizations, events, and eras.
+ * Optional long-form detail shared by civilizations, people, events, and eras.
  *
  * Keep `notes` as the short, backwards-compatible summary. The detail drawer
  * should prefer this object when it exists: `markdown` is the full study note,
@@ -136,7 +139,27 @@ export const HexColorSchema = z
  * Explicit escape hatch for small future additions during the hackathon.
  * Stable fields should eventually graduate from `metadata` into the schema.
  */
-const MetadataSchema = z.record(z.string(), z.unknown()).default({});
+const MAX_METADATA_KEYS = 100;
+const MAX_METADATA_BYTES = 32 * 1024;
+
+const MetadataSchema = z
+  .record(z.string(), z.json())
+  .superRefine((metadata, context) => {
+    if (Object.keys(metadata).length > MAX_METADATA_KEYS) {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: `metadata may contain at most ${MAX_METADATA_KEYS} top-level keys.`,
+      });
+    }
+
+    if (new TextEncoder().encode(JSON.stringify(metadata)).byteLength > MAX_METADATA_BYTES) {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: `metadata must be at most ${MAX_METADATA_BYTES} bytes when encoded as JSON.`,
+      });
+    }
+  })
+  .default({});
 
 export const CivilizationSchema = z
   .object({
@@ -153,6 +176,69 @@ export const CivilizationSchema = z
     metadata: MetadataSchema,
   })
   .strict();
+
+/** Stable filter vocabulary for the major ways a historical person is known. */
+export const PersonRoleSchema = z.enum([
+  "monarch",
+  "political_leader",
+  "military_leader",
+  "religious_leader",
+  "scholar",
+  "philosopher",
+  "scientist",
+  "inventor",
+  "explorer",
+  "artist",
+  "writer",
+  "architect",
+  "engineer",
+  "merchant",
+  "diplomat",
+  "activist",
+  "other",
+]);
+
+/**
+ * A person is a first-class wall record, not metadata inside a civilization.
+ * `span` represents their lifespan (or best-known active span when life dates
+ * are unknown). Multiple civilization IDs support people whose identity or
+ * influence crosses empires, states, or cultures.
+ */
+export const PersonSchema = z
+  .object({
+    type: z.literal("person"),
+    id: HistoryWallIdSchema,
+    /** Display name, kept as `title` so shared record UI remains generic. */
+    title: z.string().trim().min(1).max(200),
+    span: HistoricalSpanSchema,
+    civilizationIds: z.array(HistoryWallIdSchema).max(20).default([]),
+    roles: z.array(PersonRoleSchema).max(12).default([]),
+    /** Specific historical title such as `Pharaoh` or `Court astronomer`. */
+    roleTitle: z.string().trim().min(1).max(160).optional(),
+    notes: z.string().trim().max(5_000).default(""),
+    location: GeographySchema.optional(),
+    visual: VisualReferenceSchema.optional(),
+    details: RecordDetailsSchema.optional(),
+    metadata: MetadataSchema,
+  })
+  .strict()
+  .superRefine(({ civilizationIds, roles }, context) => {
+    if (new Set(civilizationIds).size !== civilizationIds.length) {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["civilizationIds"],
+        message: "Each civilization may appear only once on a person.",
+      });
+    }
+
+    if (new Set(roles).size !== roles.length) {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["roles"],
+        message: "Each person role may appear only once.",
+      });
+    }
+  });
 
 /**
  * Stable visual/filter vocabulary for relationships between civilizations.
@@ -309,9 +395,23 @@ export const EraSchema = z
 /** Useful when a component or database function accepts any record kind. */
 export const HistoryWallRecordSchema = z.discriminatedUnion("type", [
   CivilizationSchema,
+  PersonSchema,
   EventSchema,
   EraSchema,
 ]);
+
+/** The only mutable part of an existing record in v1. */
+export const RecordNotesPatchSchema = z
+  .object({
+    notes: z.string().trim().max(5_000).optional(),
+    /** Use null to remove the structured details object. */
+    details: RecordDetailsSchema.nullable().optional(),
+  })
+  .strict()
+  .refine(
+    ({ notes, details }) => notes !== undefined || details !== undefined,
+    "At least one of notes or details must be provided.",
+  );
 
 /**
  * Top-level payload read and written by the app.
@@ -323,6 +423,7 @@ export const HistoryWallDataSchema = z
   .object({
     schemaVersion: z.literal(HISTORY_WALL_SCHEMA_VERSION),
     civilizations: z.array(CivilizationSchema),
+    people: z.array(PersonSchema),
     events: z.array(EventSchema),
     eras: z.array(EraSchema),
   })
@@ -331,6 +432,11 @@ export const HistoryWallDataSchema = z
     const allRecords = [
       ...data.civilizations.map((record, index) => ({
         collection: "civilizations",
+        index,
+        record,
+      })),
+      ...data.people.map((record, index) => ({
+        collection: "people",
         index,
         record,
       })),
@@ -387,6 +493,18 @@ export const HistoryWallDataSchema = z
               "civilizationId",
             ],
             message: `Unknown civilization ID: ${participant.civilizationId}`,
+          });
+        }
+      });
+    });
+
+    data.people.forEach((person, index) => {
+      person.civilizationIds.forEach((civilizationId, civilizationIndex) => {
+        if (!civilizationIds.has(civilizationId)) {
+          context.addIssue({
+            code: z.ZodIssueCode.custom,
+            path: ["people", index, "civilizationIds", civilizationIndex],
+            message: `Unknown civilization ID: ${civilizationId}`,
           });
         }
       });

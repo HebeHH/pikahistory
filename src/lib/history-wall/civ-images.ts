@@ -1,4 +1,5 @@
 import type { HistoryWallRecord } from "@/contracts/history-wall.types";
+import { linkedCivId } from "./civ-geo";
 
 /**
  * Frontend-only image map for civilizations (iconic landmark photos from
@@ -56,10 +57,6 @@ export const CIV_IMAGES: Record<string, CivImage> = {
 
 /** The landmark image for a record: civ uses its own id; events/eras use their civilization. */
 export function imageForRecord(record: HistoryWallRecord): CivImage | undefined {
-  if (record.type === "civilization") return CIV_IMAGES[record.id];
-  const civId =
-    record.type === "era"
-      ? record.civilizationId
-      : record.civilizationId ?? record.interaction?.participants[0]?.civilizationId;
+  const civId = linkedCivId(record);
   return civId ? CIV_IMAGES[civId] : undefined;
 }

@@ -86,18 +86,23 @@ async function waitForPostgres() {
 }
 
 async function seedBaseData() {
+  // Keep the raw SQL seed path, but validate it against the same contract used
+  // by API writes before anything reaches PostgreSQL.
+  run("pnpm", ["validate:data"]);
+
   const source = JSON.parse(
     await readFile("public/data/history-wall.base.json", "utf8"),
   );
   const records = [
     ...source.civilizations,
+    ...source.people,
     ...source.events,
     ...source.eras,
   ];
   const sql = postgres(databaseUrl, { max: 1, prepare: false });
 
   try {
-    // Civilizations are first so event/era foreign keys are always valid.
+    // Civilizations are first so person/event/era references are always valid.
     for (const record of records) {
       const civilizationId =
         record.type === "event" || record.type === "era"
