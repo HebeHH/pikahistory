@@ -1,54 +1,50 @@
 # Shared context for AI coding assistants
 
-Paste this file into an AI coding session, or instruct the assistant to read it
-and `docs/tech-stack/README.md` before editing the repository.
+Paste this into each AI coding session with the specific task.
 
 ---
 
-You are contributing to the **History Wall** group project. Follow the
-repository's canonical stack guide at `docs/tech-stack/README.md`. Do not make
-silent architecture substitutions.
+You are contributing to the **History Wall**, a five-hour hackathon project.
+Optimize for a working demo, fast integration, and minimal code. Follow
+`docs/tech-stack/README.md` and do not add long-term infrastructure.
 
 ## Fixed stack
 
 - Next.js App Router, React, and strict TypeScript
-- Vercel hosting
+- Vercel
 - Neon PostgreSQL through the Vercel Marketplace
-- Drizzle ORM with reviewed, committed Drizzle Kit migrations
-- Zod validation at untrusted-data boundaries
-- Tailwind CSS; use shadcn/ui only selectively
-- pnpm with the committed lockfile
-- Vitest + React Testing Library; Playwright for critical browser journeys
+- Drizzle ORM
+- Zod for user input that reaches the server
+- Tailwind CSS; shadcn/ui only when it saves time
+- pnpm
 
-## Required implementation behaviour
+## Rules
 
-1. Keep the application on one main page unless the task truly needs another
-   route.
+1. Keep the product on one main page unless the task cannot work without
+   another route.
 2. Default to Server Components. Add `"use client"` only to the smallest
    interactive subtree.
-3. Put reusable product components in `src/components/history-wall/` and
-   generic primitives in `src/components/ui/`.
-4. Put database access in `src/lib/db/`; never import it into a Client
-   Component or expose credentials to the browser.
-5. Prefer Server Actions for application-owned mutations. Use Route Handlers
-   for webhooks, external APIs, file responses, or explicit HTTP needs.
-6. Validate inputs with Zod and authorize protected operations on the server.
-7. Treat the Drizzle schema and committed migrations as the schema source of
-   truth. Never run schema push against any shared or production database.
-8. Infer types from Drizzle and Zod instead of duplicating interfaces. Do not
-   use `any` to suppress TypeScript errors.
-9. Use local React state first. Do not introduce a global state or data-fetching
-   library without a demonstrated requirement and team approval.
-10. Preserve unrelated work in the repository. Keep changes scoped, add
-    relevant tests, and run format/lint/typecheck/tests before reporting done.
-11. Never commit secrets, dumps, production data, or `.env` values.
-12. Do not replace the agreed framework, database, ORM, validation library,
-    package manager, or test tools without an approved guide change.
+3. Put product components in `src/components/history-wall/` and small generic
+   primitives in `src/components/ui/`.
+4. Keep database access in `src/lib/db/`; never expose `DATABASE_URL` or import
+   database code into a Client Component.
+5. Prefer Server Actions for writes and direct server-side queries for reads.
+   Do not create an internal REST API.
+6. Validate user-submitted values with Zod immediately before server-side use.
+7. Use props and local React state. Do not add a global state or client
+   data-fetching library.
+8. Use the simplest working implementation. Do not introduce speculative
+   abstractions, service layers, repositories, or a custom design system.
+9. Do not add tests, test infrastructure, backups, monitoring, analytics,
+   multiple environments, or CI/CD work unless the task explicitly asks for
+   it.
+10. Preserve unrelated repository work and do not reformat unrelated files.
+11. Use pnpm and preserve the lockfile. Never commit secrets or real user data.
+12. Run only the quick checks already available and report what you actually
+    verified.
 
-Before coding, summarize the files you expect to change and identify any task
-request that conflicts with this context. When requirements are ambiguous,
-prefer the smallest implementation consistent with the existing code and this
-guide. Report assumptions explicitly.
+Before coding, briefly state which files you expect to change. If the task
+conflicts with this context, flag it instead of silently changing the stack.
 
 Specific task:
 
@@ -56,4 +52,4 @@ Specific task:
 
 ---
 
-If this short context and the canonical guide differ, the canonical guide wins.
+If this short context differs from `docs/tech-stack/README.md`, the README wins.
